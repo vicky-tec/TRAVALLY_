@@ -886,10 +886,17 @@
                 flex-direction: column;
                 width: 100%;
                 text-align: center;
+                text-transform: uppercase;
+                background: var(--navbar-bg);
+                position: absolute;
+                top: 60px; /* Below the navbar */
+                left: 0;
+                right: 0;
+                padding: 1rem;
                 display: none;
                 margin-top: 1rem;
                 gap: 1.5rem;
-                 padding-bottom: 1rem;
+                padding-bottom: 1rem;
             }
 
             .nav-links.active {
@@ -974,6 +981,8 @@
                       font-size: 0.85rem;
                  }
 
+                 
+
     </style>
 </head>
 <body>
@@ -996,11 +1005,16 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#destinations">Destinations</a></li>
-                <li><a href="bot.html">YuktiBot</a></li>
+                <li><a href="bot.html"><i class="fas fa-robot"></i>&nbsp;YuktiBot</a></li>
                 <li><a href="mapo.html">YatraMitra (Map)</a></li>
                 <li><a href="#buddy-section">HumSafar (Buddy Finder)</a></li>
                 <li><a href="About us.html">About Us</a></li>
                 <li><a href="LOGINpage/loginpage.html">Profile</a></li>
+                <!-- WhatsApp Support Floating Button -->
+                <a href="https://wa.me/918235699597" target="_blank" >
+                <i class="fab fa-whatsapp"></i>
+                <span class="whatsapp-text">Support</span></a>
+
             </ul>
         </div>
     </nav>
@@ -1060,7 +1074,7 @@
                     </div>
 
                      <div class="destination-card">
-                         <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fiasgyan.sgp1.digitaloceanspaces.com%2Fimages%2FVIKRAMSHILA_UNIVERSITY.png&tbnid=It3XUiLtvMlqqM&vet=1&imgrefurl=https%3A%2F%2Fwww.iasgyan.in%2Fdaily-current-affairs%2Fvikramshila-university&docid=r40MYFjghXB_fM&w=976&h=732&source=sh%2Fx%2Fim%2Fm1%2F0&kgs=0e91b34619fe9f56">
+                         <img src="https://www.vedicmatters.com/images/article/article-2021-09-14-04-59-30_61402c325e1ca.png" alt="Vikramshila Ruins">
                          <div class="destination-card-content">
                               <h3>Vikramshila Ruins</h3>
                               <p>Ruins of another ancient Buddhist university, located near Bhagalpur. Offers insights into the educational and religious practices of the past.</p>
