@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TRAVALLY | Your Bihar Travel Companion</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Protest+Revolution&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Protest+Revolution&display=swap" rel="stylesheet" />
     <link rel="icon" href="https://vicky-tec.github.io/TRAVALLY/TRAVALLY.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -50,7 +50,6 @@
             --section-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             --card-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
             --button-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-
 
             /* Z-index Management */
             --z-index-nav: 1000;
@@ -109,7 +108,6 @@
             color: inherit;
         }
 
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -117,7 +115,7 @@
         }
 
         .content-section {
-            padding: 6rem 0; /* Increased padding */
+            padding: 6rem 0;
         }
 
         .text-center {
@@ -133,7 +131,7 @@
             top: 0;
             z-index: var(--z-index-nav);
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-            backdrop-filter: blur(8px); /* Stronger blur */
+            backdrop-filter: blur(8px);
         }
 
         .nav-container {
@@ -147,8 +145,8 @@
             align-items: center;
             text-decoration: none;
             color: var(--primary-color);
-            font-size: 2rem; /* Larger logo text */
-            font-weight: 800; /* Bolder */
+            font-size: 2rem;
+            font-weight: 800;
             transition: color 0.3s ease;
         }
 
@@ -157,8 +155,8 @@
         }
 
         .navbar .logo img {
-            height: 45px; /* Larger logo image */
-            margin-right: 12px; /* More space */
+            height: 45px;
+            margin-right: 12px;
         }
 
         .nav-toggle {
@@ -166,20 +164,19 @@
             background: none;
             border: none;
             color: var(--navbar-link-color);
-            font-size: 2rem; /* Larger toggle icon */
+            font-size: 2rem;
             cursor: pointer;
             transition: color 0.3s ease;
         }
 
-         .nav-toggle:hover {
-             color: var(--primary-color);
-         }
-
+        .nav-toggle:hover {
+            color: var(--primary-color);
+        }
 
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 3rem; /* Increased gap */
+            gap: 3rem;
             margin: 0;
             padding: 0;
         }
@@ -191,7 +188,7 @@
             font-weight: 500;
             transition: color 0.3s ease, transform 0.2s ease;
             position: relative;
-            padding-bottom: 5px; /* Space for underline */
+            padding-bottom: 5px;
         }
 
         .nav-links a::after {
@@ -200,7 +197,7 @@
             left: 0;
             bottom: 0;
             width: 0;
-            height: 3px; /* Thicker underline */
+            height: 3px;
             background-color: var(--primary-color);
             transition: width 0.3s ease;
         }
@@ -210,46 +207,102 @@
             transform: translateY(-2px);
         }
 
-         .nav-links a:hover::after {
-             width: 100%;
-         }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: var(--navbar-bg);
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: var(--z-index-nav);
+            border-radius: 8px;
+            padding: 10px 0;
+            right: 0;
+            top: 100%;
+        }
+
+        .dropdown-menu li {
+            padding: 8px 16px;
+            list-style: none;
+        }
+
+        .dropdown-menu li a {
+            color: var(--navbar-link-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .dropdown-menu li:hover {
+            background-color: rgba(6, 182, 212, 0.1);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown .caret {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown.active .caret {
+            transform: rotate(180deg);
+        }
+
+        .divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 8px 0;
+        }
 
         /* --- Hero Section --- */
         .hero {
             text-align: center;
             padding: 0;
-            background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+            background-color: rgba(0, 0, 0, 0.7);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 95vh; /* Taller hero */
+            min-height: 95vh;
             color: var(--hero-text-color);
-            isolation: isolate; /* Create a new stacking context */
+            isolation: isolate;
         }
 
-         .hero::after {
+        .hero::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Additional dark overlay */
+            background: rgba(0, 0, 0, 0.4);
             z-index: 1;
-         }
-
+        }
 
         .hero-content {
             position: relative;
-            z-index: 3; /* Ensure content is above overlays */
+            z-index: 3;
             padding: 3rem 1rem;
-            max-width: 1000px; /* Wider content area */
+            max-width: 1000px;
             margin: 0 auto;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); /* Stronger shadow */
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
         }
 
         .video-slideshow {
@@ -269,7 +322,7 @@
             top: 0;
             left: 0;
             opacity: 0;
-            transition: opacity 2s ease-in-out; /* Slower transition */
+            transition: opacity 2s ease-in-out;
         }
 
         .video-slideshow video.active {
@@ -278,43 +331,43 @@
 
         .hero h1 {
             font-family: "Protest Revolution", sans-serif;
-            font-size: 5.5rem; /* Much larger heading */
-            font-weight: 900; /* Extra bold */
-            margin-bottom: 1.5rem; /* More space */
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
             color: var(--white-color);
             text-transform: uppercase;
-            letter-spacing: 3px; /* Increased spacing */
+            letter-spacing: 3px;
             line-height: 1.2;
         }
 
         .hero p {
-            font-size: 2rem; /* Much larger paragraph */
-            margin-bottom: 3rem; /* More space */
+            font-size: 2rem;
+            margin-bottom: 3rem;
             font-weight: 400;
         }
 
         /* --- Buttons --- */
         .btn {
-            padding: 1.2rem 3rem; /* Larger padding */
-            font-size: 1.3rem; /* Larger font */
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
             border: none;
             background: var(--gradient-primary);
             color: var(--button-text-color);
             cursor: pointer;
-            border-radius: 30px; /* More rounded */
+            border-radius: 30px;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px; /* More space */
+            gap: 10px;
             box-shadow: var(--button-shadow);
             font-weight: 600;
         }
 
         .btn:hover {
-            background: var(--gradient-secondary); /* Different gradient on hover */
-            transform: translateY(-5px); /* More lift */
+            background: var(--gradient-secondary);
+            transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
@@ -324,37 +377,38 @@
         }
 
         .btn-secondary:hover {
-            background: #7e22ce; /* Darker secondary */
-             transform: translateY(-3px);
-             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            background: #7e22ce;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
 
-         .btn-outline {
-             background: transparent;
-             border: 2px solid var(--primary-color);
-             color: var(--primary-color);
-             box-shadow: none;
-         }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: none;
+        }
 
-         [data-theme="dark"] .btn-outline {
-             border-color: var(--light-color);
-             color: var(--light-color);
-         }
+        [data-theme="dark"] .btn-outline {
+            border-color: var(--light-color);
+            color: var(--light-color);
+        }
 
-         .btn-outline:hover {
-             background: rgba(6, 182, 212, 0.15); /* More visible overlay */
-             transform: translateY(-3px);
-             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-         }
-          [data-theme="dark"] .btn-outline:hover {
-             background: rgba(241, 245, 249, 0.1);
-         }
+        .btn-outline:hover {
+            background: rgba(6, 182, 212, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] .btn-outline:hover {
+            background: rgba(241, 245, 249, 0.1);
+        }
 
         /* --- Section Headings --- */
         .content-section h2 {
             text-align: center;
-            margin-bottom: 4rem; /* More space */
-            font-size: 3.5rem; /* Larger heading */
+            margin-bottom: 4rem;
+            font-size: 3.5rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             background-clip: text;
@@ -365,62 +419,61 @@
 
         /* --- Featured Destinations Section --- */
         .featured-destinations {
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(147, 51, 234, 0.08)); /* Stronger gradient */
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(147, 51, 234, 0.08));
         }
 
-         [data-theme="dark"] .featured-destinations {
-              background: linear-gradient(135deg, rgba(6, 182, 212, 0.03), rgba(147, 51, 234, 0.03));
-         }
-
+        [data-theme="dark"] .featured-destinations {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.03), rgba(147, 51, 234, 0.03));
+        }
 
         .destination-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Wider cards */
-            gap: 35px; /* Increased gap */
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
         }
 
         .destination-card {
             background: var(--card-background);
-            border-radius: 16px; /* Larger radius */
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: var(--card-box-shadow);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             display: flex;
             flex-direction: column;
-            border: 1px solid var(--border-color); /* Subtle border */
+            border: 1px solid var(--border-color);
         }
 
         .destination-card:hover {
-            transform: translateY(-12px); /* More lift */
+            transform: translateY(-12px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
         .destination-card img {
             width: 100%;
-            height: 250px; /* Taller images */
+            height: 250px;
             object-fit: cover;
-            transition: transform 0.6s ease; /* Slower zoom */
+            transition: transform 0.6s ease;
         }
 
         .destination-card:hover img {
-            transform: scale(1.08); /* More zoom */
+            transform: scale(1.08);
         }
 
         .destination-card-content {
-            padding: 2rem; /* More padding */
+            padding: 2rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
         .destination-card-content h3 {
-            font-size: 1.6rem; /* Larger heading */
+            font-size: 1.6rem;
             margin-bottom: 1rem;
             color: var(--primary-color);
         }
 
         .destination-card-content p {
-            font-size: 1.05rem; /* Slightly larger text */
+            font-size: 1.05rem;
             color: var(--text-color);
             margin-bottom: 1.5rem;
             flex-grow: 1;
@@ -429,203 +482,93 @@
         .destination-card-content .btn {
             width: auto;
             align-self: flex-start;
-             padding: 0.9rem 2rem; /* Adjust button size */
-             font-size: 1.1rem;
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
         }
-
-
-        /* --- Chat Section --- */
-        .chat-section {
-             background: var(--card-background);
-             border-radius: 16px;
-             box-shadow: var(--section-box-shadow);
-             max-width: 850px; /* Wider chat section */
-             margin: 6rem auto;
-             padding: 3rem; /* More padding */
-        }
-
-        .chat-section .text-center:nth-of-type(2) { /* Select the paragraph after the heading */
-             font-size: 1.1rem;
-             color: var(--text-color);
-             margin-bottom: 3rem;
-        }
-
-
-        .chat-interface {
-            display: flex;
-            flex-direction: column;
-            border: 1px solid var(--input-border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            background-color: var(--background-color);
-        }
-
-        .chat-window {
-            flex-grow: 1;
-            height: 500px; /* Taller chat window */
-            overflow-y: auto;
-            padding: 1.5rem; /* More padding */
-            display: flex;
-            flex-direction: column;
-            gap: 15px; /* Increased gap */
-        }
-
-        .message {
-            padding: 1rem 1.5rem; /* More padding */
-            border-radius: 25px; /* More rounded */
-            max-width: 75%; /* Smaller max width */
-            word-wrap: break-word;
-            font-size: 1.05rem;
-            line-height: 1.5;
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)); /* Subtle shadow on bubbles */
-        }
-
-        .message.bot {
-            background: var(--message-bot-bg);
-            align-self: flex-start;
-             border-bottom-left-radius: 8px; /* Less rounded on one corner */
-        }
-
-        .message.user {
-            background: var(--message-user-bg);
-            align-self: flex-end;
-             border-bottom-right-radius: 8px; /* Less rounded on one corner */
-        }
-
-        .chat-input {
-            display: flex;
-            padding: 1.5rem; /* More padding */
-            border-top: 1px solid var(--input-border-color);
-            gap: 1rem; /* Increased gap */
-            align-items: center;
-            background-color: var(--card-background);
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 1rem; /* More padding */
-            font-size: 1rem;
-            border: 1px solid var(--input-border-color);
-            border-radius: 30px; /* Fully rounded */
-            background-color: var(--background-color);
-            color: var(--text-color);
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-         .chat-input input:focus {
-             border-color: var(--primary-color);
-             box-shadow: 0 0 8px rgba(6, 182, 212, 0.2);
-         }
-
-
-        .chat-input button {
-            padding: 1rem 2rem; /* Adjusted padding */
-             border-radius: 30px; /* Fully rounded button */
-            background: var(--gradient-primary);
-            color: var(--button-text-color);
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-             box-shadow: var(--button-shadow);
-        }
-
-        .chat-input button:hover {
-             background: var(--gradient-secondary);
-             transform: translateY(-2px);
-             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
 
         /* --- Buddy Finder Section --- */
         .buddy-finder {
             background: var(--card-background);
             border-radius: 16px;
             box-shadow: var(--section-box-shadow);
-            max-width: 950px; /* Wider buddy finder */
+            max-width: 950px;
             margin: 6rem auto;
             padding: 3rem;
         }
 
-         .buddy-finder .text-center:nth-of-type(2) { /* Select the paragraph after the heading */
-             font-size: 1.1rem;
-             color: var(--text-color);
-             margin-bottom: 3rem;
+        .buddy-finder .text-center:nth-of-type(2) {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 3rem;
         }
-
 
         .buddy-search-form {
             display: flex;
             align-items: flex-end;
-            gap: 2.5rem; /* Increased gap */
+            gap: 2.5rem;
             flex-wrap: wrap;
-            margin-bottom: 3.5rem; /* Increased margin */
+            margin-bottom: 3.5rem;
             justify-content: center;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 0.8rem; /* Increased gap */
+            gap: 0.8rem;
         }
 
         .buddy-finder label {
             font-weight: 600;
             font-size: 1.1rem;
             color: var(--heading-color);
-             display: flex;
-             align-items: center;
-             gap: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-         .buddy-finder label i {
-             color: var(--secondary-color);
-         }
 
+        .buddy-finder label i {
+            color: var(--secondary-color);
+        }
 
         .buddy-search-form input[type="text"],
         .buddy-search-form input[type="time"],
         .buddy-search-form select {
-            padding: 1rem; /* More padding */
+            padding: 1rem;
             font-size: 1rem;
             border: 1px solid var(--input-border-color);
-            border-radius: 10px; /* Consistent radius */
+            border-radius: 10px;
             width: auto;
-            min-width: 200px; /* Wider minimum */
-            max-width: 300px; /* Wider maximum */
+            min-width: 200px;
+            max-width: 300px;
             background-color: var(--background-color);
             color: var(--text-color);
             outline: none;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-         .buddy-search-form input[type="text"]:focus,
-         .buddy-search-form input[type="time"]:focus,
-         .buddy-search-form select:focus {
-             border-color: var(--primary-color);
-              box-shadow: 0 0 8px rgba(6, 182, 212, 0.2);
-         }
+        .buddy-search-form input[type="text"]:focus,
+        .buddy-search-form input[type="time"]:focus,
+        .buddy-search-form select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 8px rgba(6, 182, 212, 0.2);
+        }
 
-        /* Buddy List */
         .buddy-finder h3 {
-            font-size: 2rem; /* Larger heading */
+            font-size: 2rem;
             margin-bottom: 2.5rem;
             color: var(--heading-color);
             text-align: center;
         }
 
-
         .buddy-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Wider cards */
-            gap: 30px; /* Increased gap */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .buddy-card {
             background: var(--background-color);
-            padding: 2rem; /* More padding */
+            padding: 2rem;
             border: 1px solid var(--input-border-color);
             border-radius: 12px;
             text-align: left;
@@ -636,23 +579,23 @@
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
-         .buddy-card:hover {
-            transform: translateY(-8px); /* More lift */
+        .buddy-card:hover {
+            transform: translateY(-8px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
-         }
+        }
 
         .buddy-card h4 {
-            font-size: 1.4rem; /* Larger heading */
+            font-size: 1.4rem;
             margin-bottom: 1.2rem;
             color: var(--primary-color);
             display: flex;
             align-items: center;
-            gap: 12px; /* More space */
+            gap: 12px;
         }
-         .buddy-card h4 i {
-             color: var(--accent-color); /* Accent color for card title icon */
-         }
 
+        .buddy-card h4 i {
+            color: var(--accent-color);
+        }
 
         .buddy-card p {
             margin-bottom: 1rem;
@@ -667,21 +610,20 @@
             color: var(--secondary-color);
         }
 
-         .buddy-card .btn {
-             margin-top: 1.5rem; /* More space above button */
-             align-self: flex-start;
-             padding: 0.9rem 2rem;
-             font-size: 1.1rem;
-         }
-
+        .buddy-card .btn {
+            margin-top: 1.5rem;
+            align-self: flex-start;
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
+        }
 
         /* --- Footer --- */
         footer {
             background-color: var(--footer-bg);
             color: var(--footer-text-color);
-            padding: 60px 0 30px; /* More padding */
+            padding: 60px 0 30px;
             font-size: 1rem;
-            line-height: 1.8; /* More line height */
+            line-height: 1.8;
             margin-top: 6rem;
         }
 
@@ -689,28 +631,28 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
-             gap: 30px; /* Add gap for smaller screens */
+            gap: 30px;
         }
 
         .footer-section {
             flex: 1;
-            min-width: 280px; /* Wider min width */
-            margin: 0; /* Remove margin here, replaced by gap */
-             padding: 0 15px; /* Add padding */
+            min-width: 280px;
+            margin: 0;
+            padding: 0 15px;
         }
 
         .footer-section h3 {
             color: var(--footer-text-color);
             margin-bottom: 20px;
-            font-size: 1.5rem; /* Larger heading */
-            border-bottom: 2px solid rgba(255, 255, 255, 0.08); /* Lighter border */
-            padding-bottom: 10px; /* More padding */
+            font-size: 1.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
             font-weight: 700;
         }
 
         .footer-section.about p {
             color: var(--footer-text-color);
-            opacity: 0.95; /* Less transparent */
+            opacity: 0.95;
         }
 
         .footer-section.links ul {
@@ -720,7 +662,7 @@
         }
 
         .footer-section.links ul li {
-            margin-bottom: 15px; /* More space */
+            margin-bottom: 15px;
         }
 
         .footer-section.links ul li a {
@@ -742,7 +684,7 @@
             opacity: 0.95;
             display: flex;
             align-items: center;
-            gap: 12px; /* More space */
+            gap: 12px;
         }
 
         .footer-section.contact i {
@@ -753,8 +695,8 @@
 
         .footer-section.social a {
             display: inline-block;
-            margin-right: 25px; /* More space */
-            font-size: 1.8rem; /* Larger icons */
+            margin-right: 25px;
+            font-size: 1.8rem;
             color: var(--footer-text-color);
             transition: color 0.3s ease, transform 0.3s ease;
             opacity: 0.95;
@@ -763,12 +705,12 @@
         .footer-section.social a:hover {
             color: var(--primary-color);
             opacity: 1;
-            transform: translateY(-5px) rotate(10deg); /* Add rotation */
+            transform: translateY(-5px) rotate(10deg);
         }
 
         .footer-bottom {
             text-align: center;
-            margin-top: 50px; /* More space */
+            margin-top: 50px;
             padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 1rem;
@@ -779,22 +721,22 @@
         /* --- Theme Toggle --- */
         .theme-toggle {
             position: fixed;
-            bottom: 25px; /* Adjusted position */
-            right: 25px; /* Adjusted position */
+            bottom: 25px;
+            right: 25px;
             background: var(--primary-color);
             color: var(--button-text-color);
-            padding: 1.1rem; /* Larger padding */
+            padding: 1.1rem;
             border: none;
             cursor: pointer;
             border-radius: 50%;
-            font-size: 1.7rem; /* Larger icon */
+            font-size: 1.7rem;
             transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.5s ease;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
             z-index: var(--z-index-theme-toggle);
         }
 
         [data-theme="dark"] .theme-toggle {
-             background: var(--secondary-color);
+            background: var(--secondary-color);
         }
 
         .theme-toggle:hover {
@@ -802,9 +744,10 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             transform: rotate(90deg);
         }
-         [data-theme="dark"] .theme-toggle:hover {
-             background: #7e22ce;
-         }
+
+        [data-theme="dark"] .theme-toggle:hover {
+            background: #7e22ce;
+        }
 
         .theme-toggle.rotate {
             transform: rotate(360deg);
@@ -823,24 +766,28 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.6s ease; /* Slower hide */
+            transition: opacity 0.6s ease;
             opacity: 1;
             pointer-events: all;
+            visibility: visible;
+            filter: blur(0);
+            font-size: 1.2rem;
         }
 
         #preloader.hidden {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
+            filter: blur(5px);
         }
 
         .loader {
-            border: 12px solid var(--input-border-color); /* Thicker border */
-            border-top: 12px solid var(--primary-color); /* Thicker primary border */
+            border: 12px solid var(--input-border-color);
+            border-top: 12px solid var(--primary-color);
             border-radius: 50%;
-            width: 90px; /* Larger loader */
+            width: 90px;
             height: 90px;
-            animation: spin 1.2s linear infinite; /* Slightly faster spin */
+            animation: spin 1.2s linear infinite;
         }
 
         @keyframes spin {
@@ -850,12 +797,12 @@
 
         .warrior-quote {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem; /* Larger quote */
-            color: var(--heading-color); /* Use heading color */
-            margin-top: 25px; /* More space */
+            font-size: 1.2rem;
+            color: var(--heading-color);
+            margin-top: 25px;
             text-align: center;
             max-width: 90%;
-        }       
+        }
 
         /* --- Reduced Motion Support --- */
         @media (prefers-reduced-motion: reduce) {
@@ -867,9 +814,16 @@
             }
         }
 
-
-
+        /* --- Mobile Styles --- */
         @media (max-width: 768px) {
+            body {
+                padding: 0 10px;
+            }
+            
+            .navbar {
+                padding: 0.5rem 0;
+            }
+            
             .navbar .nav-container {
                 flex-direction: column;
                 align-items: flex-start;
@@ -886,10 +840,9 @@
                 flex-direction: column;
                 width: 100%;
                 text-align: center;
-                text-transform: uppercase;
                 background: var(--navbar-bg);
                 position: absolute;
-                top: 60px; /* Below the navbar */
+                top: 60px;
                 left: 0;
                 right: 0;
                 padding: 1rem;
@@ -907,6 +860,23 @@
                 margin: 0;
             }
 
+            /* Dropdown menu mobile styles */
+            .dropdown-menu {
+                position: static;
+                display: none;
+                width: 100%;
+                box-shadow: none;
+                background-color: transparent;
+            }
+            
+            .dropdown-menu li {
+                padding: 8px 0;
+            }
+            
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+
             .hero h1 {
                 font-size: 3.5rem;
                 letter-spacing: 2px;
@@ -919,70 +889,93 @@
             .btn {
                 padding: 1rem 2.5rem;
                 font-size: 1.2rem;
-                 gap: 8px;
+                gap: 8px;
             }
-             .content-section {
-                 padding: 4rem 0;
-             }
+            
+            .content-section {
+                padding: 4rem 0;
+            }
 
+            .content-section h2 {
+                font-size: 2.5rem;
+                margin-bottom: 3rem;
+            }
+            
+            .featured-destinations h2 {
+                font-size: 2.8rem;
+            }
 
-             .content-section h2 {
-                 font-size: 2.5rem;
-                 margin-bottom: 3rem;
-             }
-             .featured-destinations h2 {
-                 font-size: 2.8rem;
-             }
+            .destination-grid {
+                gap: 25px;
+            }
+            
+            .destination-card img {
+                height: 180px;
+            }
+            
+            .destination-card-content h3 {
+                font-size: 1.3rem;
+            }
+            
+            .destination-card-content p {
+                font-size: 0.95rem;
+            }
+            
+            .destination-card-content .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
 
-             .destination-grid {
-                 gap: 25px;
-             }
-             .destination-card img {
-                 height: 180px;
-             }
-              .destination-card-content h3 {
-                   font-size: 1.3rem;
-              }
-               .destination-card-content p {
-                   font-size: 0.95rem;
-               }
-              .destination-card-content .btn {
-                   padding: 0.8rem 1.8rem;
-                   font-size: 1rem;
-              }
-
-                footer {
-                     padding: 30px 0 15px;
-                     margin-top: 3rem;
-                }
-                .footer-section {
-                     padding: 0 8px;
-                     width: 95%;
-                }
-                 .footer-section h3 {
-                      font-size: 1.2rem;
-                      margin-bottom: 10px;
-                      padding-bottom: 6px;
-                 }
-                 .footer-section.links ul li {
-                      margin-bottom: 8px;
-                 }
-                 .footer-section.contact p {
-                      margin-bottom: 8px;
-                      gap: 6px;
-                 }
-                 .footer-section.social a {
-                      margin-right: 10px;
-                      font-size: 1.3rem;
-                 }
-                 .footer-bottom {
-                      margin-top: 20px;
-                      padding-top: 15px;
-                      font-size: 0.85rem;
-                 }
-
-                 
-
+            footer {
+                padding: 30px 0 15px;
+                margin-top: 3rem;
+            }
+            
+            .footer-section {
+                padding: 0 8px;
+                width: 95%;
+            }
+            
+            .footer-section h3 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+                padding-bottom: 6px;
+            }
+            
+            .footer-section.links ul li {
+                margin-bottom: 8px;
+            }
+            
+            .footer-section.contact p {
+                margin-bottom: 8px;
+                gap: 6px;
+            }
+            
+            .footer-section.social a {
+                margin-right: 10px;
+                font-size: 1.3rem;
+            }
+            
+            .footer-bottom {
+                margin-top: 20px;
+                padding-top: 15px;
+                font-size: 0.85rem;
+            }
+            
+            .theme-toggle {
+                bottom: 15px;
+                right: 15px;
+                padding: 0.8rem;
+                font-size: 1.5rem;
+                width: 50px;
+                height: 50px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .theme-toggle.rotate {
+                transform: rotate(180deg);
+            }
+        }
     </style>
 </head>
 <body>
@@ -1009,12 +1002,19 @@
                 <li><a href="mapo.html">YatraMitra (Map)</a></li>
                 <li><a href="#buddy-section">HumSafar (Buddy Finder)</a></li>
                 <li><a href="About us.html">About Us</a></li>
-                <li><a href="LOGINpage/loginpage.html">Profile</a></li>
-                <!-- WhatsApp Support Floating Button -->
-                <a href="https://wa.me/918235699597" target="_blank" >
-                <i class="fab fa-whatsapp"></i>
-                <span class="whatsapp-text">Support</span></a>
-
+                <li><a href="LOGINpage/loginpage.html">Register</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Support <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="openLiveChat()"><i class="fas fa-comment-dots"></i> Live Chat</a></li>
+                        <li><a href="https://wa.me/918579924554" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Support</a></li>
+                        <li><a href="mailto:support@travally.com"><i class="fas fa-envelope"></i> Email Us</a></li>
+                        <li><a href="tel:+918579924554"><i class="fas fa-phone-alt"></i> Phone Support</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/help"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                        <li><a href="/feedback"><i class="fas fa-comment-alt"></i> Feedback</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>
@@ -1023,7 +1023,7 @@
         <div class="video-slideshow" id="videoSlideshow">
             <video class="active" autoplay muted loop playsinline src="https://vicky-tec.github.io/TRAVALLY/video1.mp4"></video>
             <video muted loop playsinline src="https://vicky-tec.github.io/TRAVALLY/video2.mp4"></video>
-             <video muted loop playsinline src="https://vicky-tec.github.io/TRAVALLY/video3.mp4"></video>
+            <video muted loop playsinline src="https://vicky-tec.github.io/TRAVALLY/video3.mp4"></video>
         </div>
         <div class="hero-content">
             <h1>Embark on Your Bihar Adventure</h1>
@@ -1051,7 +1051,7 @@
                         <div class="destination-card-content">
                             <h3>Nalanda University Ruins</h3>
                             <p>Explore the remains of the ancient Mahavihara, a large Buddhist monastery and a renowned center of learning in ancient Magadha.</p>
-                             <a href="mapo.html?location=Nalanda" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
+                            <a href="mapo.html?location=Nalanda" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
                         </div>
                     </div>
 
@@ -1060,133 +1060,159 @@
                         <div class="destination-card-content">
                             <h3>Rajgir</h3>
                             <p>An ancient city and popular tourist spot known for its hot springs, Vishwa Shanti Stupa accessed by a ropeway, and historical sites related to Buddhism and Jainism.</p>
-                             <a href="mapo.html?location=Rajgir" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
+                            <a href="mapo.html?location=Rajgir" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
                         </div>
                     </div>
 
-                     <div class="destination-card">
+                    <div class="destination-card">
                         <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/3d/7b/ed/caption.jpg?w=1200&h=-1&s=1" alt="Takht Sri Patna Sahib">
                         <div class="destination-card-content">
                             <h3>Takht Sri Patna Sahib</h3>
                             <p>The birthplace of Guru Gobind Singh Ji, the tenth Sikh Guru. A sacred pilgrimage site for Sikhs, located in Patna.</p>
-                             <a href="mapo.html?location=Takht Sri Patna Sahib" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
-                        </div>
-                    </div>
-
-                     <div class="destination-card">
-                         <img src="https://www.vedicmatters.com/images/article/article-2021-09-14-04-59-30_61402c325e1ca.png" alt="Vikramshila Ruins">
-                         <div class="destination-card-content">
-                              <h3>Vikramshila Ruins</h3>
-                              <p>Ruins of another ancient Buddhist university, located near Bhagalpur. Offers insights into the educational and religious practices of the past.</p>
-                              <a href="mapo.html?location=Vikramshila" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
-                         </div>
-                     </div>
-
-                     <div class="destination-card">
-                          <img src="https://www.jagranimages.com/images/newimg/23102021/23_10_2021-hanuman-mandir5_22141898_161456552.jpg" alt="Mahavir Mandir, Patna">
-                          <div class="destination-card-content">
-                               <h3>Mahavir Mandir, Patna</h3>
-                               <p>Founded by Swami Balanand in 1730 A.D., Mahavir Mandir in Patna gained popularity after the 1947 partition due to the influx of refugees. 
-                                Originally rebuilt as a concrete structure then, it was transformed into a large marble temple in 1987. 
-                                The temple is renowned for housing the idol of Sankat-Mochan, an avatar of Hanuman.</p>
-                               <a href="mapo.html?location=Golghar" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
+                            <a href="mapo.html?location=Takht Sri Patna Sahib" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
                           </div>
-                      </div>
-
-                    </div>
             </div>
-        </section>
 
-        <section id="buddy-section" class="buddy-finder content-section">
-            <div class="container">
-                <h2>Find Your HumSafar</h2>
-                 <p class="text-center">Connect with fellow travelers looking to explore Bihar together based on your interests.</p>
-                <form id="buddySearch" class="buddy-search-form">
-                    <div class="form-group">
-                        <label for="interest"><i class="fas fa-heart"></i> Interest:</label>
-                        <select id="interest" name="interest" aria-label="Select interest">
-                            <option value="Tour">Tour</option>
-                            <option value="foodWalk">Food Walk</option>
-                            <option value="studyBuddy">Study Buddy</option>
-                            <option value="sports">Sports Facilities</option>
-                            <option value="photography">Photography</option>
-                            <option value="spiritual">Spiritual Sites</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="time"><i class="fas fa-clock"></i> Preferred Time:</label>
-                        <input type="time" id="time" name="time" aria-label="Select preferred time"/>
-                    </div>
-                    <button type="button" class="btn" onclick="window.location.href='finder.html'">Find Buddies <i class="fas fa-users"></i></button>
-                </form>
-
-                <h3>Active Groups Nearby</h3>
-                <div class="buddy-list">
-                    <div class="buddy-card">
-                        <h4><i class="fas fa-camera-retro"></i> Photography Tour Group</h4>
-                        <p><i class="fas fa-map-marker-alt"></i> Meeting Point: Near Golghar</p>
-                        <p><i class="fas fa-calendar-alt"></i> Date: Tomorrow, April 21, 2025</p>
-                         <p><i class="fas fa-clock"></i> Time: 07:00 AM</p>
-                        <p><i class="fas fa-users"></i> Participants: 3/6</p>
-                        <button class="btn btn-secondary" onclick="window.location.href='finder.html'">Join Group <i class="fas fa-sign-in-alt"></i></button>
-                    </div>
-                     <div class="buddy-card">
-                        <h4><i class="fas fa-utensils"></i> Litti Chokha Food Walk</h4>
-                        <p><i class="fas fa-map-marker-alt"></i> Meeting Point: Boring Road Chowk</p>
-                         <p><i class="fas fa-calendar-alt"></i> Date: Today, April 20, 2025</p>
-                        <p><i class="fas fa-clock"></i> Time: 06:00 PM</p>
-                        <p><i class="fas fa-users"></i> Participants: 2/4</p>
-                        <button class="btn btn-secondary" onclick="window.location.href='finder.html'">Join Group <i class="fas fa-sign-in-alt"></i></button>
-                    </div>
-                    </div>
+            <div class="destination-card">
+              <img src="https://www.vedicmatters.com/images/article/article-2021-09-14-04-59-30_61402c325e1ca.png" alt="Vikramshila Ruins" />
+              <div class="destination-card-content">
+                <h3>Vikramshila Ruins</h3>
+                <p>Ruins of another ancient Buddhist university, located near Bhagalpur. Offers insights into the educational and religious practices of the past.</p>
+                <a href="mapo.html?location=Vikramshila" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
+              </div>
             </div>
-        </section>
+
+            <div class="destination-card">
+              <img src="https://www.jagranimages.com/images/newimg/23102021/23_10_2021-hanuman-mandir5_22141898_161456552.jpg" alt="Mahavir Mandir, Patna" />
+              <div class="destination-card-content">
+                <h3>Mahavir Mandir, Patna</h3>
+                <p>Founded by Swami Balanand in 1730 A.D., Mahavir Mandir in Patna gained popularity after the 1947 partition due to the influx of refugees. Originally rebuilt as a concrete structure then, it was transformed into a large marble temple in 1987. The temple is renowned for housing the idol of Sankat-Mochan, an avatar of Hanuman.</p>
+                <a href="mapo.html?location=Golghar" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="buddy-section" class="buddy-finder content-section">
+        <div class="container">
+          <h2>Find Your HumSafar</h2>
+          <p class="text-center">Connect with fellow travelers looking to explore Bihar together based on your interests.</p>
+          <form id="buddySearch" class="buddy-search-form">
+            <div class="form-group">
+              <label for="interest"><i class="fas fa-heart"></i> Interest:</label>
+              <select id="interest" name="interest" aria-label="Select interest">
+                <option value="Tour">Tour</option>
+                <option value="foodWalk">Food Walk</option>
+                <option value="studyBuddy">Study Buddy</option>
+                <option value="sports">Sports Facilities</option>
+                <option value="photography">Photography</option>
+                <option value="spiritual">Spiritual Sites</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="time"><i class="fas fa-clock"></i> Preferred Time:</label>
+              <input type="time" id="time" name="time" aria-label="Select preferred time" />
+            </div>
+            <button type="button" class="btn" onclick="window.location.href='finder.html'">Find Buddies <i class="fas fa-users"></i></button>
+          </form>
+
+          <h3>Active Groups Nearby</h3>
+          <div class="buddy-list">
+            <div class="buddy-card">
+              <h4><i class="fas fa-camera-retro"></i> Photography Tour Group</h4>
+              <p>
+                <i class="fas fa-map-marker-alt"></i> Meeting Point: Near Golghar
+              </p>
+              <p>
+                <i class="fas fa-calendar-alt"></i> Date: Tomorrow, April 21, 2025
+              </p>
+              <p>
+                <i class="fas fa-clock"></i> Time: 07:00 AM
+              </p>
+              <p>
+                <i class="fas fa-users"></i> Participants: 3/6
+              </p>
+              <button class="btn btn-secondary" onclick="window.location.href='finder.html'">Join Group <i class="fas fa-sign-in-alt"></i></button>
+            </div>
+            <div class="buddy-card">
+              <h4><i class="fas fa-utensils"></i> Litti Chokha Food Walk</h4>
+              <p>
+                <i class="fas fa-map-marker-alt"></i> Meeting Point: Boring Road Chowk
+              </p>
+              <p>
+                <i class="fas fa-calendar-alt"></i> Date: Today, April 20, 2025
+              </p>
+              <p>
+                <i class="fas fa-clock"></i> Time: 06:00 PM
+              </p>
+              <p>
+                <i class="fas fa-users"></i> Participants: 2/4
+              </p>
+              <button class="btn btn-secondary" onclick="window.location.href='finder.html'">Join Group <i class="fas fa-sign-in-alt"></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>
-        <div class="container footer-content">
-            <div class="footer-section about">
-                <h3>About TRAVALLY</h3>
-                <p>TRAVALLY is your ultimate companion for discovering new places and connecting with fellow explorers. From AI-powered guidance to finding your perfect travel buddy, we're here to make your journey unforgettable.</p>
-            </div>
-            <div class="footer-section links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#destinations">Destinations</a></li>
-                    <li><a href="#chatbot-section">YuktiBot</a></li>
-                    <li><a href="mapo.html">YatraMitra (Map)</a></li>
-                    <li><a href="#buddy-section">HumSafar (Buddy Finder)</a></li>
-                    <li><a href="About us.html">About Us</a></li>
-                    <li><a href="LOGINpage/loginpage.html">Profile</a></li>
-                </ul>
-            </div>
-            <div class="footer-section contact">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-envelope"></i> info@travally.com</p>
-                <p><i class="fas fa-phone"></i> +91 8579924554</p>
-                <p><i class="fas fa-map-marker-alt"></i> IIT PATNA HOSTEL</p>
-            </div>
-            <div class="footer-section social">
-                <h3>Follow Us</h3>
-                <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Follow on Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/yourpage" target="_blank" aria-label="Follow on LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.instagram.com/yourpage" target="_blank" aria-label="Follow on Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://github.com/vicky-tec" target="_blank" aria-label="View on GitHub"><i class="fab fa-github"></i></a>
-            </div>
+      <div class="container footer-content">
+        <div class="footer-section about">
+          <h3>About TRAVALLY</h3>
+          <p>TRAVALLY is your ultimate companion for discovering new places and connecting with fellow explorers. From AI-powered guidance to finding your perfect travel buddy, we're here to make your journey unforgettable.</p>
         </div>
-        <div class="footer-bottom">
-            &copy; 2025 TRAVALLY | Designed with devotion ✨
+        <div class="footer-section links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li>
+              <a href="#home">Home</a>
+            </li>
+            <li>
+              <a href="#destinations">Destinations</a>
+            </li>
+            <li>
+              <a href="#chatbot-section">YuktiBot</a>
+            </li>
+            <li>
+              <a href="mapo.html">YatraMitra (Map)</a>
+            </li>
+            <li>
+              <a href="#buddy-section">HumSafar (Buddy Finder)</a>
+            </li>
+            <li>
+              <a href="About us.html">About Us</a>
+            </li>
+            <li>
+              <a href="LOGINpage/loginpage.html">Profile</a>
+            </li>
+          </ul>
         </div>
+        <div class="footer-section contact">
+          <h3>Contact Us</h3>
+          <p>
+            <i class="fas fa-envelope"></i> info@travally.com
+          </p>
+          <p>
+            <i class="fas fa-phone"></i> +91 8579924554
+          </p>
+          <p>
+            <i class="fas fa-map-marker-alt"></i> IIT PATNA HOSTEL
+          </p>
+        </div>
+        <div class="footer-section social">
+          <h3>Follow Us</h3>
+          <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Follow on Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.linkedin.com/yourpage" target="_blank" aria-label="Follow on LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://www.instagram.com/yourpage" target="_blank" aria-label="Follow on Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://github.com/vicky-tec" target="_blank" aria-label="View on GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2025 TRAVALLY | Designed with devotion ✨</div>
     </footer>
 
     <!-- Dark/Light Theme Toggle Button -->
-<button id="themeToggle" class="theme-toggle" style="left: 25px; right: auto;" onclick="toggleTheme()" aria-label="Toggle theme">
-    🌙
-</button>
-
-
-
+    <button id="themeToggle" class="theme-toggle" style="left: 25px; right: auto;" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
 
     <script>
         // --- Preloader ---
@@ -1282,6 +1308,6 @@
 
     </script>
     <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
-  <script src="https://files.bpcontent.cloud/2025/03/28/05/20250328055708-52MFWWBB.js"></script>
-     </body>
+    <script src="https://files.bpcontent.cloud/2025/03/28/05/20250328055708-52MFWWBB.js"></script>
+  </body>
 </html>
