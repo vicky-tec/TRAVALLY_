@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chatbot</title>
+  <style>
+    /* Chatbot Container */
+    .chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      transition: all 0.3s ease;
+    }
+    
+    /* Chat Header */
+    .chat-header {
+      background: #4a6bff;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    /* Chat Body */
+    .chat-body {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background: #f9f9f9;
+    }
+
+    /* Messages */
+    .message {
+      margin-bottom: 15px;
+      max-width: 80%;
+      padding: 10px 15px;
+      border-radius: 18px;
+      line-height: 1.4;
+      position: relative;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .user-message {
+      background: #4a6bff;
+      color: white;
+      margin-left: auto;
+      border-bottom-right-radius: 5px;
+    }
+
+    .bot-message {
+      background: #e5e5ea;
+      color: #000;
+      border-bottom-left-radius: 5px;
+    }
+
+    /* Typing Indicator */
+    .typing-indicator {
+      display: flex;
+      padding: 10px 15px;
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: #ccc;
+      border-radius: 50%;
+      margin: 0 2px;
+      animation: typingAnimation 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingAnimation {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+
+    /* Input Area */
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #eee;
+      background: #fff;
+    }
+
+    #user-input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    #send-btn {
+      margin-left: 10px;
+      padding: 10px 15px;
+      background: #4a6bff;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #send-btn:hover {
+      background: #3a5bef;
+    }
+
+    /* Toggle Button */
+    .chatbot-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #4a6bff;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 999;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Chatbot Toggle Button -->
+  <div class="chatbot-toggle" id="chatbotToggle">💬</div>
+
+  <!-- Chatbot Container -->
+  <div class="chatbot-container" id="chatbotContainer" style="display: none;">
+    <div class="chat-header">
+      <div class="chat-title">AI Assistant</div>
+      <button class="close-btn" id="closeChat">✕</button>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="message bot-message">Hello! I'm your AI assistant. How can I help you today?</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Type your message...">
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    // DOM Elements
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotContainer = document.getElementById('chatbotContainer');
+    const closeChat = document.getElementById('closeChat');
+    const chatBody = document.getElementById('chatBody');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+
+    // Toggle Chatbot Visibility
+    chatbotToggle.addEventListener('click', () => {
+      chatbotContainer.style.display = chatbotContainer.style.display === 'none' ? 'flex' : 'none';
+    });
+
+    closeChat.addEventListener('click', () => {
+      chatbotContainer.style.display = 'none';
+    });
+
+    // Send Message Function
+    function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      // Add user message to chat
+      addMessage(message, 'user');
+      userInput.value = '';
+
+      // Show typing indicator
+      showTypingIndicator();
+
+      // Process message and get bot response (simulated delay)
+      setTimeout(() => {
+        // Remove typing indicator
+        removeTypingIndicator();
+        
+        // Get bot response
+        const botResponse = generateResponse(message);
+        addMessage(botResponse, 'bot');
+      }, 1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+    }
+
+    // Add Message to Chat
+    function addMessage(text, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', `${sender}-message`);
+      messageDiv.textContent = text;
+      chatBody.appendChild(messageDiv);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // Show Typing Indicator
+    function showTypingIndicator() {
+      const typingDiv = document.createElement('div');
+      typingDiv.classList.add('typing-indicator');
+      typingDiv.id = 'typingIndicator';
+      typingDiv.innerHTML = `
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      `;
+      chatBody.appendChild(typingDiv);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // Remove Typing Indicator
+    function removeTypingIndicator() {
+      const typingIndicator = document.getElementById('typingIndicator');
+      if (typingIndicator) {
+        typingIndicator.remove();
+      }
+    }
+
+    // Generate Bot Response (Advanced)
+    function generateResponse(userInput) {
+      const input = userInput.toLowerCase();
+      
+      // Greetings
+      if (/hello|hi|hey|greetings|what's up/i.test(input)) {
+        return getRandomResponse([
+          "Hello there! How can I assist you today?",
+          "Hi! What can I do for you?",
+          "Hey! How can I help?"
+        ]);
+      }
+
+      // Farewell
+      if (/bye|goodbye|see you|farewell/i.test(input)) {
+        return getRandomResponse([
+          "Goodbye! Have a great day!",
+          "See you later!",
+          "Bye! Come back anytime!"
+        ]);
+      }
+
+      // Help
+      if (/help|support|assist/i.test(input)) {
+        return "I can help with information, answer questions, or just chat. What do you need?";
+      }
+
+      // Time
+      if (/time|what time|current time/i.test(input)) {
+        return `The current time is ${new Date().toLocaleTimeString()}.`;
+      }
+
+      // Date
+      if (/date|today's date|what date/i.test(input)) {
+        return `Today is ${new Date().toLocaleDateString()}.`;
+      }
+
+      // Weather (simulated)
+      if (/weather|forecast|temperature/i.test(input)) {
+        return "I can't check real-time weather, but you can ask me about general climate information!";
+      }
+
+      // Default fallback
+      return getRandomResponse([
+        "I'm not sure I understand. Could you rephrase that?",
+        "That's interesting! Can you tell me more?",
+        "I'm still learning. Could you ask me something else?",
+        "I don't have an answer for that yet. Try asking something different."
+      ]);
+    }
+
+    // Helper function for random responses
+    function getRandomResponse(responses) {
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+
+    // Event Listeners
+    sendBtn.addEventListener('click', sendMessage);
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // Initial greeting
+    setTimeout(() => {
+      addMessage("Tip: You can ask me anything!", 'bot');
+    }, 1500);
+  </script>
+</body>
+</html>
