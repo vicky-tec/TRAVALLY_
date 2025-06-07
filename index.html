@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TRAVALLY | Your Bihar Travel Companion</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Protest+Revolution&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Protest+Revolution&display=swap"
+        rel="stylesheet" />
     <link rel="icon" href="https://vicky-tec.github.io/TRAVALLY/TRAVALLY.png" type="image/x-icon" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         /* --- CSS Variables --- */
         :root {
             /* Color System */
-            --primary-color: #06B6D4; /* Vibrant Blue */
+            --primary-color: #06B6D4;
+            /* Vibrant Blue */
             --primary-hover: #0891b2;
-            --secondary-color: #9333EA; /* Rich Purple */
-            --accent-color: #EC4899; /* Bright Pink */
-            --dark-color: #1E293B; /* Dark Slate */
-            --light-color: #F1F5F9; /* Light Gray */
+            --secondary-color: #9333EA;
+            /* Rich Purple */
+            --accent-color: #EC4899;
+            /* Bright Pink */
+            --dark-color: #1E293B;
+            /* Dark Slate */
+            --light-color: #F1F5F9;
+            /* Light Gray */
             --white-color: #ffffff;
             --black-color: #000000;
 
@@ -26,12 +36,14 @@
 
             --text-color: var(--dark-color);
             --heading-color: var(--dark-color);
-            --border-color: #e2e8f0; /* Light border */
+            --border-color: #e2e8f0;
+            /* Light border */
 
             /* Component Backgrounds */
             --background-color: var(--light-color);
             --card-background: var(--white-color);
-            --navbar-bg: rgba(255, 255, 255, 0.98); /* Slightly more opaque */
+            --navbar-bg: rgba(255, 255, 255, 0.98);
+            /* Slightly more opaque */
             --footer-bg: var(--dark-color);
 
             /* Text Colors */
@@ -42,9 +54,12 @@
             --footer-link-color: var(--light-color);
 
             /* Chat Specific Colors */
-            --message-user-bg: #dbeafe; /* Lighter blue */
-            --message-bot-bg: #e2e8f0; /* Light gray */
-            --input-border-color: #cbd5e1; /* Medium light gray */
+            --message-user-bg: #dbeafe;
+            /* Lighter blue */
+            --message-bot-bg: #e2e8f0;
+            /* Light gray */
+            --input-border-color: #cbd5e1;
+            /* Medium light gray */
 
             /* Shadows */
             --section-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -60,17 +75,23 @@
 
         /* Dark Theme */
         [data-theme="dark"] {
-            --background-color: #1a202c; /* Darker background */
-            --card-background: #2d3748; /* Dark card background */
+            --background-color: #1a202c;
+            /* Darker background */
+            --card-background: #2d3748;
+            /* Dark card background */
             --text-color: var(--light-color);
             --heading-color: var(--light-color);
-            --navbar-bg: rgba(26, 32, 44, 0.98); /* Darker navbar */
+            --navbar-bg: rgba(26, 32, 44, 0.98);
+            /* Darker navbar */
             --navbar-link-color: var(--light-color);
-            --footer-bg: #171923; /* Very dark footer */
+            --footer-bg: #171923;
+            /* Very dark footer */
 
             /* Chat Specific Colors (Dark Mode) */
-            --message-user-bg: #4a5568; /* Dark user bubble */
-            --message-bot-bg: #718096; /* Dark bot bubble */
+            --message-user-bg: #4a5568;
+            /* Dark user bubble */
+            --message-bot-bg: #718096;
+            /* Dark bot bubble */
             --input-border-color: #4a5568;
 
             --section-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -78,7 +99,9 @@
         }
 
         /* --- Base Styles --- */
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
         }
 
@@ -92,7 +115,12 @@
             line-height: 1.6;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Protest Revolution', sans-serif;
             color: var(--heading-color);
             transition: color 0.5s ease;
@@ -221,7 +249,7 @@
             position: absolute;
             background-color: var(--navbar-bg);
             min-width: 220px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             z-index: var(--z-index-nav);
             border-radius: 8px;
             padding: 10px 0;
@@ -430,6 +458,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 35px;
+            perspective: 1000px;
         }
 
         .destination-card {
@@ -441,10 +470,14 @@
             display: flex;
             flex-direction: column;
             border: 1px solid var(--border-color);
+            transform-style: preserve-3d;
+            position: relative;
+            transition: all 0.5s ease;
+            transform: rotateY(0deg);
         }
 
         .destination-card:hover {
-            transform: translateY(-12px);
+            transform: translateY(-12px) rotateY(15deg);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
@@ -453,6 +486,7 @@
             height: 250px;
             object-fit: cover;
             transition: transform 0.6s ease;
+            backface-visibility: hidden;
         }
 
         .destination-card:hover img {
@@ -464,6 +498,7 @@
             display: flex;
             flex-direction: column;
             flex-grow: 1;
+            backface-visibility: hidden;
         }
 
         .destination-card-content h3 {
@@ -484,6 +519,56 @@
             align-self: flex-start;
             padding: 0.9rem 2rem;
             font-size: 1.1rem;
+        }
+
+        /* Circular motion effect */
+        .destination-grid:hover .destination-card {
+            animation: circularMotion 8s infinite ease-in-out;
+        }
+
+        @keyframes circularMotion {
+
+            0%,
+            100% {
+                transform: rotateY(0deg) translateY(0);
+            }
+
+            25% {
+                transform: rotateY(15deg) translateY(-10px);
+            }
+
+            50% {
+                transform: rotateY(0deg) translateY(-5px);
+            }
+
+            75% {
+                transform: rotateY(-15deg) translateY(-10px);
+            }
+        }
+
+        /* Individual card delays for wave effect */
+        .destination-grid:hover .destination-card:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .destination-grid:hover .destination-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .destination-grid:hover .destination-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .destination-grid:hover .destination-card:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .destination-grid:hover .destination-card:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        .destination-grid:hover .destination-card:nth-child(6) {
+            animation-delay: 1s;
         }
 
         /* --- Buddy Finder Section --- */
@@ -722,7 +807,7 @@
         .theme-toggle {
             position: fixed;
             bottom: 25px;
-            right: 25px;
+            left: 25px;
             background: var(--primary-color);
             color: var(--button-text-color);
             padding: 1.1rem;
@@ -791,8 +876,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .warrior-quote {
@@ -819,11 +909,11 @@
             body {
                 padding: 0 10px;
             }
-            
+
             .navbar {
                 padding: 0.5rem 0;
             }
-            
+
             .navbar .nav-container {
                 flex-direction: column;
                 align-items: flex-start;
@@ -868,11 +958,11 @@
                 box-shadow: none;
                 background-color: transparent;
             }
-            
+
             .dropdown-menu li {
                 padding: 8px 0;
             }
-            
+
             .dropdown.active .dropdown-menu {
                 display: block;
             }
@@ -891,7 +981,7 @@
                 font-size: 1.2rem;
                 gap: 8px;
             }
-            
+
             .content-section {
                 padding: 4rem 0;
             }
@@ -900,7 +990,7 @@
                 font-size: 2.5rem;
                 margin-bottom: 3rem;
             }
-            
+
             .featured-destinations h2 {
                 font-size: 2.8rem;
             }
@@ -908,19 +998,19 @@
             .destination-grid {
                 gap: 25px;
             }
-            
+
             .destination-card img {
                 height: 180px;
             }
-            
+
             .destination-card-content h3 {
                 font-size: 1.3rem;
             }
-            
+
             .destination-card-content p {
                 font-size: 0.95rem;
             }
-            
+
             .destination-card-content .btn {
                 padding: 0.8rem 1.8rem;
                 font-size: 1rem;
@@ -930,38 +1020,38 @@
                 padding: 30px 0 15px;
                 margin-top: 3rem;
             }
-            
+
             .footer-section {
                 padding: 0 8px;
                 width: 95%;
             }
-            
+
             .footer-section h3 {
                 font-size: 1.2rem;
                 margin-bottom: 10px;
                 padding-bottom: 6px;
             }
-            
+
             .footer-section.links ul li {
                 margin-bottom: 8px;
             }
-            
+
             .footer-section.contact p {
                 margin-bottom: 8px;
                 gap: 6px;
             }
-            
+
             .footer-section.social a {
                 margin-right: 10px;
                 font-size: 1.3rem;
             }
-            
+
             .footer-bottom {
                 margin-top: 20px;
                 padding-top: 15px;
                 font-size: 0.85rem;
             }
-            
+
             .theme-toggle {
                 bottom: 15px;
                 right: 15px;
@@ -971,13 +1061,31 @@
                 height: 50px;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             }
-            
+
             .theme-toggle.rotate {
                 transform: rotate(180deg);
+            }
+
+            /* Disable 3D effects on mobile */
+            .destination-grid {
+                perspective: none;
+            }
+
+            .destination-card {
+                transform-style: flat;
+            }
+
+            .destination-grid:hover .destination-card {
+                animation: none;
+            }
+
+            .destination-card:hover {
+                transform: translateY(-12px);
             }
         }
     </style>
 </head>
+
 <body>
     <div id="preloader">
         <div class="loader"></div>
@@ -988,7 +1096,8 @@
         <div class="nav-container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="https://github.com/vicky-tec/TRAVALLY_/blob/main/TRAVALLY.png?raw=true" alt="Travally Logo">
+                    <img src="https://github.com/vicky-tec/TRAVALLY_/blob/main/TRAVALLY.png?raw=true"
+                        alt="Travally Logo">
                     <span>TRAVALLY</span>
                 </a>
             </div>
@@ -1007,7 +1116,8 @@
                     <a href="#" class="dropdown-toggle">Support <i class="fas fa-caret-down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="#" onclick="openLiveChat()"><i class="fas fa-comment-dots"></i> Live Chat</a></li>
-                        <li><a href="https://wa.me/918579924554" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Support</a></li>
+                        <li><a href="https://wa.me/918579924554" target="_blank"><i class="fab fa-whatsapp"></i>
+                                WhatsApp Support</a></li>
                         <li><a href="mailto:support@travally.com"><i class="fas fa-envelope"></i> Email Us</a></li>
                         <li><a href="tel:+918579924554"><i class="fas fa-phone-alt"></i> Phone Support</a></li>
                         <li class="divider"></li>
@@ -1037,276 +1147,346 @@
                 <h2>Featured Destinations in Bihar</h2>
                 <div class="destination-grid">
                     <div class="destination-card">
-                        <img src="https://th.bing.com/th/id/OIP.iAzVWIdawKGEcVXXhheDeQAAAA?rs=1&pid=ImgDetMain,jpg" alt="Mahabodhi Temple, Bodh Gaya">
+                        <img src="https://th.bing.com/th/id/OIP.iAzVWIdawKGEcVXXhheDeQAAAA?rs=1&pid=ImgDetMain,jpg"
+                            alt="Mahabodhi Temple, Bodh Gaya">
                         <div class="destination-card-content">
                             <h3>Mahabodhi Temple</h3>
-                            <p>A UNESCO World Heritage Site in Bodh Gaya, marking the place where Buddha attained enlightenment. A major pilgrimage site for Buddhists worldwide.</p>
-                            <a href="mapo.html?location=Mahabodhi Temple" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
+                            <p>A UNESCO World Heritage Site in Bodh Gaya, marking the place where Buddha attained
+                                enlightenment. A major pilgrimage site for Buddhists worldwide.</p>
+                            <a href="mapo.html?location=Mahabodhi Temple" class="btn btn-outline">View on Map <i
+                                    class="fas fa-map-marker-alt"></i></a>
                         </div>
                     </div>
 
                     <div class="destination-card">
-                        <img src="https://as1.ftcdn.net/v2/jpg/02/11/88/00/1000_F_211880037_YxH859TYGRP8GyHwkNMXT45YJBkLUkxt.jpg" alt="Nalanda University Ruins">
+                        <img src="https://as1.ftcdn.net/v2/jpg/02/11/88/00/1000_F_211880037_YxH859TYGRP8GyHwkNMXT45YJBkLUkxt.jpg"
+                            alt="Nalanda University Ruins">
                         <div class="destination-card-content">
                             <h3>Nalanda University Ruins</h3>
-                            <p>Explore the remains of the ancient Mahavihara, a large Buddhist monastery and a renowned center of learning in ancient Magadha.</p>
-                            <a href="mapo.html?location=Nalanda" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
+                            <p>Explore the remains of the ancient Mahavihara, a largeBuddhist monastery and center of
+                                learning from the 5th to 12th century. A UNESCO World Heritage Site showcasing Bihar's
+                                rich academic heritage.</p>
+                            <a href="mapo.html?location=Nalanda University" class="btn btn-outline">View on Map <i
+                                    class="fas fa-map-marker-alt"></i></a>
+                        </div>
+                    </div>
+                    <div class="destination-card">
+                        <img src="https://www.vedicmatters.com/images/article/article-2021-09-14-04-59-30_61402c325e1ca.png"
+                            alt="Vikramshila Ruins">
+                        <div class="destination-card-content">
+                            <h3>Vikramshila Ruins</h3>
+                            <p>Ruins of another ancient Buddhist university, located near Bhagalpur. Offers insights
+                                into the educational and religious practices of the past.</p>
+                            <a href="mapo.html?location=Vikramshila Ruins" class="btn btn-outline">View on Map <i
+                                    class="fas fa-map-marker-alt"></i></a>
                         </div>
                     </div>
 
                     <div class="destination-card">
-                        <img src="https://www.recipe4travel.com/wp-content/uploads/2016/07/11286128306_4176d3ba24_o001-1024x768.jpg" alt="Rajgir">
+                        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/3d/7b/ed/caption.jpg?w=1200&h=-1&s=1"
+                            alt="Patna Sahib">
+                        <div class="destination-card-content">
+                            <h3>Patna Sahib</h3>
+                            <p>The birthplace of Guru Gobind Singh Ji, the tenth Sikh Guru. A sacred pilgrimage site for
+                                Sikhs, located in Patna.</p>
+                            <a href="mapo.html?location=Pawapuri" class="btn btn-outline">View on Map <i
+                                    class="fas fa-map-marker-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <img src="https://www.jagranimages.com/images/newimg/23102021/23_10_2021-hanuman-mandir5_22141898_161456552.jpg"
+                            alt="Mahavir Mandir, Patna">
+                        <div class="destination-card-content">
+                            <h3>Mahavir Mandir</h3>
+                            <p>Founded by Swami Balanand in 1730 A.D., Mahavir Mandir in Patna gained popularity after
+                                the 1947 partition due to the influx of refugees. Originally rebuilt as a concrete
+                                structure then, it was transformed into a large marble temple in 1987. The temple is
+                                renowned for housing the idol of Sankat-Mochan, an avatar of Hanuman.</p>
+                            <a href="mapo.html?location=Rajgir" class="btn btn-outline">View on Map <i
+                                    class="fas fa-map-marker-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <img src="https://www.recipe4travel.com/wp-content/uploads/2016/07/11286128306_4176d3ba24_o001-1024x768.jpg"
+                            alt="Rajgir">
                         <div class="destination-card-content">
                             <h3>Rajgir</h3>
-                            <p>An ancient city and popular tourist spot known for its hot springs, Vishwa Shanti Stupa accessed by a ropeway, and historical sites related to Buddhism and Jainism.</p>
-                            <a href="mapo.html?location=Rajgir" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
+                            <p>An ancient city and popular tourist spot known for its hot springs, Vishwa Shanti Stupa
+                                accessed by a ropeway, and historical sites related to Buddhism and Jainism.</p>
+                            <a href="mapo.html?location=Vaishali" class="btn btn-outline">View on Map <i
+                                    class="fas fa-map-marker-alt"></i></a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <div class="destination-card">
-                        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/3d/7b/ed/caption.jpg?w=1200&h=-1&s=1" alt="Takht Sri Patna Sahib">
-                        <div class="destination-card-content">
-                            <h3>Takht Sri Patna Sahib</h3>
-                            <p>The birthplace of Guru Gobind Singh Ji, the tenth Sikh Guru. A sacred pilgrimage site for Sikhs, located in Patna.</p>
-                            <a href="mapo.html?location=Takht Sri Patna Sahib" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
-                          </div>
-            </div>
+        <section id="buddy-section" class="content-section">
+            <div class="container">
+                <div class="buddy-finder">
+                    <h2>Find Your Travel Buddy</h2>
+                    <p class="text-center">Connect with fellow travelers exploring Bihar and share your journey</p>
 
-            <div class="destination-card">
-              <img src="https://www.vedicmatters.com/images/article/article-2021-09-14-04-59-30_61402c325e1ca.png" alt="Vikramshila Ruins" />
-              <div class="destination-card-content">
-                <h3>Vikramshila Ruins</h3>
-                <p>Ruins of another ancient Buddhist university, located near Bhagalpur. Offers insights into the educational and religious practices of the past.</p>
-                <a href="mapo.html?location=Vikramshila" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
-              </div>
-            </div>
+                    <div class="buddy-search-form">
+                        <div class="form-group">
+                            <label for="destination"><i class="fas fa-map-marked-alt"></i> Destination</label>
+                            <input type="text" id="destination" placeholder="Where are you going?">
+                        </div>
 
-            <div class="destination-card">
-              <img src="https://www.jagranimages.com/images/newimg/23102021/23_10_2021-hanuman-mandir5_22141898_161456552.jpg" alt="Mahavir Mandir, Patna" />
-              <div class="destination-card-content">
-                <h3>Mahavir Mandir, Patna</h3>
-                <p>Founded by Swami Balanand in 1730 A.D., Mahavir Mandir in Patna gained popularity after the 1947 partition due to the influx of refugees. Originally rebuilt as a concrete structure then, it was transformed into a large marble temple in 1987. The temple is renowned for housing the idol of Sankat-Mochan, an avatar of Hanuman.</p>
-                <a href="mapo.html?location=Golghar" class="btn btn-outline">View on Map <i class="fas fa-map-marker-alt"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                        <div class="form-group">
+                            <label for="travel-date"><i class="far fa-calendar-alt"></i> Travel Date</label>
+                            <input type="date" id="travel-date">
+                        </div>
 
-      <section id="buddy-section" class="buddy-finder content-section">
-        <div class="container">
-          <h2>Find Your HumSafar</h2>
-          <p class="text-center">Connect with fellow travelers looking to explore Bihar together based on your interests.</p>
-          <form id="buddySearch" class="buddy-search-form">
-            <div class="form-group">
-              <label for="interest"><i class="fas fa-heart"></i> Interest:</label>
-              <select id="interest" name="interest" aria-label="Select interest">
-                <option value="Tour">Tour</option>
-                <option value="foodWalk">Food Walk</option>
-                <option value="studyBuddy">Study Buddy</option>
-                <option value="sports">Sports Facilities</option>
-                <option value="photography">Photography</option>
-                <option value="spiritual">Spiritual Sites</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="time"><i class="fas fa-clock"></i> Preferred Time:</label>
-              <input type="time" id="time" name="time" aria-label="Select preferred time" />
-            </div>
-            <button type="button" class="btn" onclick="window.location.href='finder.html'">Find Buddies <i class="fas fa-users"></i></button>
-          </form>
+                        <div class="form-group">
+                            <label for="interests"><i class="fas fa-heart"></i> Interests</label>
+                            <select id="interests">
+                                <option value="">Select Interest</option>
+                                <option value="history">History & Culture</option>
+                                <option value="nature">Nature & Wildlife</option>
+                                <option value="photography">Photography</option>
+                                <option value="food">Local Cuisine</option>
+                                <option value="spiritual">Spiritual</option>
+                            </select>
+                        </div>
 
-          <h3>Active Groups Nearby</h3>
-          <div class="buddy-list">
-            <div class="buddy-card">
-              <h4><i class="fas fa-camera-retro"></i> Photography Tour Group</h4>
-              <p>
-                <i class="fas fa-map-marker-alt"></i> Meeting Point: Near Golghar
-              </p>
-              <p>
-                <i class="fas fa-calendar-alt"></i> Date: Tomorrow, April 21, 2025
-              </p>
-              <p>
-                <i class="fas fa-clock"></i> Time: 07:00 AM
-              </p>
-              <p>
-                <i class="fas fa-users"></i> Participants: 3/6
-              </p>
-              <button class="btn btn-secondary" onclick="window.location.href='finder.html'">Join Group <i class="fas fa-sign-in-alt"></i></button>
+                        <button class="btn" id="searchBuddies" onclick="searchAndRedirect()">
+                            Search Buddies <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h3>Available Travel Buddies</h3>
+
+                    <div class="buddy-list">
+                        <div class="buddy-card">
+                            <h4><i class="fas fa-user"></i>Vicky Raj</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> Exploring: Bodh Gaya</p>
+                            <p><i class="fas fa-calendar-day"></i> Travel Dates: 15-20 June 2023</p>
+                            <p><i class="fas fa-heart"></i> Interests: History, Photography</p>
+                            <p><i class="fas fa-comment"></i> "Looking for someone to explore Buddhist sites with and
+                                share photography tips!"</p>
+                            <a href="finder.html" class="btn btn-outline">Connect <i class="fas fa-handshake"></i></a>
+                        </div>
+
+                        <div class="buddy-card">
+                            <h4><i class="fas fa-user"></i>Tejashwi Raj</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> Exploring: Nalanda & Rajgir</p>
+                            <p><i class="fas fa-calendar-day"></i> Travel Dates: 22-25 June 2023</p>
+                            <p><i class="fas fa-heart"></i> Interests: History, Local Cuisine</p>
+                            <p><i class="fas fa-comment"></i> "Foodie looking to explore ancient sites and try local
+                                Bihari dishes together!"</p>
+                            <a href="finder.html" class="btn btn-outline">Connect <i class="fas fa-handshake"></i></a>
+                        </div>
+
+                        <div class="buddy-card">
+                            <h4><i class="fas fa-user"></i> Yuvraj Singh</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> Exploring: Vaishali & Pawapuri</p>
+                            <p><i class="fas fa-calendar-day"></i> Travel Dates: 5-8 July 2023</p>
+                            <p><i class="fas fa-heart"></i> Interests: Spiritual, Nature</p>
+                            <p><i class="fas fa-comment"></i> "Seeking a travel companion for Jain and Buddhist
+                                pilgrimage sites."</p>
+                            <a href="finder.html" class="btn btn-outline">Connect <i class="fas fa-handshake"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="buddy-card">
-              <h4><i class="fas fa-utensils"></i> Litti Chokha Food Walk</h4>
-              <p>
-                <i class="fas fa-map-marker-alt"></i> Meeting Point: Boring Road Chowk
-              </p>
-              <p>
-                <i class="fas fa-calendar-alt"></i> Date: Today, April 20, 2025
-              </p>
-              <p>
-                <i class="fas fa-clock"></i> Time: 06:00 PM
-              </p>
-              <p>
-                <i class="fas fa-users"></i> Participants: 2/4
-              </p>
-              <button class="btn btn-secondary" onclick="window.location.href='finder.html'">Join Group <i class="fas fa-sign-in-alt"></i></button>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
     </main>
 
     <footer>
-      <div class="container footer-content">
-        <div class="footer-section about">
-          <h3>About TRAVALLY</h3>
-          <p>TRAVALLY is your ultimate companion for discovering new places and connecting with fellow explorers. From AI-powered guidance to finding your perfect travel buddy, we're here to make your journey unforgettable.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>About TRAVALLY</h3>
+                    <p>TRAVALLY is your ultimate travel companion for exploring the rich cultural heritage and natural
+                        beauty of Bihar. We provide curated experiences, travel tools, and local insights to make your
+                        journey unforgettable.</p>
+                    <div class="social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="bot.html">YuktiBot</a></li>
+                        <li><a href="mapo.html">YatraMitra (Map)</a></li>
+                        <li><a href="#buddy-section">HumSafar (Buddy Finder)</a></li>
+                        <li><a href="About us.html">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Patna, Bihar 800001, India</p>
+                    <p><i class="fas fa-phone"></i> +91 8579924554</p>
+                    <p><i class="fas fa-envelope"></i> info@travally.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Sun: 9:00 AM - 7:00 PM</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 TRAVALLY | Your Bihar Travel Companion. All Rights Reserved.</p>
+            </div>
         </div>
-        <div class="footer-section links">
-          <h3>Quick Links</h3>
-          <ul>
-            <li>
-              <a href="#home">Home</a>
-            </li>
-            <li>
-              <a href="#destinations">Destinations</a>
-            </li>
-            <li>
-              <a href="#chatbot-section">YuktiBot</a>
-            </li>
-            <li>
-              <a href="mapo.html">YatraMitra (Map)</a>
-            </li>
-            <li>
-              <a href="#buddy-section">HumSafar (Buddy Finder)</a>
-            </li>
-            <li>
-              <a href="About us.html">About Us</a>
-            </li>
-            <li>
-              <a href="LOGINpage/loginpage.html">Profile</a>
-            </li>
-          </ul>
-        </div>
-        <div class="footer-section contact">
-          <h3>Contact Us</h3>
-          <p>
-            <i class="fas fa-envelope"></i> info@travally.com
-          </p>
-          <p>
-            <i class="fas fa-phone"></i> +91 8579924554
-          </p>
-          <p>
-            <i class="fas fa-map-marker-alt"></i> IIT PATNA HOSTEL
-          </p>
-        </div>
-        <div class="footer-section social">
-          <h3>Follow Us</h3>
-          <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Follow on Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.linkedin.com/yourpage" target="_blank" aria-label="Follow on LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a href="https://www.instagram.com/yourpage" target="_blank" aria-label="Follow on Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://github.com/vicky-tec" target="_blank" aria-label="View on GitHub"><i class="fab fa-github"></i></a>
-        </div>
-      </div>
-      <div class="footer-bottom">&copy; 2025 TRAVALLY | Designed with devotion ✨</div>
     </footer>
 
-    <!-- Dark/Light Theme Toggle Button -->
-    <button id="themeToggle" class="theme-toggle" style="left: 25px; right: auto;" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
 
     <script>
-        // --- Preloader ---
-        window.addEventListener('load', function() {
+        // Preloader
+        window.addEventListener('load', function () {
             const preloader = document.getElementById('preloader');
-            preloader.classList.add('hidden');
-             // Optionally play the flute sound on page load
-             // const audio = document.getElementById('warriorSound');
-             // audio.play().catch(e => console.error("Audio play failed:", e));
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+            }, 1500);
         });
 
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
 
-        // --- Navbar Toggle ---
-        document.getElementById('navToggle').addEventListener('click', function() {
-            const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            // Add/remove aria-expanded attribute for accessibility
-            const isExpanded = navLinks.classList.contains('active');
-            this.setAttribute('aria-expanded', isExpanded);
+            navToggle.innerHTML = navLinks.classList.contains('active')
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
         });
 
-         // Close navbar when a link is clicked (for mobile)
-         document.querySelectorAll('.nav-links a').forEach(link => {
-             link.addEventListener('click', () => {
-                 const navLinks = document.getElementById('navLinks');
-                 if (navLinks.classList.contains('active')) {
-                     navLinks.classList.remove('active');
-                     document.getElementById('navToggle').setAttribute('aria-expanded', false);
-                 }
-             });
-         });
+        // Dropdown functionality
+        const dropdowns = document.querySelectorAll('.dropdown');
 
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
 
-        // --- Video Slideshow ---
-        const videos = document.querySelectorAll('.video-slideshow video');
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        if (currentTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+
+            themeToggle.classList.add('rotate');
+            setTimeout(() => {
+                themeToggle.classList.remove('rotate');
+            }, 500);
+        });
+
+        // Video Slideshow
+        const videoSlideshow = document.getElementById('videoSlideshow');
+        const videos = videoSlideshow.querySelectorAll('video');
         let currentVideoIndex = 0;
 
         function changeVideo() {
             videos[currentVideoIndex].classList.remove('active');
             currentVideoIndex = (currentVideoIndex + 1) % videos.length;
             videos[currentVideoIndex].classList.add('active');
-             // Restart the video to ensure it plays from the beginning
-             videos[currentVideoIndex].currentTime = 0;
-             videos[currentVideoIndex].play();
         }
 
-        // Change video every 8 seconds (adjust as needed)
-        // Ensure videos loop infinitely by adding the loop attribute in HTML
-        setInterval(changeVideo, 8000);
+        // Change video every 10 seconds
+        setInterval(changeVideo, 10000);
 
+        // Ensure first video is playing
+        videos[0].classList.add('active');
 
-        // --- Theme Toggle ---
-        const themeToggleBtn = document.getElementById('themeToggle');
-        const currentTheme = localStorage.getItem('theme');
+        // Buddy Finder Search
+        const searchButton = document.getElementById('searchBuddies');
 
-        // Apply saved theme on load
-        if (currentTheme) {
-            document.documentElement.setAttribute('data-theme', currentTheme);
-             themeToggleBtn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-        }
+        searchButton.addEventListener('click', () => {
+            const destination = document.getElementById('destination').value;
+            const date = document.getElementById('travel-date').value;
+            const interests = document.getElementById('interests').value;
 
-        function toggleTheme() {
-            const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
-            if (isDarkMode) {
-                document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                themeToggleBtn.textContent = '🌙';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                 themeToggleBtn.textContent = '☀️';
-            }
-             themeToggleBtn.classList.add('rotate');
-             themeToggleBtn.addEventListener('transitionend', () => {
-                 themeToggleBtn.classList.remove('rotate');
-             }, { once: true }); // Remove class after rotation
-        }
+            // In a real app, this would make an API call
+            alert(`Searching for buddies going to ${destination} around ${date} interested in ${interests}`);
+        });
 
-         // --- Basic Scroll to Section ---
-         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
+
                 const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    targetElement.scrollIntoView({
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
+
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
                 }
             });
         });
 
+        // Live Chat function
+        function openLiveChat() {
+            alert("Live chat feature will be implemented soon. For now, please use WhatsApp or email support.");
+        }
+    </script>
+    <script>
+        function searchAndRedirect() {
+            // Get search values
+            const destination = document.getElementById('destination').value;
+            const date = document.getElementById('travel-date').value;
+            const interests = document.getElementById('interests').value;
 
+            // Perform search (your existing code)
+            alert(`Searching for buddies going to ${destination} around ${date} interested in ${interests}`);
+
+            // Then redirect
+            window.location.href = 'finder.html';
+            // Or with parameters:
+            // window.location.href = `buddy-results.html?destination=${destination}&date=${date}&interests=${interests}`;
+        }
     </script>
     <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/03/28/05/20250328055708-52MFWWBB.js"></script>
-  </body>
+</body>
+
 </html>
