@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bihar Travel Map | TRAVALLY</title>
+    <link rel="icon" href="TRAVALLY.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Protest+Revolution&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <style>
+        :root {
+            --primary: #06B6D4;
+            --secondary: #9333EA;
+            --accent: #EC4899;
+            --dark: #1E293B;
+            --light: #F8FAFC;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(128, 0, 255, 0.1), rgba(0, 91, 144, 0.1));
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .logo {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .map-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .map-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .map-header h1 {
+            font-family: "Protest Revolution", sans-serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .map-header p {
+            color: var(--dark);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        #bihar-map {
+            height: 600px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        
+        .map-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+            justify-content: center;
+        }
+        
+        .map-btn {
+            padding: 0.5rem 1rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .map-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                gap: 1rem;
+            }
+            
+            #bihar-map {
+                height: 400px;
+            }
+        }
+        
+        /* Custom map markers */
+        .custom-marker {
+            background: var(--gradient);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .map-legend {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            line-height: 1.6;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="TRAVALLY.png" alt="TRAVALLY logo" class="logo">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="map.html">Bihar Map</a></li>
+            <li><a href="COMING SOON.html">YatraBot</a></li>
+            <li><a href="About us.html">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="map-container">
+        <div class="map-header">
+            <h1>Explore Bihar</h1>
+            <p>Discover the rich cultural heritage, spiritual destinations, and hidden gems of Bihar with our interactive map. Find real-time information about tourist spots, transportation, and local events.</p>
+        </div>
+        
+        <div class="map-controls">
+            <button class="map-btn" onclick="showTouristSpots()">
+                <i class="fas fa-landmark"></i> Tourist Spots
+            </button>
+            <button class="map-btn" onclick="showTransportation()">
+                <i class="fas fa-bus"></i> Transportation
+            </button>
+            <button class="map-btn" onclick="showHotels()">
+                <i class="fas fa-hotel"></i> Hotels
+            </button>
+            <button class="map-btn" onclick="showEvents()">
+                <i class="fas fa-calendar-alt"></i> Events
+            </button>
+            <button class="map-btn" onclick="showAll()">
+                <i class="fas fa-layer-group"></i> Show All
+            </button>
+        </div>
+        
+        <div id="bihar-map"></div>
+        
+        <div class="map-info">
+            <div class="info-card">
+                <h3><i class="fas fa-info-circle"></i> Current Weather</h3>
+                <div id="weather-info">Loading weather data...</div>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-exclamation-circle"></i> Travel Advisory</h3>
+                <p>Monsoon season (June-September) may affect travel plans. Check road conditions before traveling to rural areas.</p>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-calendar-star"></i> Upcoming Events</h3>
+                <div id="events-info">
+                    <p><strong>Chhath Puja:</strong> Nov 8-11, 2024</p>
+                    <p><strong>Buddha Jayanti:</strong> May 23, 2024</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p>&copy; 2025 TRAVALLY | Designed with devotion ✨</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map centered on Bihar
+        const map = L.map('bihar-map').setView([25.0961, 85.3131], 7);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+        // Add Bihar state boundary (simplified for demo)
+        const biharBoundary = L.geoJSON({
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[
+                    [83.19, 27.31], [88.19, 27.31], [88.19, 24.20], 
+                    [83.19, 24.20], [83.19, 27.31]
+                ]]
+            }
+        }, {
+            color: var(--primary),
+            weight: 2,
+            fillOpacity: 0.1
+        }).addTo(map);
+        
+        // Important locations in Bihar with categories
+        const locations = [
+            {
+                name: "Bodh Gaya",
+                coords: [24.6951, 84.9913],
+                type: "spiritual",
+                description: "Mahabodhi Temple, UNESCO World Heritage Site",
+                icon: "temple"
+            },
+            {
+                name: "Nalanda",
+                coords: [25.1368, 85.4439],
+                type: "historical",
+                description: "Ancient university ruins, archaeological site",
+                icon: "landmark"
+            },
+            {
+                name: "Patna",
+                coords: [25.5941, 85.1376],
+                type: "city",
+                description: "State capital with museums and riverside attractions",
+                icon: "city"
+            },
+            {
+                name: "Vaishali",
+                coords: [25.9856, 85.1376],
+                type: "spiritual",
+                description: "Important Buddhist and Jain pilgrimage site",
+                icon: "temple"
+            },
+            {
+                name: "Rajgir",
+                coords: [25.0264, 85.4209],
+                type: "spiritual",
+                description: "Ancient city with hot springs and ropeway",
+                icon: "temple"
+            },
+            {
+                name: "Pawapuri",
+                coords: [25.0884, 85.5386],
+                type: "spiritual",
+                description: "Jal Mandir, important Jain pilgrimage site",
+                icon: "temple"
+            },
+            {
+                name: "Gaya Junction",
+                coords: [24.8147, 85.0036],
+                type: "transport",
+                description: "Major railway station connecting to all parts of India",
+                icon: "train"
+            },
+            {
+                name: "Patna Airport",
+                coords: [25.5913, 85.0879],
+                type: "transport",
+                description: "Jay Prakash Narayan International Airport",
+                icon: "plane"
+            },
+            {
+                name: "Sonepur Mela",
+                coords: [25.7000, 85.1833],
+                type: "event",
+                description: "Asia's largest cattle fair (Nov-Dec)",
+                icon: "calendar"
+            },
+            {
+                name: "Vikramshila Ruins",
+                coords: [25.2583, 87.3076],
+                type: "historical",
+                description: "Ancient Buddhist university ruins",
+                icon: "landmark"
+            }
+        ];
+        
+        // Create layer groups for different types of locations
+        const spiritualLayer = L.layerGroup();
+        const historicalLayer = L.layerGroup();
+        const transportLayer = L.layerGroup();
+        const eventLayer = L.layerGroup();
+        
+        // Add markers to the map with custom icons
+        locations.forEach(location => {
+            const icon = L.divIcon({
+                className: 'custom-marker',
+                html: `<i class="fas fa-${location.icon}"></i>`,
+                iconSize: [24, 24]
+            });
+            
+            const marker = L.marker(location.coords, { icon: icon })
+                .bindPopup(`<b>${location.name}</b><br>${location.description}`);
+            
+            // Add to appropriate layer
+            if (location.type === "spiritual") {
+                marker.addTo(spiritualLayer);
+            } else if (location.type === "historical") {
+                marker.addTo(historicalLayer);
+            } else if (location.type === "transport") {
+                marker.addTo(transportLayer);
+            } else if (location.type === "event") {
+                marker.addTo(eventLayer);
+            }
+        });
+        
+        // Add layer control
+        const overlayMaps = {
+            "Spiritual Sites": spiritualLayer,
+            "Historical Places": historicalLayer,
+            "Transport Hubs": transportLayer,
+            "Events": eventLayer
+        };
+        
+        L.control.layers(null, overlayMaps, {collapsed: false}).addTo(map);
+        
+        // Add legend
+        const legend = L.control({position: 'bottomright'});
+        
+        legend.onAdd = function(map) {
+            const div = L.DomUtil.create('div', 'map-legend');
+            div.innerHTML = `
+                <h4>Map Legend</h4>
+                <div class="legend-item"><span class="legend-color" style="background: #06B6D4"></span> Spiritual Sites</div>
+                <div class="legend-item"><span class="legend-color" style="background: #9333EA"></span> Historical Places</div>
+                <div class="legend-item"><span class="legend-color" style="background: #EC4899"></span> Transport Hubs</div>
+                <div class="legend-item"><span class="legend-color" style="background: #F59E0B"></span> Events</div>
+            `;
+            return div;
+        };
+        
+        legend.addTo(map);
+        
+        // Control button functions
+        function showTouristSpots() {
+            map.addLayer(spiritualLayer);
+            map.addLayer(historicalLayer);
+            map.removeLayer(transportLayer);
+            map.removeLayer(eventLayer);
+        }
+        
+        function showTransportation() {
+            map.addLayer(transportLayer);
+            map.removeLayer(spiritualLayer);
+            map.removeLayer(historicalLayer);
+            map.removeLayer(eventLayer);
+        }
+        
+        function showHotels() {
+            // Would be implemented with actual hotel data
+            alert("Hotel data would be displayed here with real implementation");
+        }
+        
+        function showEvents() {
+            map.addLayer(eventLayer);
+            map.removeLayer(spiritualLayer);
+            map.removeLayer(historicalLayer);
+            map.removeLayer(transportLayer);
+        }
+        
+        function showAll() {
+            map.addLayer(spiritualLayer);
+            map.addLayer(historicalLayer);
+            map.addLayer(transportLayer);
+            map.addLayer(eventLayer);
+        }
+        
+        // Initially show tourist spots
+        showTouristSpots();
+        
+        // Fetch weather data (simplified for demo)
+        setTimeout(() => {
+            document.getElementById('weather-info').innerHTML = `
+                <p><strong>Patna:</strong> 32°C, Partly Cloudy</p>
+                <p><strong>Gaya:</strong> 30°C, Sunny</p>
+                <p><strong>Bhagalpur:</strong> 31°C, Humid</p>
+            `;
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAVALLY | Login/Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Protest+Revolution&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://vicky-tec.github.io/TRAVALLY/TRAVALLY.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Inherit your existing theme variables */
+        :root {
+            --primary-color: #06B6D4;
+            --primary-hover: #0891b2;
+            --secondary-color: #9333EA;
+            --accent-color: #EC4899;
+            --dark-color: #1E293B;
+            --light-color: #F1F5F9;
+            --white-color: #ffffff;
+            --black-color: #000000;
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-secondary: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            --text-color: var(--dark-color);
+            --heading-color: var(--dark-color);
+            --border-color: #e2e8f0;
+            --background-color: var(--light-color);
+            --card-background: var(--white-color);
+            --section-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --card-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            --button-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] {
+                        --background-color: #0F172A;
+            --text-color: #E2E8F0;
+            --heading-color: #F8FAFC;
+            --border-color: #334155;
+            --card-background: #1E293B;
+            --section-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --card-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            display: flex;
+            width: 100%;
+            max-width: 1000px;
+            background: var(--card-background);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--section-box-shadow);
+        }
+
+        .auth-image {
+            flex: 1;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-image::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('https://vicky-tec.github.io/TRAVALLY/TRAVALLY.png') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .auth-image-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+        }
+
+        .auth-image h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-family: 'Protest Revolution', cursive;
+        }
+
+        .auth-image p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .auth-form {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-header h2 {
+            font-size: 2rem;
+            color: var(--heading-color);
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--heading-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--card-background);
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--button-shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--gradient-secondary);
+            transform: translateY(-2px);
+        }
+
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .form-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .toggle-form {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-background);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--card-box-shadow);
+            z-index: 100;
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+            }
+            
+            .auth-image {
+                padding: 30px;
+            }
+            
+            .auth-form {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
+    
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-image">
+                <div class="auth-image-content">
+                    <h1>TRAVALLY</h1>
+                    <p>Explore the world with us</p>
+                </div>
+            </div>
+            
+            <div class="auth-form">
+                <div class="form-header">
+                    <h2>Welcome Back!</h2>
+                    <p>Please enter your details to sign in</p>
+                </div>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+                
+                <div class="form-footer">
+                    <p>Forgot password? <a href="#">Reset here</a></p>
+                </div>
+                
+                <div class="toggle-form">
+                    <p>Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            
+            if (document.body.classList.contains('dark-theme')) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+
+        // Form toggle between login and signup
+        const showSignup = document.getElementById('showSignup');
+        const loginForm = document.getElementById('loginForm');
+        const formHeader = document.querySelector('.form-header');
+        
+        showSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            if (loginForm.id === 'loginForm') {
+                // Switch to signup form
+                loginForm.id = 'signupForm';
+                formHeader.querySelector('h2').textContent = 'Create Account';
+                formHeader.querySelector('p').textContent = 'Join us to start your journey';
+                
+                // Add name field
+                const nameField = document.createElement('div');
+                nameField.className = 'form-group';
+                nameField.innerHTML = `
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" class="form-control" placeholder="Enter your full name" required>
+                `;
+                loginForm.insertBefore(nameField, loginForm.firstChild);
+                
+                // Change button text
+                loginForm.querySelector('button').textContent = 'Sign Up';
+                
+                // Update toggle link
+                showSignup.textContent = 'Sign in';
+            } else {
+                // Switch back to login form
+                loginForm.id = 'loginForm';
+                formHeader.querySelector('h2').textContent = 'Welcome Back!';
+                formHeader.querySelector('p').textContent = 'Please enter your details to sign in';
+                
+                // Remove name field
+                loginForm.removeChild(loginForm.firstChild);
+                
+                // Change button text
+                loginForm.querySelector('button').textContent = 'Sign In';
+                
+                // Update toggle link
+                showSignup.textContent = 'Sign up';
+            }
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevents actual form submission
+
+            // Show alert and redirect when "OK" is clicked
+            alert('Form submitted!');
+            window.location.href = "main.html"; 
+        });
+    </script>
+     
+</body>
+</html>
