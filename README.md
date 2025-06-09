@@ -5,9 +5,9 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=vicky-tec" alt="vicky-tec" /></a> </p>
 
-- 🔭 I’m currently working on [Right2Complaint](https://vicky-tec.github.io/UdaanMart.io/)
+- 🔭 I’m currently working on [Capstone Project](https://vicky-tec.github.io/TRAVALLY_/)
 
-- 🌱 I’m currently learning **PYTHON**
+- 🌱 I’m currently learning **Flask**
 
 - 👨‍💻 All of my projects are available at [https://github.com/vicky-tec/](https://github.com/vicky-tec/)
 
