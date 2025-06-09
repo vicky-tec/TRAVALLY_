@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,11 +21,11 @@
             --bihar-blue: #3b82f6;
             --bihar-green: #10b981;
         }
-        
+
         * {
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             margin: 0;
@@ -33,7 +34,7 @@
             color: var(--dark);
             font-size: 14px;
         }
-        
+
         .navbar {
             background: linear-gradient to right, var(--primary), var(--secondary);
             color: var(--white);
@@ -48,7 +49,7 @@
             z-index: 1000;
             height: 60px;
         }
-        
+
         .logo {
             font-weight: 700;
             font-size: 1.2rem;
@@ -56,17 +57,17 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .logo i {
             font-size: 1.3rem;
         }
-        
+
         .user-menu {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
+
         .user-avatar {
             width: 36px;
             height: 36px;
@@ -79,7 +80,7 @@
             cursor: pointer;
             font-size: 0.9rem;
         }
-        
+
         .sidebar {
             width: 220px;
             background: var(--white);
@@ -92,21 +93,21 @@
             transition: all 0.3s ease;
             overflow-y: auto;
         }
-        
+
         .sidebar.collapsed {
             width: 60px;
         }
-        
+
         .sidebar-menu {
             list-style: none;
             padding: 0;
             margin: 0;
         }
-        
+
         .sidebar-menu li {
             margin-bottom: 2px;
         }
-        
+
         .sidebar-menu a {
             display: flex;
             align-items: center;
@@ -118,33 +119,33 @@
             font-size: 0.9rem;
             white-space: nowrap;
         }
-        
+
         .sidebar-menu a:hover {
             background-color: rgba(79, 70, 229, 0.1);
             color: var(--primary);
         }
-        
+
         .sidebar-menu a.active {
             background-color: rgba(79, 70, 229, 0.2);
             color: var(--primary);
             border-left: 3px solid var(--primary);
         }
-        
+
         .sidebar-menu i {
             font-size: 1rem;
             min-width: 20px;
         }
-        
+
         .sidebar-menu .menu-text {
             transition: opacity 0.3s;
         }
-        
+
         .sidebar.collapsed .menu-text {
             opacity: 0;
             width: 0;
             overflow: hidden;
         }
-        
+
         .main-content {
             margin-left: 220px;
             margin-top: 60px;
@@ -152,11 +153,11 @@
             transition: all 0.3s ease;
             min-height: calc(100vh - 60px);
         }
-        
-        .sidebar.collapsed + .main-content {
+
+        .sidebar.collapsed+.main-content {
             margin-left: 60px;
         }
-        
+
         .welcome-card {
             background: var(--white);
             border-radius: 8px;
@@ -167,28 +168,28 @@
             overflow: hidden;
             background-image: linear-gradient(to right, var(--white) 60%, rgba(79, 70, 229, 0.03));
         }
-        
+
         .welcome-card h1 {
             margin-top: 0;
             color: var(--dark);
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
-        
+
         .welcome-card p {
             color: var(--gray);
             max-width: 70%;
             margin: 0;
             font-size: 0.9rem;
         }
-        
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
-        
+
         .stat-card {
             background: var(--white);
             border-radius: 8px;
@@ -199,7 +200,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .stat-card::after {
             content: '';
             position: absolute;
@@ -208,23 +209,23 @@
             width: 4px;
             height: 100%;
         }
-        
+
         .stat-card.users::after {
             background: var(--bihar-blue);
         }
-        
+
         .stat-card.bookings::after {
             background: var(--success);
         }
-        
+
         .stat-card.revenue::after {
             background: var(--warning);
         }
-        
+
         .stat-card.tickets::after {
             background: var(--danger);
         }
-        
+
         .stat-card h3 {
             margin-top: 0;
             color: var(--gray);
@@ -234,14 +235,14 @@
             gap: 8px;
             margin-bottom: 0.5rem;
         }
-        
+
         .stat-card p {
             font-size: 1.5rem;
             margin: 0.3rem 0 0;
             font-weight: 700;
             color: var(--dark);
         }
-        
+
         .stat-card .change {
             margin-top: 8px;
             font-size: 0.75rem;
@@ -249,15 +250,15 @@
             align-items: center;
             gap: 5px;
         }
-        
+
         .stat-card .change.positive {
             color: var(--success);
         }
-        
+
         .stat-card .change.negative {
             color: var(--danger);
         }
-        
+
         .card {
             background: var(--white);
             border-radius: 8px;
@@ -265,14 +266,14 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             margin-bottom: 1.5rem;
         }
-        
+
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
         }
-        
+
         .card-header h2 {
             margin: 0;
             font-size: 1.1rem;
@@ -281,12 +282,12 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .card-header .actions {
             display: flex;
             gap: 8px;
         }
-        
+
         .btn {
             padding: 6px 12px;
             border-radius: 4px;
@@ -299,54 +300,55 @@
             transition: all 0.2s;
             font-size: 0.85rem;
         }
-        
+
         .btn-primary {
             background: var(--primary);
             color: var(--white);
         }
-        
+
         .btn-primary:hover {
             background: #4338ca;
         }
-        
+
         .btn-outline {
             background: transparent;
             border: 1px solid var(--gray);
             color: var(--dark);
         }
-        
+
         .btn-outline:hover {
             background: rgba(0, 0, 0, 0.05);
         }
-        
+
         .btn-sm {
             padding: 4px 8px;
             font-size: 0.75rem;
         }
-        
+
         .recent-bookings table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.85rem;
         }
-        
-        .recent-bookings th, .recent-bookings td {
+
+        .recent-bookings th,
+        .recent-bookings td {
             padding: 10px 12px;
             text-align: left;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
-        
+
         .recent-bookings th {
             color: var(--gray);
             font-weight: 500;
             font-size: 0.75rem;
             text-transform: uppercase;
         }
-        
+
         .recent-bookings tr:hover {
             background: rgba(0, 0, 0, 0.02);
         }
-        
+
         .status {
             padding: 3px 6px;
             border-radius: 12px;
@@ -354,28 +356,28 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-        
+
         .status.confirmed {
             background: rgba(16, 185, 129, 0.1);
             color: var(--success);
         }
-        
+
         .status.pending {
             background: rgba(245, 158, 11, 0.1);
             color: var(--warning);
         }
-        
+
         .status.cancelled {
             background: rgba(239, 68, 68, 0.1);
             color: var(--danger);
         }
-        
+
         .chart-container {
             height: 250px;
             margin-top: 15px;
             position: relative;
         }
-        
+
         .toggle-sidebar {
             background: none;
             border: none;
@@ -387,7 +389,7 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .auth-modal {
             display: none;
             position: fixed;
@@ -400,11 +402,11 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .auth-modal.show {
             display: flex;
         }
-        
+
         .auth-card {
             background: var(--white);
             border-radius: 8px;
@@ -414,52 +416,52 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        
+
         .auth-card h2 {
             margin-top: 0;
             color: var(--dark);
             font-size: 1.3rem;
         }
-        
+
         .auth-card p {
             color: var(--gray);
             margin-bottom: 1.5rem;
             font-size: 0.9rem;
         }
-        
+
         .auth-form {
             display: flex;
             flex-direction: column;
             gap: 0.8rem;
         }
-        
+
         .form-group {
             display: flex;
             flex-direction: column;
             gap: 5px;
             text-align: left;
         }
-        
+
         .form-group label {
             font-weight: 500;
             color: var(--dark);
             font-size: 0.8rem;
         }
-        
+
         .form-group input {
             padding: 8px 10px;
             border: 1px solid var(--gray);
             border-radius: 4px;
             font-size: 0.9rem;
         }
-        
+
         .auth-btn {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
             font-size: 0.9rem;
         }
-        
+
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -468,14 +470,14 @@
             font-size: 1.2rem;
             cursor: pointer;
         }
-        
+
         .top-destinations {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 1rem;
             margin-top: 1rem;
         }
-        
+
         .destination-card {
             background: var(--white);
             border-radius: 8px;
@@ -483,18 +485,18 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s;
         }
-        
+
         .destination-card:hover {
             transform: translateY(-3px);
         }
-        
+
         .destination-img {
             height: 120px;
             background-size: cover;
             background-position: center;
             position: relative;
         }
-        
+
         .destination-img .popular-badge {
             position: absolute;
             top: 10px;
@@ -506,16 +508,16 @@
             font-size: 0.7rem;
             font-weight: 600;
         }
-        
+
         .destination-info {
             padding: 12px;
         }
-        
+
         .destination-info h3 {
             margin: 0 0 5px 0;
             font-size: 0.95rem;
         }
-        
+
         .destination-info p {
             margin: 0;
             color: var(--gray);
@@ -524,92 +526,93 @@
             align-items: center;
             gap: 5px;
         }
-        
+
         .destination-stats {
             display: flex;
             justify-content: space-between;
             margin-top: 8px;
             font-size: 0.75rem;
         }
-        
+
         .stat-item {
             display: flex;
             align-items: center;
             gap: 3px;
             color: var(--gray);
         }
-        
+
         @media (max-width: 992px) {
             .sidebar {
                 transform: translateX(-100%);
                 z-index: 1001;
             }
-            
+
             .sidebar.show {
                 transform: translateX(0);
             }
-            
+
             .main-content {
                 margin-left: 0;
             }
-            
-            .sidebar.collapsed + .main-content {
+
+            .sidebar.collapsed+.main-content {
                 margin-left: 0;
             }
-            
+
             .mobile-menu-btn {
                 display: block;
             }
-            
+
             .welcome-card p {
                 max-width: 100%;
             }
         }
-        
+
         @media (max-width: 768px) {
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
             }
-            
+
             .card-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
             }
-            
+
             .card-header .actions {
                 width: 100%;
                 justify-content: flex-end;
             }
-            
+
             .recent-bookings {
                 overflow-x: auto;
             }
-            
+
             .recent-bookings table {
                 min-width: 700px;
             }
         }
-        
+
         @media (max-width: 576px) {
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .navbar {
                 padding: 0.8rem 1rem;
             }
-            
+
             .main-content {
                 padding: 1rem;
             }
-            
+
             .top-destinations {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="logo">
@@ -661,7 +664,8 @@
     <div class="main-content">
         <div class="welcome-card">
             <h1>Welcome to Bihar Tourism Admin</h1>
-            <p>Manage tourism activities, bookings, and destinations across Bihar. Today you have 24 new bookings and 8 support tickets.</p>
+            <p>Manage tourism activities, bookings, and destinations across Bihar. Today you have 24 new bookings and 8
+                support tickets.</p>
         </div>
 
         <div class="stats-grid">
@@ -718,7 +722,8 @@
             </div>
             <div class="top-destinations">
                 <div class="destination-card">
-                    <div class="destination-img" style="background-image: url('https://www.kathmanduandbeyond.com/wp-content/uploads/2017/05/Mahabodhi-Temple-Bodhgaya-India-31.jpg');">
+                    <div class="destination-img"
+                        style="background-image: url('https://www.kathmanduandbeyond.com/wp-content/uploads/2017/05/Mahabodhi-Temple-Bodhgaya-India-31.jpg');">
                         <span class="popular-badge">Popular</span>
                     </div>
                     <div class="destination-info">
@@ -731,7 +736,8 @@
                     </div>
                 </div>
                 <div class="destination-card">
-                    <div class="destination-img" style="background-image: url('https://im.indiatimes.in/facebook/2016/Jul/b02e0381-b103-4516-ac18-49b4da890b30_1468654757_1468654766.jpg');">
+                    <div class="destination-img"
+                        style="background-image: url('https://im.indiatimes.in/facebook/2016/Jul/b02e0381-b103-4516-ac18-49b4da890b30_1468654757_1468654766.jpg');">
                         <span class="popular-badge">Popular</span>
                     </div>
                     <div class="destination-info">
@@ -744,7 +750,8 @@
                     </div>
                 </div>
                 <div class="destination-card">
-                    <div class="destination-img" style="background-image: url('https://tse4.mm.bing.net/th/id/OIP.ZoDD1FFX-iY0iEwHviEymgAAAA?w=474&h=355&rs=1&pid=ImgDetMain');">
+                    <div class="destination-img"
+                        style="background-image: url('https://tse4.mm.bing.net/th/id/OIP.ZoDD1FFX-iY0iEwHviEymgAAAA?w=474&h=355&rs=1&pid=ImgDetMain');">
                         <span class="popular-badge">Trending</span>
                     </div>
                     <div class="destination-info">
@@ -757,7 +764,8 @@
                     </div>
                 </div>
                 <div class="destination-card">
-                    <div class="destination-img" style="background-image: url('https://i0.wp.com/www.tusktravel.com/blog/wp-content/uploads/2023/04/Pawapuri-Jain-Temple-Nalanda-Bihar.jpg?resize=1200%2C675&ssl=1');">
+                    <div class="destination-img"
+                        style="background-image: url('https://i0.wp.com/www.tusktravel.com/blog/wp-content/uploads/2023/04/Pawapuri-Jain-Temple-Nalanda-Bihar.jpg?resize=1200%2C675&ssl=1');">
                     </div>
                     <div class="destination-info">
                         <h3>Pawapuri</h3>
@@ -863,7 +871,9 @@
                     <label for="password">Password</label>
                     <input type="password" id="password" placeholder="••••••••" required>
                 </div>
-                <div id="errorMessage" style="color: var(--danger); font-size: 0.8rem; margin-top: -5px; margin-bottom: 5px; display: none;"></div>
+                <div id="errorMessage"
+                    style="color: var(--danger); font-size: 0.8rem; margin-top: -5px; margin-bottom: 5px; display: none;">
+                </div>
                 <button type="submit" class="btn btn-primary auth-btn">Login</button>
             </form>
         </div>
@@ -874,51 +884,52 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Check authentication
             const token = localStorage.getItem('auth_token');
-            
+
             if (!token) {
                 showAuthModal();
             } else {
                 hideAuthModal();
             }
-            
+
             // Setup sidebar toggle
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const sidebar = document.getElementById('sidebar');
-            
+
             mobileMenuBtn.addEventListener('click', () => {
                 sidebar.classList.toggle('show');
             });
-            
+
             // Close sidebar when clicking outside on mobile
             document.addEventListener('click', (e) => {
-                if (window.innerWidth <= 992 && !sidebar.contains(e.target) && 
+                if (window.innerWidth <= 992 && !sidebar.contains(e.target) &&
                     e.target !== mobileMenuBtn && !mobileMenuBtn.contains(e.target)) {
                     sidebar.classList.remove('show');
                 }
             });
-            
+
             // User avatar click (logout)
             const userAvatar = document.getElementById('userAvatar');
             userAvatar.addEventListener('click', () => {
                 if (confirm('Are you sure you want to logout?')) {
                     localStorage.removeItem('auth_token');
-                    showAuthModal();
+                    window.location.href = "index.html"; // Redirect to homepage after logout
                 }
             });
-            
+
+
             // Login form submission
             const loginForm = document.getElementById('loginForm');
             const errorMessage = document.getElementById('errorMessage');
-            
+
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
-                
+
                 // Valid credentials
                 const validEmail = "admin@travally.com";
                 const validPassword = "admin123";
-                
+
                 if (email === validEmail && password === validPassword) {
                     localStorage.setItem('auth_token', 'demo_token');
                     hideAuthModal();
@@ -928,7 +939,7 @@
                     errorMessage.style.display = 'block';
                 }
             });
-            
+
             // Initialize revenue chart
             const ctx = document.getElementById('revenueChart').getContext('2d');
             const revenueChart = new Chart(ctx, {
@@ -954,7 +965,7 @@
                         },
                         tooltip: {
                             callbacks: {
-                                label: function(context) {
+                                label: function (context) {
                                     return '₹' + context.parsed.y + ' Thousand';
                                 }
                             }
@@ -964,7 +975,7 @@
                         y: {
                             beginAtZero: true,
                             ticks: {
-                                callback: function(value) {
+                                callback: function (value) {
                                     return '₹' + value + 'K';
                                 }
                             }
@@ -972,22 +983,23 @@
                     }
                 }
             });
-            
+
             // Resize chart on window resize
-            window.addEventListener('resize', function() {
+            window.addEventListener('resize', function () {
                 revenueChart.resize();
             });
         });
-        
+
         function showAuthModal() {
             document.getElementById('authModal').classList.add('show');
             document.body.style.overflow = 'hidden';
         }
-        
+
         function hideAuthModal() {
             document.getElementById('authModal').classList.remove('show');
             document.body.style.overflow = 'auto';
         }
     </script>
 </body>
+
 </html>
