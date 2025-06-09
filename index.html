@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAVALLY | Your Bihar Travel Companion</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Protest+Revolution&display=swap"
+        rel="stylesheet" />
+    <link rel="icon" href="https://vicky-tec.github.io/TRAVALLY/TRAVALLY.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* --- CSS Variables --- */
+        :root {
+            /* Color System */
+            --primary-color: #06B6D4;
+            /* Vibrant Blue */
+            --primary-hover: #0891b2;
+            --secondary-color: #9333EA;
+            /* Rich Purple */
+            --accent-color: #EC4899;
+            /* Bright Pink */
+            --dark-color: #1E293B;
+            /* Dark Slate */
+            --light-color: #F1F5F9;
+            /* Light Gray */
+            --white-color: #ffffff;
+            --black-color: #000000;
+
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-secondary: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+
+            --text-color: var(--dark-color);
+            --heading-color: var(--dark-color);
+            --border-color: #e2e8f0;
+            /* Light border */
+
+            /* Component Backgrounds */
+            --background-color: var(--light-color);
+            --card-background: var(--white-color);
+            --navbar-bg: rgba(255, 255, 255, 0.98);
+            /* Slightly more opaque */
+            --footer-bg: var(--dark-color);
+
+            /* Text Colors */
+            --navbar-link-color: var(--dark-color);
+            --hero-text-color: var(--white-color);
+            --button-text-color: var(--white-color);
+            --footer-text-color: var(--light-color);
+            --footer-link-color: var(--light-color);
+
+            /* Chat Specific Colors */
+            --message-user-bg: #dbeafe;
+            /* Lighter blue */
+            --message-bot-bg: #e2e8f0;
+            /* Light gray */
+            --input-border-color: #cbd5e1;
+            /* Medium light gray */
+
+            /* Shadows */
+            --section-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --card-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            --button-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+            /* Z-index Management */
+            --z-index-nav: 1000;
+            --z-index-chat: 100;
+            --z-index-theme-toggle: 1000;
+            --z-index-preloader: 9999;
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --background-color: #1a202c;
+            /* Darker background */
+            --card-background: #2d3748;
+            /* Dark card background */
+            --text-color: var(--light-color);
+            --heading-color: var(--light-color);
+            --navbar-bg: rgba(26, 32, 44, 0.98);
+            /* Darker navbar */
+            --navbar-link-color: var(--light-color);
+            --footer-bg: #171923;
+            /* Very dark footer */
+
+            /* Chat Specific Colors (Dark Mode) */
+            --message-user-bg: #4a5568;
+            /* Dark user bubble */
+            --message-bot-bg: #718096;
+            /* Dark bot bubble */
+            --input-border-color: #4a5568;
+
+            --section-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --card-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Base Styles --- */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.5s ease, color 0.5s ease;
+            scroll-behavior: smooth;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Protest Revolution', sans-serif;
+            color: var(--heading-color);
+            transition: color 0.5s ease;
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .content-section {
+            padding: 6rem 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background: var(--navbar-bg);
+            padding: 1rem 0;
+            color: var(--navbar-link-color);
+            position: sticky;
+            top: 0;
+            z-index: var(--z-index-nav);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 800;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .logo a:hover {
+            color: var(--primary-hover);
+        }
+
+        .navbar .logo img {
+            height: 45px;
+            margin-right: 12px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--navbar-link-color);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .nav-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--navbar-link-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.2s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: var(--navbar-bg);
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: var(--z-index-nav);
+            border-radius: 8px;
+            padding: 10px 0;
+            right: 0;
+            top: 100%;
+        }
+
+        .dropdown-menu li {
+            padding: 8px 16px;
+            list-style: none;
+        }
+
+        .dropdown-menu li a {
+            color: var(--navbar-link-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .dropdown-menu li:hover {
+            background-color: rgba(6, 182, 212, 0.1);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown .caret {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown.active .caret {
+            transform: rotate(180deg);
+        }
+
+        .divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 8px 0;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 95vh;
+            color: var(--hero-text-color);
+            isolation: isolate;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 3rem 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .video-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .video-slideshow video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .video-slideshow video.active {
+            opacity: 1;
+        }
+
+        .hero h1 {
+            font-family: "Protest Revolution", sans-serif;
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--white-color);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            border: none;
+            background: var(--gradient-primary);
+            color: var(--button-text-color);
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: var(--button-shadow);
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: var(--gradient-secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary:hover {
+            background: #7e22ce;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: none;
+        }
+
+        [data-theme="dark"] .btn-outline {
+            border-color: var(--light-color);
+            color: var(--light-color);
+        }
+
+        .btn-outline:hover {
+            background: rgba(6, 182, 212, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] .btn-outline:hover {
+            background: rgba(241, 245, 249, 0.1);
+        }
+
+        /* --- Section Headings --- */
+        .content-section h2 {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 3.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            width: 100%;
+        }
+
+        /* --- Featured Destinations Section --- */
+        .featured-destinations {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(147, 51, 234, 0.08));
+        }
+
+        [data-theme="dark"] .featured-destinations {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.03), rgba(147, 51, 234, 0.03));
+        }
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            perspective: 1000px;
+        }
+
+        .destination-card {
+            background: var(--card-background);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-box-shadow);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            transform-style: preserve-3d;
+            position: relative;
+            transition: all 0.5s ease;
+            transform: rotateY(0deg);
+        }
+
+        .destination-card:hover {
+            transform: translateY(-12px) rotateY(15deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            backface-visibility: hidden;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .destination-card-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            backface-visibility: hidden;
+        }
+
+        .destination-card-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .destination-card-content p {
+            font-size: 1.05rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .destination-card-content .btn {
+            width: auto;
+            align-self: flex-start;
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Circular motion effect */
+        .destination-grid:hover .destination-card {
+            animation: circularMotion 8s infinite ease-in-out;
+        }
+
+        @keyframes circularMotion {
+
+            0%,
+            100% {
+                transform: rotateY(0deg) translateY(0);
+            }
+
+            25% {
+                transform: rotateY(15deg) translateY(-10px);
+            }
+
+            50% {
+                transform: rotateY(0deg) translateY(-5px);
+            }
+
+            75% {
+                transform: rotateY(-15deg) translateY(-10px);
+            }
+        }
+
+        /* Individual card delays for wave effect */
+        .destination-grid:hover .destination-card:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .destination-grid:hover .destination-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .destination-grid:hover .destination-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .destination-grid:hover .destination-card:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .destination-grid:hover .destination-card:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        .destination-grid:hover .destination-card:nth-child(6) {
+            animation-delay: 1s;
+        }
+
+        /* --- Buddy Finder Section --- */
+        .buddy-finder {
+            background: var(--card-background);
+            border-radius: 16px;
+            box-shadow: var(--section-box-shadow);
+            max-width: 950px;
+            margin: 6rem auto;
+            padding: 3rem;
+        }
+
+        .buddy-finder .text-center:nth-of-type(2) {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 3rem;
+        }
+
+        .buddy-search-form {
+            display: flex;
+            align-items: flex-end;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 3.5rem;
+            justify-content: center;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .buddy-finder label {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--heading-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .buddy-finder label i {
+            color: var(--secondary-color);
+        }
+
+        .buddy-search-form input[type="text"],
+        .buddy-search-form input[type="time"],
+        .buddy-search-form select {
+            padding: 1rem;
+            font-size: 1rem;
+            border: 1px solid var(--input-border-color);
+            border-radius: 10px;
+            width: auto;
+            min-width: 200px;
+            max-width: 300px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .buddy-search-form input[type="text"]:focus,
+        .buddy-search-form input[type="time"]:focus,
+        .buddy-search-form select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 8px rgba(6, 182, 212, 0.2);
+        }
+
+        .buddy-finder h3 {
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            color: var(--heading-color);
+            text-align: center;
+        }
+
+        .buddy-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .buddy-card {
+            background: var(--background-color);
+            padding: 2rem;
+            border: 1px solid var(--input-border-color);
+            border-radius: 12px;
+            text-align: left;
+            box-shadow: var(--card-box-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .buddy-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        .buddy-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .buddy-card h4 i {
+            color: var(--accent-color);
+        }
+
+        .buddy-card p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .buddy-card p i {
+            color: var(--secondary-color);
+        }
+
+        .buddy-card .btn {
+            margin-top: 1.5rem;
+            align-self: flex-start;
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text-color);
+            padding: 60px 0 30px;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 280px;
+            margin: 0;
+            padding: 0 15px;
+        }
+
+        .footer-section h3 {
+            color: var(--footer-text-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .footer-section.about p {
+            color: var(--footer-text-color);
+            opacity: 0.95;
+        }
+
+        .footer-section.links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section.links ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-section.links ul li a {
+            color: var(--footer-link-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            opacity: 0.95;
+        }
+
+        .footer-section.links ul li a:hover {
+            color: var(--primary-color);
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .footer-section.contact p {
+            margin-bottom: 15px;
+            color: var(--footer-text-color);
+            opacity: 0.95;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-section.contact i {
+            margin-right: 0;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .footer-section.social a {
+            display: inline-block;
+            margin-right: 25px;
+            font-size: 1.8rem;
+            color: var(--footer-text-color);
+            transition: color 0.3s ease, transform 0.3s ease;
+            opacity: 0.95;
+        }
+
+        .footer-section.social a:hover {
+            color: var(--primary-color);
+            opacity: 1;
+            transform: translateY(-5px) rotate(10deg);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1rem;
+            color: var(--footer-text-color);
+            opacity: 0.8;
+        }
+
+        /* --- Theme Toggle --- */
+        .theme-toggle {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: var(--primary-color);
+            color: var(--button-text-color);
+            padding: 1.1rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.7rem;
+            transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.5s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            z-index: var(--z-index-theme-toggle);
+        }
+
+        [data-theme="dark"] .theme-toggle {
+            background: var(--secondary-color);
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transform: rotate(90deg);
+        }
+
+        [data-theme="dark"] .theme-toggle:hover {
+            background: #7e22ce;
+        }
+
+        .theme-toggle.rotate {
+            transform: rotate(360deg);
+        }
+
+        /* --- Preloader --- */
+        #preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: var(--z-index-preloader);
+            background-color: var(--background-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.6s ease;
+            opacity: 1;
+            pointer-events: all;
+            visibility: visible;
+            filter: blur(0);
+            font-size: 1.2rem;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            filter: blur(5px);
+        }
+
+        .loader {
+            border: 12px solid var(--input-border-color);
+            border-top: 12px solid var(--primary-color);
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            animation: spin 1.2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .warrior-quote {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            color: var(--heading-color);
+            margin-top: 25px;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        /* --- Reduced Motion Support --- */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* --- Mobile Styles --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 0 10px;
+            }
+
+            .navbar {
+                padding: 0.5rem 0;
+            }
+
+            .navbar .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-toggle {
+                display: block;
+                position: absolute;
+                right: 15px;
+                top: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background: var(--navbar-bg);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                display: none;
+                margin-top: 1rem;
+                gap: 1.5rem;
+                padding-bottom: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0;
+            }
+
+            /* Dropdown menu mobile styles */
+            .dropdown-menu {
+                position: static;
+                display: none;
+                width: 100%;
+                box-shadow: none;
+                background-color: transparent;
+            }
+
+            .dropdown-menu li {
+                padding: 8px 0;
+            }
+
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+                letter-spacing: 2px;
+            }
+
+            .hero p {
+                font-size: 1.4rem;
+            }
+
+            .btn {
+                padding: 1rem 2.5rem;
+                font-size: 1.2rem;
+                gap: 8px;
+            }
+
+            .content-section {
+                padding: 4rem 0;
+            }
+
+            .content-section h2 {
+                font-size: 2.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .featured-destinations h2 {
+                font-size: 2.8rem;
+            }
+
+            .destination-grid {
+                gap: 25px;
+            }
+
+            .destination-card img {
+                height: 180px;
+            }
+
+            .destination-card-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .destination-card-content p {
+                font-size: 0.95rem;
+            }
+
+            .destination-card-content .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+
+            footer {
+                padding: 30px 0 15px;
+                margin-top: 3rem;
+            }
+
+            .footer-section {
+                padding: 0 8px;
+                width: 95%;
+            }
+
+            .footer-section h3 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+                padding-bottom: 6px;
+            }
+
+            .footer-section.links ul li {
+                margin-bottom: 8px;
+            }
+
+            .footer-section.contact p {
+                margin-bottom: 8px;
+                gap: 6px;
+            }
+
+            .footer-section.social a {
+                margin-right: 10px;
+                font-size: 1.3rem;
+            }
+
+            .footer-bottom {
+                margin-top: 20px;
+                padding-top: 15px;
+                font-size: 0.85rem;
+            }
+
+            .theme-toggle {
+                bottom: 15px;
+                right: 15px;
+                padding: 0.8rem;
+                font-size: 1.5rem;
+                width: 50px;
+                height: 50px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .theme-toggle.rotate {
+                transform: rotate(180deg);
+            }
+
+            /* Disable 3D effects on mobile */
+            .destination-grid {
+                perspective: none;
+            }
+
+            .destination-card {
+                transform-style: flat;
+            }
+
+            .destination-grid:hover .destination-card {
+                animation: none;
+            }
+
+            .destination-card:hover {
+                transform: translateY(-12px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="preloader">
+        <div class="loader"></div>
+        <div class="warrior-quote">"Your Yatra begins with struggle"</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://github.com/vicky-tec/TRAVALLY_/blob/main/TRAVALLY.png?raw=true"
+                        alt="Travally Logo">
+                    <span>TRAVALLY</span>
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <!-- <li><a href="#destinations">Destinations</a></li> -->
+                <li><a href="bot.html"><i class="fas fa-robot"></i>&nbsp;YuktiBot</a></li>
+                <li><a href="mapo.html">YatraMitra (Map)</a></li>
+                <li><a href="#buddy-section">HumSafar (Buddy Finder)</a></li>
+                <li><a href="About us.html">About Us</a></li>
+                <li><a href="loginpage.html">Register</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Support <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="openLiveChat()"><i class="fas fa-comment-dots"></i> Live Chat</a></li>
+                        <li><a href="https://wa.me/918579924554" target="_blank"><i class="fab fa-whatsapp"></i>
+                                WhatsApp Support</a></li>
+                        <li><a href="mailto:support@travally.com"><i class="fas fa-envelope"></i> Email Us</a></li>
+                        <li><a href="tel:+918579924554"><i class="fas fa-phone-alt"></i> Phone Support</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/help"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                        <li><a href="/feedback"><i class="fas fa-comment-alt"></i> Feedback</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="video-slideshow" id="videoSlideshow">
+            <video class="active" autoplay muted loop playsinline src="video1.mp4"></video>
+            <video muted loop playsinline src="video2.mp4"></video>
+        </div>
+        <div class="hero-content">
+            <h1>Embark on Your Bihar Adventure</h1>
+            <p>Discover the Rich Heritage and Vibrant Culture with TRAVALLY</p>
+            <a href="#destinations" class="btn">Explore Destinations <i class="fas fa-arrow-down"></i></a>
+        </div>
+    </header>
+
+    <main>
+        <section id="destinations" class="featured-destinations content-section">
+            <div class="container">
+                <h2>Featured Destinations in Bihar</h2>
+                <div class="destination-grid">
+                    <div class="destination-card">
+                        <img src="https://th.bing.com/th/id/OIP.iAzVWIdawKGEcVXXhheDeQAAAA?rs=1&pid=ImgDetMain,jpg"
+                            alt="Mahabodhi Temple, Bodh Gaya">
+                        <div class="destination-card-content">
+                            <h3>Mahabodhi Temple</h3>
+                            <p>A UNESCO World Heritage Site in Bodh Gaya, marking the place where Buddha attained
+                                enlightenment. A major pilgrimage site for Buddhists worldwide.</p>
+                            <a href="mapo.html?location=Mahabodhi Temple" class="btn btn-outline">View on Map <i
+                                    class="fas fa-map-marker-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <img src="https://as1.ftcdn.net/v2/jpg/02/11/88/00/1000_F_211880037_YxH859TYGRP8GyHwkNMXT45YJBkLUkxt.jpg"
+                            alt="Nalanda University Ruins">
+                        <div class="destination-card-content">
+                            <h3>Nalanda University Ruins</h3>
+                            <p>Explore the remains of the ancient Mahavihara, a largeBuddhist monastery and center of
+                                learning from the 5th to 12th century. A UNESCO World Heritage Site showcasing Bihar's
+                                rich academic heritage.</p>
+                            <a href="mapo.html?location=Nalanda University" class="btn btn-outline">View on Map <i
+                                    class="fas fa-map-marker-alt"></i></a>
+                        </div>
+                    </div>
+                    <div class="destination-card">
+                        <img src="https://www.vedicmatters.com/images/article/article-2021-09-14-04-59-30_61402c325e1ca.png"
+                            alt="Vikramshila Ruins">
+                        <div class="destination-card-content">
+                            <h3>Vikramshila Ruins</h3>
+                            <p>Ruins of another ancient Buddhist university, located near Bhagalpur. Offers insights
+                                into the educational and religious practices of the past.</p>
+                            <a href="mapo.html?location=Vikramshila Ruins" class="btn btn-outline">View on Map <i
+                                    class="fas fa-map-marker-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/3d/7b/ed/caption.jpg?w=1200&h=-1&s=1"
+                            alt="Patna Sahib">
+                        <div class="destination-card-content">
+                            <h3>Patna Sahib</h3>
+                            <p>The birthplace of Guru Gobind Singh Ji, the tenth Sikh Guru. A sacred pilgrimage site for
+                                Sikhs, located in Patna.</p>
+                            <a href="mapo.html?location=Pawapuri" class="btn btn-outline">View on Map <i
+                                    class="fas fa-map-marker-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <img src="https://www.jagranimages.com/images/newimg/23102021/23_10_2021-hanuman-mandir5_22141898_161456552.jpg"
+                            alt="Mahavir Mandir, Patna">
+                        <div class="destination-card-content">
+                            <h3>Mahavir Mandir</h3>
+                            <p>Founded by Swami Balanand in 1730 A.D., Mahavir Mandir in Patna gained popularity after
+                                the 1947 partition due to the influx of refugees. Originally rebuilt as a concrete
+                                structure then, it was transformed into a large marble temple in 1987. The temple is
+                                renowned for housing the idol of Sankat-Mochan, an avatar of Hanuman.</p>
+                            <a href="mapo.html?location=Rajgir" class="btn btn-outline">View on Map <i
+                                    class="fas fa-map-marker-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <img src="https://www.recipe4travel.com/wp-content/uploads/2016/07/11286128306_4176d3ba24_o001-1024x768.jpg"
+                            alt="Rajgir">
+                        <div class="destination-card-content">
+                            <h3>Rajgir</h3>
+                            <p>An ancient city and popular tourist spot known for its hot springs, Vishwa Shanti Stupa
+                                accessed by a ropeway, and historical sites related to Buddhism and Jainism.</p>
+                            <a href="mapo.html?location=Vaishali" class="btn btn-outline">View on Map <i
+                                    class="fas fa-map-marker-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="buddy-section" class="content-section">
+            <div class="container">
+                <div class="buddy-finder">
+                    <h2>Find Your Travel Buddy</h2>
+                    <p class="text-center">Connect with fellow travelers exploring Bihar and share your journey</p>
+
+                    <div class="buddy-search-form">
+                        <div class="form-group">
+                            <label for="destination"><i class="fas fa-map-marked-alt"></i> Destination</label>
+                            <input type="text" id="destination" placeholder="Where are you going?">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="travel-date"><i class="far fa-calendar-alt"></i> Travel Date</label>
+                            <input type="date" id="travel-date">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interests"><i class="fas fa-heart"></i> Interests</label>
+                            <select id="interests">
+                                <option value="">Select Interest</option>
+                                <option value="history">History & Culture</option>
+                                <option value="nature">Nature & Wildlife</option>
+                                <option value="photography">Photography</option>
+                                <option value="food">Local Cuisine</option>
+                                <option value="spiritual">Spiritual</option>
+                            </select>
+                        </div>
+
+                        <button class="btn" id="searchBuddies" onclick="searchAndRedirect()">
+                            Search Buddies <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h3>Available Travel Buddies</h3>
+
+                    <div class="buddy-list">
+                        <div class="buddy-card">
+                            <h4><i class="fas fa-user"></i>Vicky Raj</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> Exploring: Bodh Gaya</p>
+                            <p><i class="fas fa-calendar-day"></i> Travel Dates: 15-20 June 2023</p>
+                            <p><i class="fas fa-heart"></i> Interests: History, Photography</p>
+                            <p><i class="fas fa-comment"></i> "Looking for someone to explore Buddhist sites with and
+                                share photography tips!"</p>
+                            <a href="finder.html" class="btn btn-outline">Connect <i class="fas fa-handshake"></i></a>
+                        </div>
+
+                        <div class="buddy-card">
+                            <h4><i class="fas fa-user"></i>Tejashwi Raj</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> Exploring: Nalanda & Rajgir</p>
+                            <p><i class="fas fa-calendar-day"></i> Travel Dates: 22-25 June 2023</p>
+                            <p><i class="fas fa-heart"></i> Interests: History, Local Cuisine</p>
+                            <p><i class="fas fa-comment"></i> "Foodie looking to explore ancient sites and try local
+                                Bihari dishes together!"</p>
+                            <a href="finder.html" class="btn btn-outline">Connect <i class="fas fa-handshake"></i></a>
+                        </div>
+
+                        <div class="buddy-card">
+                            <h4><i class="fas fa-user"></i> Yuvraj Singh</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> Exploring: Vaishali & Pawapuri</p>
+                            <p><i class="fas fa-calendar-day"></i> Travel Dates: 5-8 July 2023</p>
+                            <p><i class="fas fa-heart"></i> Interests: Spiritual, Nature</p>
+                            <p><i class="fas fa-comment"></i> "Seeking a travel companion for Jain and Buddhist
+                                pilgrimage sites."</p>
+                            <a href="finder.html" class="btn btn-outline">Connect <i class="fas fa-handshake"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>About TRAVALLY</h3>
+                    <p>TRAVALLY is your ultimate travel companion for exploring the rich cultural heritage and natural
+                        beauty of Bihar. We provide curated experiences, travel tools, and local insights to make your
+                        journey unforgettable.</p>
+                    <div class="social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="bot.html">YuktiBot</a></li>
+                        <li><a href="mapo.html">YatraMitra (Map)</a></li>
+                        <li><a href="#buddy-section">HumSafar (Buddy Finder)</a></li>
+                        <li><a href="About us.html">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Patna, Bihar 800001, India</p>
+                    <p><i class="fas fa-phone"></i> +91 8579924554</p>
+                    <p><i class="fas fa-envelope"></i> info@travally.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Sun: 9:00 AM - 7:00 PM</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 TRAVALLY | Your Bihar Travel Companion. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', function () {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+            }, 1500);
+        });
+
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            navToggle.innerHTML = navLinks.classList.contains('active')
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Dropdown functionality
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        if (currentTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+
+            themeToggle.classList.add('rotate');
+            setTimeout(() => {
+                themeToggle.classList.remove('rotate');
+            }, 500);
+        });
+
+        // Video Slideshow
+        const videoSlideshow = document.getElementById('videoSlideshow');
+        const videos = videoSlideshow.querySelectorAll('video');
+        let currentVideoIndex = 0;
+
+        function changeVideo() {
+            videos[currentVideoIndex].classList.remove('active');
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+            videos[currentVideoIndex].classList.add('active');
+        }
+
+        // Change video every 10 seconds
+        setInterval(changeVideo, 10000);
+
+        // Ensure first video is playing
+        videos[0].classList.add('active');
+
+        // Buddy Finder Search
+        const searchButton = document.getElementById('searchBuddies');
+
+        searchButton.addEventListener('click', () => {
+            const destination = document.getElementById('destination').value;
+            const date = document.getElementById('travel-date').value;
+            const interests = document.getElementById('interests').value;
+
+            // In a real app, this would make an API call
+            alert(`Searching for buddies going to ${destination} around ${date} interested in ${interests}`);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Live Chat function
+        function openLiveChat() {
+            alert("Live chat feature will be implemented soon. For now, please use WhatsApp or email support.");
+        }
+    </script>
+    <script>
+        function searchAndRedirect() {
+            // Get search values
+            const destination = document.getElementById('destination').value;
+            const date = document.getElementById('travel-date').value;
+            const interests = document.getElementById('interests').value;
+
+            // Perform search (your existing code)
+            alert(`Searching for buddies going to ${destination} around ${date} interested in ${interests}`);
+
+            // Then redirect
+            window.location.href = 'finder.html';
+            // Or with parameters:
+            // window.location.href = `buddy-results.html?destination=${destination}&date=${date}&interests=${interests}`;
+        }
+    </script>
+    <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/03/28/05/20250328055708-52MFWWBB.js"></script>
+</body>
+
+</html>

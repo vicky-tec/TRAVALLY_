@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - TRAVALLY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Protest+Revolution&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://vicky-tec.github.io/TRAVALLY/TRAVALLY.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #06B6D4;
+            --primary-hover: #0891b2;
+            --secondary-color: #9333EA;
+            --accent-color: #EC4899;
+            --dark-color: #1E293B;
+            --light-color: #F1F5F9;
+            --white-color: #ffffff;
+            --black-color: #000000;
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-secondary: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            --text-color: var(--dark-color);
+            --heading-color: var(--dark-color);
+            --border-color: #e2e8f0;
+            --background-color: var(--light-color);
+            --card-background: var(--white-color);
+            --section-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --card-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            --button-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] {
+            --background-color: #0F172A;
+            --text-color: #E2E8F0;
+            --heading-color: #F8FAFC;
+            --border-color: #334155;
+            --card-background: #1E293B;
+            --section-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --card-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: var(--card-background);
+            box-shadow: var(--section-box-shadow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .logo {
+            height: 40px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-header h1 {
+            font-family: 'Protest Revolution', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .about-card {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-box-shadow);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background: rgba(6, 182, 212, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-item i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--button-shadow);
+        }
+
+        footer {
+            background: var(--card-background);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-background);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--card-box-shadow);
+            z-index: 100;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                gap: 1rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
+    
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="TRAVALLY.png" alt="TRAVALLY logo" class="logo">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="COMING SOON.html">YatraBot</a></li>
+            <li><a href="About us.html">About</a></li>
+            <li><a href="COMING SOON.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="about-header">
+            <h1>About TRAVALLY</h1>
+            <p>Redefining travel experiences through innovation and technology</p>
+        </div>
+
+        <div class="about-card">
+            <h2>Our Mission</h2>
+            <p>At TRAVALLY, we're revolutionizing the way you explore the world—starting with Bihar. We are a passionate team of innovators dedicated to making tourism smarter, safer, and more social through cutting-edge AI technology.</p>
+            
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Tourist Guide</h3>
+                    <p>Smart recommendations tailored to your interests with voice and chat-based interactions.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <i class="fas fa-users"></i>
+                    <h3>Buddy Finder</h3>
+                    <p>Connect with like-minded travelers to share your journey and create lasting memories.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <i class="fas fa-temple"></i>
+                    <h3>Spiritual Journeys</h3>
+                    <p>Discover sacred destinations with rich cultural context and local insights.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-card">
+            <h2>Why Choose TRAVALLY?</h2>
+            <ul style="list-style: none;">
+                <li style="margin-bottom: 0.8rem;"><i class="fas fa-check" style="color: var(--primary-color); margin-right: 0.5rem;"></i> Designed specifically for India's unique needs</li>
+                <li style="margin-bottom: 0.8rem;"><i class="fas fa-check" style="color: var(--primary-color); margin-right: 0.5rem;"></i> Advanced AI with simple, intuitive interfaces</li>
+                <li style="margin-bottom: 0.8rem;"><i class="fas fa-check" style="color: var(--primary-color); margin-right: 0.5rem;"></i> Works in remote areas with limited connectivity</li>
+                <li style="margin-bottom: 0.8rem;"><i class="fas fa-check" style="color: var(--primary-color); margin-right: 0.5rem;"></i> Created by students, inspired by real travelers</li>
+            </ul>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="index.html" class="btn">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/vicky-tec"><i class="fab fa-github"></i></a>
+        </div>
+        <p>&copy; 2025 TRAVALLY | Designed with devotion ✨</p>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            
+            if (document.body.classList.contains('dark-theme')) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+    </script>
+</body>
+</html>
