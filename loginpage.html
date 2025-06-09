@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,33 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(45deg, #ff8c00, #ff0066, #6600cc, #3399ff);
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-size: 400% 400%;
+            animation: gradientAnimation 5s ease infinite;
+            z-index: 0;
             color: #333;
         }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         .login-box {
             background: white;
             padding: 2.5rem;
@@ -24,23 +43,28 @@
             width: 350px;
             text-align: center;
         }
+
         .logo {
             width: 80px;
             margin-bottom: 1.5rem;
         }
+
         h1 {
             margin: 0 0 1.5rem;
             color: #444;
         }
+
         .input-group {
             margin-bottom: 1.5rem;
             text-align: left;
         }
+
         label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
         }
+
         input {
             width: 100%;
             padding: 12px;
@@ -49,10 +73,12 @@
             font-size: 16px;
             transition: border 0.3s;
         }
+
         input:focus {
             border-color: #667eea;
             outline: none;
         }
+
         button {
             background: linear-gradient(to right, #667eea, #764ba2);
             color: white;
@@ -65,9 +91,11 @@
             cursor: pointer;
             transition: opacity 0.3s;
         }
+
         button:hover {
             opacity: 0.9;
         }
+
         .default-creds {
             margin-top: 1.5rem;
             font-size: 14px;
@@ -76,63 +104,68 @@
             padding: 10px;
             border-radius: 6px;
         }
+
         #message {
             margin-top: 1.5rem;
             padding: 10px;
             border-radius: 6px;
             display: none;
         }
+
         .success {
             background-color: #d4edda;
             color: #155724;
         }
+
         .error {
             background-color: #f8d7da;
             color: #721c24;
         }
+
         footer {
-          text-align: center;
-     
-          background-image: url("https://img.pikbest.com/backgrounds/20190309/dark-purple-simple-gradient-banner-background_1872428.jpg!bwr800");
-          color: rgb(255, 255, 255);
-          position: fixed;
-          bottom: 0;
-          height: 90px; ;
-          width: 70%;
-          text-align: center;
-          font-size: smaller;
-      }
+            text-align: center;
+            background-image: url("https://img.pikbest.com/backgrounds/20190309/dark-purple-simple-gradient-banner-background_1872428.jpg!bwr800");
+            color: rgb(255, 255, 255);
+            position: fixed;
+            bottom: 0;
+            height: 90px;
+            ;
+            width: 70%;
+            text-align: center;
+            font-size: smaller;
+        }
     </style>
 </head>
+
 <body>
     <div class="login-box">
         <img src="https://github.com/vicky-tec/TRAVALLY_/blob/main/TRAVALLY.png?raw=true" alt="Logo" class="logo">
         <h1>Admin Portal</h1>
-        
+
         <div class="input-group">
             <label for="email">Email</label>
-            <input type="email" id="email" >
+            <input type="email" id="email">
         </div>
-        
+
         <div class="input-group">
             <label for="password">Password</label>
-            <input type="password" id="password" >
+            <input type="password" id="password">
         </div>
-        
+
         <button onclick="login()">Sign In</button>
-        
+
         <div class="default-creds">
             Default credentials pre-filled for testing<br>
             Email: admin@travally.com<br>
             Password: admin123
         </div>
-        
+
         <div id="message"></div>
     </div>
     <footer>
         <h5 style="color: rgb(255, 251, 0);">TEST THIS AT YOUR OWN RISK</h5>
-      &copy; 2025 TRAVALLY 
-  </footer>
+        &copy; 2025 TRAVALLY | Designed with devotion ✨
+    </footer>
 
     <script>
         async function login() {
@@ -176,11 +209,12 @@
         }
 
         // Allow login on Enter key press
-        document.addEventListener('keypress', function(e) {
+        document.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 login();
             }
         });
     </script>
 </body>
+
 </html>
