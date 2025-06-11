@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Forecast</h1>
+        
+        <div class="search-container">
+            <input type="text" id="locationInput" placeholder="Enter city name..." aria-label="Enter city name">
+            <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
+        </div>
+        
+        <div class="weather-card" id="weatherCard">
+            <div class="weather-header">
+                <h2 id="location">--</h2>
+                <p id="date">--</p>
+            </div>
+            
+            <div class="weather-main">
+                <div class="temp-container">
+                    <div id="weatherIcon"><i class="fas fa-sun"></i></div>
+                    <div class="temp-value">
+                        <span id="temperature">--</span>
+                        <span class="unit">°C</span>
+                    </div>
+                </div>
+                
+                <div class="weather-details">
+                    <div class="detail">
+                        <i class="fas fa-temperature-high"></i>
+                        <span id="feelsLike">Feels like: --°C</span>
+                    </div>
+                    <div class="detail">
+                        <i class="fas fa-tint"></i>
+                        <span id="humidity">Humidity: --%</span>
+                    </div>
+                    <div class="detail">
+                        <i class="fas fa-wind"></i>
+                        <span id="wind">Wind: -- km/h</span>
+                    </div>
+                    <div class="detail">
+                        <i class="fas fa-cloud"></i>
+                        <span id="condition">Condition: --</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="error-message" id="errorMessage"></div>
+    </div>
+
+    <script src="scripit.js"></script>
+</body>
+</html>
