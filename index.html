@@ -1643,6 +1643,66 @@
             .theme-toggle.rotate {
                 transform: rotate(180deg);
             }
+
+            /* Add these new styles to your existing CSS */
+
+            /* Video controls for mobile */
+            .video-controls {
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10;
+                display: none;
+            }
+
+            .mobile-video-play {
+                background: var(--gradient-primary);
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 50px;
+                font-size: 1rem;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .mobile-video-play i {
+                font-size: 1.2rem;
+            }
+
+            .video-fallback {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 1;
+                display: none;
+            }
+
+            /* Show controls on mobile */
+            @media (max-width: 768px) {
+                .video-controls {
+                    display: block;
+                }
+
+                .video-slideshow video {
+                    display: none;
+                }
+
+                .video-slideshow video.active {
+                    display: block;
+                }
+
+                .video-fallback {
+                    display: block;
+                }
+            }
         }
     </style>
 
@@ -1691,12 +1751,26 @@
 
     <header id="home" class="hero">
         <div class="video-slideshow" id="videoSlideshow">
-            <video class="active" autoplay unmuted loop playsinline src="video1.mp4"></video>
-            <!-- <video muted loop playsinline src="video2.mp4"></video> -->
+            <!-- Fallback image for mobile -->
+            <img src="https://img.freepik.com/premium-photo/indian-temple_397139-19908.jpg" alt="Bihar Landscape" class="video-fallback"
+                id="videoFallback">
+
+            <!-- Video with muted attribute but no autoplay -->
+            <video loop playsinline muted id="heroVideo">
+                <source src="video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <!-- Video controls for mobile -->
+            <div class="video-controls">
+                <button class="mobile-video-play" id="playVideoBtn">
+                    <i class="fas fa-play"></i> Play Video
+                </button>
+            </div>
         </div>
         <div class="hero-content">
-            <h1>Embark on Your Bihar Adventure</h1>
-            <p>Discover the Rich Heritage and Vibrant Culture with TRAVALLY</p>
+            <h1 style="color: yellow;">Discover Bihar’s heritage with TRAVALLY!</h1>
+            <p>Let TRAVALLY guide you through Bihar’s historical treasures!</p>
             <a href="#destinations" class="btn">Explore Destinations <i class="fas fa-arrow-down"></i></a>
         </div>
     </header>
@@ -2088,6 +2162,88 @@
         // Run on load and resize
         window.addEventListener('DOMContentLoaded', applyMobileAdjustments);
         window.addEventListener('resize', applyMobileAdjustments);
+    </script>
+    <script>
+        // Update your existing JavaScript with these additions
+
+        // Video handling for mobile
+        const heroVideo = document.getElementById('heroVideo');
+        const playVideoBtn = document.getElementById('playVideoBtn');
+        const videoFallback = document.getElementById('videoFallback');
+
+        function handleVideoPlay() {
+            // Check if mobile
+            const isMobile = window.innerWidth <= 768;
+
+            if (isMobile) {
+                // On mobile, we'll let user initiate playback
+                playVideoBtn.addEventListener('click', function () {
+                    heroVideo.play()
+                        .then(() => {
+                            // Hide fallback image when video plays
+                            videoFallback.style.display = 'none';
+                            playVideoBtn.style.display = 'none';
+                        })
+                        .catch(error => {
+                            console.error('Video playback failed:', error);
+                            // Keep fallback image visible if video fails
+                            videoFallback.style.display = 'block';
+                        });
+                });
+
+                // Pause video by default on mobile
+                heroVideo.pause();
+            } else {
+                // On desktop, try to autoplay (with muted)
+                heroVideo.play()
+                    .then(() => {
+                        videoFallback.style.display = 'none';
+                    })
+                    .catch(error => {
+                        console.error('Autoplay failed:', error);
+                        videoFallback.style.display = 'block';
+                    });
+            }
+        }
+
+        // Run video handling on load
+        window.addEventListener('DOMContentLoaded', function () {
+            handleVideoPlay();
+            applyMobileAdjustments(); // Your existing function
+        });
+
+        // Update your existing applyMobileAdjustments function
+        function applyMobileAdjustments() {
+            const isMobile = window.innerWidth <= 768;
+
+            if (isMobile) {
+                // Mobile-specific adjustments
+                const heroContent = document.querySelector('.hero-content');
+                if (heroContent) {
+                    heroContent.style.padding = '1rem';
+                }
+
+                // Show play button for video
+                playVideoBtn.style.display = 'flex';
+
+                // Optionally change button text
+                const heroBtn = document.querySelector('.hero .btn');
+                if (heroBtn) {
+                    heroBtn.textContent = 'Explore';
+                }
+            } else {
+                // Desktop adjustments
+                const heroBtn = document.querySelector('.hero .btn');
+                if (heroBtn) {
+                    heroBtn.textContent = 'Explore Destinations';
+                }
+
+                // Hide mobile video controls
+                playVideoBtn.style.display = 'none';
+            }
+        }
+
+        // Rest of your existing JavaScript remains the same
     </script>
 
     <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
