@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Bihar Travel Map | TRAVALLY</title>
     <link rel="icon" href="https://vicky-tec.github.io/TRAVALLY/TRAVALLY.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Protest+Revolution&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Protest+Revolution&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary: #06B6D4;
@@ -170,7 +171,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .map-btn:hover {
@@ -266,6 +267,7 @@
             padding: 1.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             margin-bottom: 1.5rem;
+
         }
 
         .weather-header {
@@ -398,7 +400,7 @@
             background: white;
             padding: 1rem;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             line-height: 1.6;
             font-size: 0.9rem;
         }
@@ -420,21 +422,6 @@
             justify-content: center;
             color: white;
             font-size: 0.7rem;
-        }
-
-        /* Routing controls */
-        .leaflet-routing-container {
-            background: white;
-            border-radius: 8px;
-            padding: 0.5rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            width: 300px;
-            max-width: 90%; /* Added for responsiveness */
-        }
-
-        .leaflet-routing-alt {
-            max-height: 200px;
-            overflow-y: auto;
         }
 
         /* Custom popup styles */
@@ -480,21 +467,90 @@
 
         /* Animation */
         @keyframes pulse {
-            0% { transform: scale(1) rotate(-45deg); }
-            50% { transform: scale(1.1) rotate(-45deg); }
-            100% { transform: scale(1) rotate(-45deg); }
+            0% {
+                transform: scale(1) rotate(-45deg);
+            }
+
+            50% {
+                transform: scale(1.1) rotate(-45deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(-45deg);
+            }
         }
 
         .pulse {
             animation: pulse 2s infinite;
         }
+
+        /* Google Maps Info Window Styles */
+        .gm-style .gm-style-iw-c {
+            border-radius: 12px !important;
+            padding: 0 !important;
+        }
+
+        .gm-style .gm-style-iw-d {
+            overflow: hidden !important;
+        }
+
+        .gm-style .gm-style-iw-t::after {
+            background: var(--gradient) !important;
+        }
+
+        .gm-info-window {
+            padding: 1rem;
+        }
+
+        .gm-info-window h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .gm-info-window img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .gm-info-window p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .gm-info-window .rating {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .gm-info-window-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .gm-info-window-button {
+            flex: 1;
+            padding: 0.3rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="logo">
             <a href="index.html">
-                <img src="https://github.com/vicky-tec/TRAVALLY_/blob/main/TRAVALLY.png?raw=true" alt="TRAVALLY logo" class="logo">
+                <img src="https://github.com/vicky-tec/TRAVALLY_/blob/main/TRAVALLY.png?raw=true" alt="TRAVALLY logo"
+                    class="logo">
             </a>
         </div>
         <ul class="nav-links">
@@ -508,7 +564,9 @@
     <div class="map-container">
         <div class="map-header">
             <h1>Explore Bihar</h1>
-            <p>Discover the rich cultural heritage, spiritual destinations, and hidden gems of Bihar with our interactive travel companion. Get real-time information about tourist spots, transportation, weather, and local events.</p>
+            <p>Discover the rich cultural heritage, spiritual destinations, and hidden gems of Bihar with our
+                interactive travel companion. Get real-time information about tourist spots, transportation, weather,
+                and local events.</p>
         </div>
 
         <div class="map-content">
@@ -553,7 +611,7 @@
                 <div class="info-panel">
                     <h3><i class="fas fa-info-circle"></i> Popular Destinations</h3>
                     <ul class="location-list" id="location-list">
-                        </ul>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -569,91 +627,149 @@
         <p>&copy; 2025 TRAVALLY | Designed with devotion ✨</p>
     </footer>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <!-- Load Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places,geometry"></script>
     <script>
         // Initialize the map centered on Bihar
-        const map = L.map('bihar-map').setView([25.0961, 85.3131], 7);
+        let map;
+        let markers = [];
+        let infoWindow;
+        let directionsService;
+        let directionsRenderer;
+        let currentLocationMarker;
 
-        // Add OpenStreetMap tiles with custom style
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            maxZoom: 18,
-        }).addTo(map);
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('bihar-map'), {
+                center: { lat: 25.0961, lng: 85.3131 },
+                zoom: 7,
+                styles: [
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "labels.icon",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "transit",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    }
+                ]
+            });
 
-        // Add more detailed base map option
-        const transportMap = L.tileLayer('https://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=6170aad10dfd42a38d4d8c709a536f38', {
-             attribution: '&copy; <a href="https://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-             maxZoom: 22,
-        });
+            infoWindow = new google.maps.InfoWindow();
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer({
+                map: map,
+                suppressMarkers: true,
+                polylineOptions: {
+                    strokeColor: '#EC4899',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 4
+                }
+            });
 
-        // Add satellite imagery option
-        const satelliteMap = L.tileLayer('https://server.arcgisonoline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-            maxZoom: 22,
-        });
+            // Add Bihar boundary (simplified)
+            const biharBoundary = new google.maps.Polygon({
+                paths: [
+                    { lat: 27.31, lng: 83.19 },
+                    { lat: 27.31, lng: 88.19 },
+                    { lat: 24.20, lng: 88.19 },
+                    { lat: 24.20, lng: 83.19 },
+                    { lat: 27.31, lng: 83.19 }
+                ],
+                strokeColor: '#06B6D4',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#06B6D4',
+                fillOpacity: 0.05
+            });
+            biharBoundary.setMap(map);
 
-        // Add base layer control
-        const baseMaps = {
-            "Standard": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'),
-            "Transport": transportMap,
-            "Satellite": satelliteMap
-        };
+            // Add districts
+            const districts = [
+                { name: "Patna", coords: { lat: 25.5941, lng: 85.1376 }, population: "5.8 million" },
+                { name: "Gaya", coords: { lat: 24.7955, lng: 85.0000 }, population: "4.3 million" },
+                { name: "Bhagalpur", coords: { lat: 25.2445, lng: 86.9718 }, population: "3.0 million" },
+                { name: "Muzaffarpur", coords: { lat: 26.1209, lng: 85.3647 }, population: "4.8 million" },
+                { name: "Darbhanga", coords: { lat: 26.1529, lng: 85.8972 }, population: "3.9 million" }
+            ];
 
-        // More accurate Bihar boundary coordinates (simplified)
-        const biharBoundary = L.geoJSON({
-            "type": "Feature",
-            "properties": { "name": "Bihar" },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [[
-                    [83.19, 27.31], [88.19, 27.31], [88.19, 24.20],
-                    [83.19, 24.20], [83.19, 27.31]
-                ]]
+            districts.forEach(district => {
+                const marker = new google.maps.Marker({
+                    position: district.coords,
+                    map: map,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        fillColor: '#9333EA',
+                        fillOpacity: 0.8,
+                        strokeColor: '#fff',
+                        strokeWeight: 1,
+                        scale: 8
+                    },
+                    title: district.name
+                });
+
+                const infowindow = new google.maps.InfoWindow({
+                    content: `<b>${district.name}</b><br>Population: ${district.population}`
+                });
+
+                marker.addListener('click', () => {
+                    infowindow.open(map, marker);
+                });
+            });
+
+            // Add locations to the map
+            addLocationsToMap();
+
+            // Initialize location list
+            updateLocationList('spiritual');
+
+            // Get current weather
+            getCurrentWeather(25.5941, 85.1376); // Default to Patna
+
+            // Try to get user's location for weather
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        getCurrentWeather(position.coords.latitude, position.coords.longitude);
+                    },
+                    () => {
+                        console.log("Geolocation permission denied or failed");
+                    }
+                );
             }
-        }, {
-            color: '#06B6D4',
-            weight: 2,
-            fillOpacity: 0.05,
-            fillColor: '#06B6D4'
-        }).addTo(map);
-
-        // Add hover effect to boundary
-        biharBoundary.on('mouseover', function() {
-            this.setStyle({ fillOpacity: 0.2 });
-        });
-
-        biharBoundary.on('mouseout', function() {
-            this.setStyle({ fillOpacity: 0.05 });
-        });
-
-        // Bihar districts data (sample) - Used for circle markers
-        const districts = [
-            { name: "Patna", coords: [25.5941, 85.1376], population: "5.8 million" },
-            { name: "Gaya", coords: [24.7955, 85.0000], population: "4.3 million" },
-            { name: "Bhagalpur", coords: [25.2445, 86.9718], population: "3.0 million" },
-            { name: "Muzaffarpur", coords: [26.1209, 85.3647], population: "4.8 million" },
-            { name: "Darbhanga", coords: [26.1529, 85.8972], population: "3.9 million" }
-        ];
-
-        // Add districts to map as circle markers
-        districts.forEach(district => {
-            L.circleMarker(district.coords, {
-                radius: 8,
-                fillColor: "#9333EA",
-                color: "#fff",
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-            }).bindPopup(`<b>${district.name}</b><br>Population: ${district.population}`).addTo(map);
-        });
+        }
 
         // Enhanced locations data with images and more details
         const locations = [
             {
                 id: 1,
                 name: "Mahabodhi Temple",
-                coords: [24.6961, 84.9913],
+                coords: { lat: 24.6961, lng: 84.9913 },
                 type: "spiritual",
                 category: "Buddhist",
                 description: "UNESCO World Heritage Site where Buddha attained enlightenment",
@@ -666,7 +782,7 @@
             {
                 id: 2,
                 name: "Nalanda University Ruins",
-                coords: [25.1368, 85.4439],
+                coords: { lat: 25.1368, lng: 85.4439 },
                 type: "historical",
                 category: "Archaeological",
                 description: "Ancient center of learning dating back to 5th century CE",
@@ -679,12 +795,12 @@
             {
                 id: 3,
                 name: "Patna Museum",
-                coords: [25.6114, 85.1456],
+                coords: { lat: 25.6114, lng: 85.1456 },
                 type: "historical",
                 category: "Museum",
                 description: "State museum showcasing Bihar's rich history and artifacts",
                 icon: "museum",
-                image: "https://vicky-tec.github.io. TRAVALLY/patna_museum.jpg",
+                image: "https://vicky-tec.github.io/TRAVALLY/patna_museum.jpg",
                 rating: "4.2",
                 hours: "10:30AM-4:30PM (Closed Mondays)",
                 fee: "₹100 for Indians, ₹250 for foreigners"
@@ -692,7 +808,7 @@
             {
                 id: 4,
                 name: "Vishwa Shanti Stupa, Rajgir",
-                coords: [25.0031, 85.4242],
+                coords: { lat: 25.0031, lng: 85.4242 },
                 type: "spiritual",
                 category: "Buddhist",
                 description: "Peace pagoda in Rajgir with panoramic views",
@@ -705,7 +821,7 @@
             {
                 id: 5,
                 name: "Gaya Junction Railway Station",
-                coords: [24.8147, 85.0036],
+                coords: { lat: 24.8147, lng: 85.0036 },
                 type: "transport",
                 category: "Railway",
                 description: "Major railway station connecting to all parts of India",
@@ -718,7 +834,7 @@
             {
                 id: 6,
                 name: "Patna Airport",
-                coords: [25.5913, 85.0879],
+                coords: { lat: 25.5913, lng: 85.0879 },
                 type: "transport",
                 category: "Airport",
                 description: "Jay Prakash Narayan International Airport",
@@ -731,7 +847,7 @@
             {
                 id: 7,
                 name: "Sonepur Mela Ground",
-                coords: [25.7000, 85.1833],
+                coords: { lat: 25.7000, lng: 85.1833 },
                 type: "event",
                 category: "Fair",
                 description: "Asia's largest cattle fair (held annually in Nov-Dec)",
@@ -744,7 +860,7 @@
             {
                 id: 8,
                 name: "Jal Mandir, Pawapuri",
-                coords: [25.0884, 85.5386],
+                coords: { lat: 25.0884, lng: 85.5386 },
                 type: "spiritual",
                 category: "Jain",
                 description: "Important Jain pilgrimage site in a lotus-filled lake",
@@ -757,7 +873,7 @@
             {
                 id: 9,
                 name: "Vikramshila Ruins",
-                coords: [25.2583, 87.3076],
+                coords: { lat: 25.2583, lng: 87.3076 },
                 type: "historical",
                 category: "Archaeological",
                 description: "Ancient Buddhist university ruins",
@@ -767,10 +883,10 @@
                 hours: "9AM-5PM",
                 fee: "₹25 for Indians, ₹300 for foreigners"
             },
-             {
+            {
                 id: 10,
                 name: "Takht Sri Patna Sahib",
-                coords: [25.5948, 85.1732],
+                coords: { lat: 25.5948, lng: 85.1732 },
                 type: "spiritual",
                 category: "Sikh",
                 description: "Birthplace of Guru Gobind Singh, important Sikh pilgrimage site",
@@ -783,7 +899,7 @@
             {
                 id: 11,
                 name: "Golghar, Patna",
-                coords: [25.614, 85.1636],
+                coords: { lat: 25.614, lng: 85.1636 },
                 type: "historical",
                 category: "Monument",
                 description: "Large granary built in 1786, offers panoramic city views",
@@ -793,15 +909,14 @@
                 hours: "10AM-5PM (Closed Mondays)",
                 fee: "₹10 entry"
             }
-            // Add more locations here
         ];
 
         // Dummy hotel locations (replace with real data if available)
         const hotels = [
-             {
+            {
                 id: 101,
                 name: "Hotel Maurya, Patna",
-                coords: [25.609, 85.153],
+                coords: { lat: 25.609, lng: 85.153 },
                 type: "hotel",
                 category: "Luxury",
                 description: "Prominent hotel in Patna",
@@ -811,10 +926,10 @@
                 hours: "24/7",
                 fee: "N/A"
             },
-             {
+            {
                 id: 102,
                 name: "Lemon Tree Premier, Patna",
-                coords: [25.605, 85.148],
+                coords: { lat: 25.605, lng: 85.148 },
                 type: "hotel",
                 category: "Mid-range",
                 description: "Modern hotel in Patna",
@@ -824,177 +939,73 @@
                 hours: "24/7",
                 fee: "N/A"
             }
-            // Add more dummy hotels
         ];
 
-         // Combine locations and hotels for the map and list
+        // Combine locations and hotels for the map and list
         const allLocations = locations.concat(hotels);
 
+        function addLocationsToMap() {
+            // Clear existing markers
+            markers.forEach(marker => marker.setMap(null));
+            markers = [];
 
-        // Create layer groups for different types of locations
-        const spiritualLayer = L.layerGroup();
-        const historicalLayer = L.layerGroup();
-        const transportLayer = L.layerGroup();
-        const eventLayer = L.layerGroup();
-        const hotelLayer = L.layerGroup();
-        const allMarkers = [];
-
-        // Add markers to the map with custom icons
-        allLocations.forEach(location => {
-            const icon = L.divIcon({
-                className: 'custom-marker',
-                html: `<i class="fas fa-${location.icon}"></i>`,
-                iconSize: [28, 28]
-            });
-
-            const marker = L.marker(location.coords, {
-                icon: icon,
-                riseOnHover: true
-            });
-
-            // Custom popup content
-            const popupContent = `
-                <div>
-                    <div class="popup-header">
-                        <i class="fas fa-${location.icon}"></i>
-                        ${location.name}
-                    </div>
-                    <img src="${location.image}" class="popup-image" alt="${location.name}">
-                    <p>${location.description}</p>
-                    ${location.rating ? `<p><i class="fas fa-star"></i> Rating: ${location.rating}/5</p>` : ''}
-                    ${location.hours ? `<p><i class="fas fa-clock"></i> Hours: ${location.hours}</p>` : ''}
-                    ${location.fee && location.fee !== 'N/A' ? `<p><i class="fas fa-ticket-alt"></i> Entry: ${location.fee}</p>` : ''}
-                    <div class="popup-actions">
-                        <button class="popup-btn" onclick="startNavigation(${location.coords[0]}, ${location.coords[1]})">
-                            <i class="fas fa-directions"></i> Directions
-                        </button>
-                         <button class="popup-btn" onclick="zoomToLocation(${location.coords[0]}, ${location.coords[1]}, 15)">
-                            <i class="fas fa-search-plus"></i> Zoom In
-                        </button>
-                    </div>
-                </div>
-            `;
-
-            marker.bindPopup(popupContent, { maxWidth: 300 });
-            marker.locationId = location.id; // Store location id with marker
-            allMarkers.push(marker);
-
-            // Add to appropriate layer
-            if (location.type === "spiritual") {
-                marker.addTo(spiritualLayer);
-            } else if (location.type === "historical") {
-                marker.addTo(historicalLayer);
-            } else if (location.type === "transport") {
-                marker.addTo(transportLayer);
-            } else if (location.type === "event") {
-                marker.addTo(eventLayer);
-            } else if (location.type === "hotel") {
-                marker.addTo(hotelLayer);
-            }
-        });
-
-         // Add overlay maps control
-        const overlayMaps = {
-            "Spiritual Sites": spiritualLayer,
-            "Historical Places": historicalLayer,
-            "Transport Hubs": transportLayer,
-            "Events": eventLayer,
-            "Hotels": hotelLayer
-        };
-
-        L.control.layers(baseMaps, overlayMaps, {collapsed: false}).addTo(map);
-
-
-        // Add legend
-        const legend = L.control({position: 'bottomright'});
-
-        legend.onAdd = function(map) {
-            const div = L.DomUtil.create('div', 'map-legend');
-            div.innerHTML = `
-                <h4>Map Legend</h4>
-                <div class="legend-item"><span class="legend-color" style="background: #06B6D4"><i class="fas fa-temple"></i></span> Spiritual</div>
-                <div class="legend-item"><span class="legend-color" style="background: #9333EA"><i class="fas fa-landmark"></i></span> Historical</div>
-                <div class="legend-item"><span class="legend-color" style="background: #EC4899"><i class="fas fa-bus"></i></span> Transport</div>
-                <div class="legend-item"><span class="legend-color" style="background: #F59E0B"><i class="fas fa-calendar-alt"></i></span> Events</div>
-                <div class="legend-item"><span class="legend-color" style="background: #00CC66"><i class="fas fa-hotel"></i></span> Hotels</div>
-            `; // Added icons to legend
-            return div;
-        };
-
-        legend.addTo(map);
-
-        // Routing control
-        let routingControl = null;
-
-        function toggleRoute() {
-            const routeButton = document.getElementById('btn-route');
-            if (routingControl) {
-                map.removeControl(routingControl);
-                routingControl = null;
-                routeButton.classList.remove('active');
-                routeButton.innerHTML = '<i class="fas fa-route"></i> Route';
-            } else {
-                routingControl = L.Routing.control({
-                    waypoints: [],
-                    routeWhileDragging: true,
-                    showAlternatives: true,
-                    fitSelectedRoutes: true,
-                     lineOptions: {
-                        styles: [
-                            {color: 'black', opacity: 0.15, weight: 9},
-                            {color: 'white', opacity: 0.8, weight: 6},
-                            {color: '#EC4899', opacity: 1, weight: 4} // Main route color
-                        ]
-                    },
-                     altLineOptions: {
-                         styles: [
-                            {color: '#06B6D4', opacity: 0.5, weight: 4} // Alternative route color
-                        ]
-                    },
-                    createMarker: function(i, wp, nWps) {
-                        return L.marker(wp.latLng, {
-                            icon: L.divIcon({
-                                className: `custom-marker ${i === 0 ? 'pulse' : ''}`, // Pulse on start marker
-                                html: `<i class="fas fa-${i === 0 ? 'map-marker-alt' : 'flag'}"></i>`,
-                                iconSize: [28, 28]
-                            })
-                        });
+            allLocations.forEach(location => {
+                const marker = new google.maps.Marker({
+                    position: location.coords,
+                    map: map,
+                    title: location.name,
+                    icon: {
+                        path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
+                        fillColor: getColorForLocationType(location.type),
+                        fillOpacity: 1,
+                        strokeColor: '#fff',
+                        strokeWeight: 1,
+                        scale: 1.5,
+                        anchor: new google.maps.Point(12, 24),
+                        rotation: 0
                     }
-                }).addTo(map);
-                routeButton.classList.add('active');
-                 routeButton.innerHTML = '<i class="fas fa-times"></i> Cancel Route';
-            }
+                });
+
+                // Store reference to location data
+                marker.locationData = location;
+
+                // Create info window content
+                const content = `
+                    <div class="gm-info-window">
+                        <h3><i class="fas fa-${location.icon}"></i> ${location.name}</h3>
+                        <img src="${location.image}" alt="${location.name}">
+                        <p>${location.description}</p>
+                        ${location.rating ? `<p><i class="fas fa-star"></i> <span class="rating">Rating: ${location.rating}/5</span></p>` : ''}
+                        ${location.hours ? `<p><i class="fas fa-clock"></i> Hours: ${location.hours}</p>` : ''}
+                        ${location.fee && location.fee !== 'N/A' ? `<p><i class="fas fa-ticket-alt"></i> Entry: ${location.fee}</p>` : ''}
+                        <div class="gm-info-window-buttons">
+                            <button class="gm-info-window-button" onclick="startNavigationFromInfoWindow(${location.coords.lat}, ${location.coords.lng})">
+                                <i class="fas fa-directions"></i> Directions
+                            </button>
+                            <button class="gm-info-window-button" onclick="zoomToLocation(${location.coords.lat}, ${location.coords.lng}, 15)">
+                                <i class="fas fa-search-plus"></i> Zoom
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                marker.addListener('click', () => {
+                    infoWindow.setContent(content);
+                    infoWindow.open(map, marker);
+                });
+
+                markers.push(marker);
+            });
         }
 
-        function startNavigation(lat, lng) {
-            if (!routingControl) {
-                 toggleRoute(); // Activate routing if not already active
-            }
-
-            // Get user's current location (using browser geolocation)
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(position => {
-                    const userLocation = [position.coords.latitude, position.coords.longitude];
-                     routingControl.setWaypoints([
-                        L.latLng(userLocation[0], userLocation[1]),
-                        L.latLng(lat, lng)
-                    ]);
-                }, () => {
-                    // Handle geolocation error or denial
-                    alert("Could not retrieve your location. Please enable geolocation.");
-                     // Optionally set a default start point if geolocation fails
-                     routingControl.setWaypoints([
-                        L.latLng(25.6099, 85.1374), // Default to a central point like Patna
-                        L.latLng(lat, lng)
-                    ]);
-                });
-            } else {
-                 alert("Geolocation is not supported by your browser.");
-                 // Optionally set a default start point if geolocation is not supported
-                 routingControl.setWaypoints([
-                    L.latLng(25.6099, 85.1374), // Default to a central point like Patna
-                    L.latLng(lat, lng)
-                ]);
+        function getColorForLocationType(type) {
+            switch (type) {
+                case 'spiritual': return '#06B6D4';
+                case 'historical': return '#9333EA';
+                case 'transport': return '#EC4899';
+                case 'event': return '#F59E0B';
+                case 'hotel': return '#00CC66';
+                default: return '#666666';
             }
         }
 
@@ -1015,11 +1026,12 @@
                     <p>${location.description}</p>
                 `;
                 listItem.addEventListener('click', () => {
-                    map.setView(location.coords, 14); // Zoom to location on click
-                    // Optionally open the popup
-                    const marker = allMarkers.find(m => m.locationId === location.id);
+                    map.setCenter(location.coords);
+                    map.setZoom(14);
+                    // Find and open the marker's info window
+                    const marker = markers.find(m => m.locationData.id === location.id);
                     if (marker) {
-                        marker.openPopup();
+                        google.maps.event.trigger(marker, 'click');
                     }
                 });
                 locationList.appendChild(listItem);
@@ -1028,53 +1040,28 @@
 
         // Filter button functions
         function showTouristSpots() {
-            spiritualLayer.addTo(map);
-            historicalLayer.addTo(map);
-            transportLayer.remove();
-            eventLayer.remove();
-            hotelLayer.remove();
-             updateButtonState('btn-tourist');
-             updateLocationList('spiritual'); // Update list with spiritual locations
+            updateButtonState('btn-tourist');
+            updateLocationList('spiritual');
         }
 
         function showTransportation() {
-            transportLayer.addTo(map);
-            spiritualLayer.remove();
-            historicalLayer.remove();
-            eventLayer.remove();
-            hotelLayer.remove();
             updateButtonState('btn-transport');
-             updateLocationList('transport'); // Update list
+            updateLocationList('transport');
         }
 
         function showHotels() {
-             hotelLayer.addTo(map);
-            spiritualLayer.remove();
-            historicalLayer.remove();
-            transportLayer.remove();
-            eventLayer.remove();
             updateButtonState('btn-hotels');
-             updateLocationList('hotel'); // Update list
+            updateLocationList('hotel');
         }
 
         function showEvents() {
-             eventLayer.addTo(map);
-            spiritualLayer.remove();
-            historicalLayer.remove();
-            transportLayer.remove();
-            hotelLayer.remove();
             updateButtonState('btn-events');
-             updateLocationList('event'); // Update list
+            updateLocationList('event');
         }
 
         function showAll() {
-            spiritualLayer.addTo(map);
-            historicalLayer.addTo(map);
-            transportLayer.addTo(map);
-            eventLayer.addTo(map);
-            hotelLayer.addTo(map);
             updateButtonState('btn-all');
-             updateLocationList('all'); // Update list with all locations
+            updateLocationList('all');
         }
 
         function updateButtonState(activeButtonId) {
@@ -1088,73 +1075,207 @@
             });
         }
 
-         function zoomToLocation(lat, lng, zoom) {
-            map.setView([lat, lng], zoom);
+        function zoomToLocation(lat, lng, zoom) {
+            map.setCenter({ lat: lat, lng: lng });
+            map.setZoom(zoom || 15);
         }
-
 
         // Search functionality
         function searchLocation() {
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
-            if (!searchTerm) return;
-
             const foundLocation = allLocations.find(location =>
-                location.name.toLowerCase().includes(searchTerm) ||
-                location.description.toLowerCase().includes(searchTerm) ||
-                location.category.toLowerCase().includes(searchTerm)
+                location.name.toLowerCase().includes(searchTerm)
             );
 
             if (foundLocation) {
-                map.setView(foundLocation.coords, 14); // Zoom to found location
-                 const marker = allMarkers.find(m => m.locationId === foundLocation.id);
-                  if (marker) {
-                      marker.openPopup(); // Open popup for the found location
-                  }
+                map.setCenter(foundLocation.coords);
+                map.setZoom(15);
+                const marker = markers.find(m => m.locationData.id === foundLocation.id);
+                if (marker) {
+                    google.maps.event.trigger(marker, 'click');
+                }
             } else {
-                alert(`Location "${searchTerm}" not found in Bihar.`);
+                alert("Location not found. Please try another search term.");
             }
         }
 
 
-        // Fetch weather data (using a placeholder function)
-        function fetchWeatherData() {
-            // In a real application, you would fetch this from a weather API
-            // For this demo, we use placeholder data
-            const weatherInfoDiv = document.getElementById('weather-info');
-             weatherInfoDiv.innerHTML = `
-                <div class="weather-header">
-                    <span class="weather-city">Patna</span>
-                    <span class="weather-temp">34°C</span>
-                </div>
-                <div class="weather-details">
-                    <div class="weather-detail">
-                        <i class="fas fa-cloud"></i>
-                        <p>Condition</p>
-                        <p class="value">Partly Cloudy</p>
-                    </div>
-                    <div class="weather-detail">
-                        <i class="fas fa-water"></i>
-                        <p>Humidity</p>
-                        <p class="value">60%</p>
-                    </div>
-                    <div class="weather-detail">
-                        <i class="fas fa-wind"></i>
-                        <p>Wind</p>
-                        <p class="value">15 km/h</p>
-                    </div>
-                    <div class="weather-detail">
-                         <i class="fas fa-temperature-high"></i>
-                         <p>Feels Like</p>
-                         <p class="value">38°C</p>
-                    </div>
-                </div>
-            `;
+        // Route functionality
+        let routeMode = false;
+        let startPoint = null;
+        let endPoint = null;
+
+        function toggleRoute() {
+            routeMode = !routeMode;
+            const btn = document.getElementById('btn-route');
+
+            if (routeMode) {
+                btn.classList.add('active');
+                alert("Please click on the map to set starting point");
+                map.setOptions({ draggableCursor: 'crosshair' });
+
+                // Listen for clicks on the map
+                map.addListener('click', setRoutePoints);
+            } else {
+                btn.classList.remove('active');
+                map.setOptions({ draggableCursor: '' });
+                directionsRenderer.setMap(null);
+                startPoint = null;
+                endPoint = null;
+
+                // Remove the click listener
+                google.maps.event.clearListeners(map, 'click');
+            }
         }
 
-         // Initial load
-        showTouristSpots(); // Show tourist spots by default
-        fetchWeatherData(); // Load weather data
-        updateLocationList('spiritual'); // Populate initial location list
+        function setRoutePoints(event) {
+            if (!startPoint) {
+                startPoint = event.latLng;
+                alert("Now click to set destination point");
+
+                // Add a marker for start point
+                if (currentLocationMarker) {
+                    currentLocationMarker.setMap(null);
+                }
+                currentLocationMarker = new google.maps.Marker({
+                    position: startPoint,
+                    map: map,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        fillColor: '#00FF00',
+                        fillOpacity: 1,
+                        strokeColor: '#fff',
+                        strokeWeight: 1,
+                        scale: 8
+                    },
+                    title: "Start Point"
+                });
+            } else if (!endPoint) {
+                endPoint = event.latLng;
+
+                // Add a marker for end point
+                new google.maps.Marker({
+                    position: endPoint,
+                    map: map,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        fillColor: '#FF0000',
+                        fillOpacity: 1,
+                        strokeColor: '#fff',
+                        strokeWeight: 1,
+                        scale: 8
+                    },
+                    title: "End Point"
+                });
+
+                // Calculate and display route
+                calculateAndDisplayRoute(startPoint, endPoint);
+            }
+        }
+
+        function calculateAndDisplayRoute(start, end) {
+            directionsService.route(
+                {
+                    origin: start,
+                    destination: end,
+                    travelMode: google.maps.TravelMode.DRIVING,
+                    provideRouteAlternatives: true
+                },
+                (response, status) => {
+                    if (status === 'OK') {
+                        directionsRenderer.setMap(map);
+                        directionsRenderer.setDirections(response);
+                    } else {
+                        alert('Directions request failed due to ' + status);
+                    }
+                }
+            );
+        }
+
+        function startNavigationFromInfoWindow(lat, lng) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const userLocation = new google.maps.LatLng(
+                            position.coords.latitude,
+                            position.coords.longitude
+                        );
+                        const destination = new google.maps.LatLng(lat, lng);
+                        calculateAndDisplayRoute(userLocation, destination);
+                    },
+                    () => {
+                        alert("Could not get your current location. Please enable location services.");
+                    }
+                );
+            } else {
+                alert("Geolocation is not supported by your browser.");
+            }
+        }
+
+        // Weather functionality//
+        function getCurrentWeather(lat, lon) {
+            // In a real implementation, you would call a weather API here
+            // For demo purposes, we'll use mock data
+            const mockWeather = {
+                city: "Patna",
+                temp: "32°C",
+                condition: "Partly Cloudy",
+                icon: "fa-cloud-sun",
+                humidity: "65%",
+                wind: "12 km/h",
+                forecast: ` <b>Use our search page to get current temerature of your place</b> <a href="https://vicky-tec.github.io/Weather.in/" target="_blank">(See details)</a>`
+            };
+
+
+            displayWeather(mockWeather);
+        }
+
+        function displayWeather(weather) {
+            const weatherInfoDiv = document.getElementById("weather-info");
+
+            weatherInfoDiv.innerHTML = `
+        <p><strong>City:</strong> ${weather.city}</p>
+        <p><strong>Temperature:</strong> ${weather.temp}</p>
+        <p><strong>Condition:</strong> ${weather.condition} <i class="fas ${weather.icon}"></i></p>
+        <p><strong>Humidity:</strong> ${weather.humidity}</p>
+        <p><strong>Wind:</strong> ${weather.wind}</p>
+        <p><strong>Forecast:</strong> ${weather.forecast}</p>
+    `;
+        }
+
+
+
+        function displayWeather(weatherData) {
+            const weatherInfo = document.getElementById('weather-info');
+            weatherInfo.innerHTML = `
+            <div class="weather-header">
+                <div class="weather-city">${weatherData.city}</div>
+                <div class="weather-temp">${weatherData.temp}</div>
+            </div>
+            <div class="weather-condition">
+                <i class="fas ${weatherData.icon}"></i> ${weatherData.condition}
+            </div>
+            <div class="weather-details">
+                <div class="weather-detail">
+                    <i class="fas fa-tint"></i>
+                    <p>Humidity</p>
+                    <p class="value">${weatherData.humidity}</p>
+                </div>
+                <div class="weather-detail">
+                    <i class="fas fa-wind"></i>
+                    <p>Wind</p>
+                    <p class="value">${weatherData.wind}</p>
+                </div>
+            </div>
+            <div class="weather-forecast">
+                <p>${weatherData.forecast}</p>
+            </div>
+        `;
+        }
+
+        // Initialize the map when the window loads
+        window.onload = initMap;
     </script>
 </body>
+
 </html>
