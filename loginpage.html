@@ -10,52 +10,134 @@
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --error-color: #e63946;
+            --success-color: #2a9d8f;
+            --text-dark: #2b2d42;
+            --text-light: #edf2f4;
+            --bg-dark: #0a0e17;
+            --card-bg: #ffffff;
+            --input-border: #e2e8f0;
+            --input-focus: #a5b4fc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(45deg, #ff8c00, #ff0066, #6600cc, #3399ff);
+            background: var(--bg-dark);
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-size: 400% 400%;
-            animation: gradientAnimation 5s ease infinite;
-            z-index: 0;
-            color: #333;
+            min-height: 100vh;
+            color: var(--text-dark);
+            position: relative;
+            overflow-x: hidden;
         }
 
-        @keyframes gradientAnimation {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+        /* Starry night background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
         }
 
-        .login-box {
-            background: white;
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        /* Moon */
+        .moon {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            background: #f5f3ce;
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(245, 243, 206, 0.5);
+            top: 15%;
+            right: 15%;
+            z-index: -1;
+        }
+
+        /* Main container */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        .login-container {
+            display: flex;
+            width: 100%;
+            max-width: 800px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+            margin: 1rem;
+        }
+
+        .form-container {
             padding: 2.5rem;
-            border-radius: 10px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            width: 350px;
-            text-align: center;
+            width: 100%;
+            transition: all 0.5s ease;
+        }
+
+        #login-form {
+            display: block;
+        }
+
+        #signup-form {
+            display: none;
+        }
+
+        .active-form {
+            display: block !important;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .logo {
             width: 80px;
             margin-bottom: 1.5rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         h1 {
             margin: 0 0 1.5rem;
-            color: #444;
+            color: var(--text-dark);
+            text-align: center;
+            font-size: 1.8rem;
         }
 
         .input-group {
@@ -67,37 +149,42 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
+            color: var(--text-dark);
         }
 
         input {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
+            padding: 12px 15px;
+            border: 2px solid var(--input-border);
             border-radius: 6px;
             font-size: 16px;
-            transition: border 0.3s;
+            transition: all 0.3s;
         }
 
         input:focus {
-            border-color: #667eea;
+            border-color: var(--input-focus);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
             outline: none;
         }
 
         button {
-            background: linear-gradient(to right, #667eea, #764ba2);
+            background: var(--primary-gradient);
             color: white;
             border: none;
-            padding: 12px;
+            padding: 14px;
             width: 100%;
             border-radius: 6px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
         }
 
         button:hover {
             opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         .default-creds {
@@ -105,73 +192,331 @@
             font-size: 14px;
             color: #666;
             background: #f8f9fa;
-            padding: 10px;
+            padding: 12px;
             border-radius: 6px;
+            text-align: center;
+            border-left: 4px solid #667eea;
         }
 
-        #message {
+        #message, #signup-message {
             margin-top: 1.5rem;
-            padding: 10px;
+            padding: 12px;
             border-radius: 6px;
             display: none;
+            text-align: center;
+            font-weight: 500;
         }
 
         .success {
-            background-color: #d4edda;
-            color: #155724;
+            background-color: rgba(42, 157, 143, 0.2);
+            color: var(--success-color);
+            border-left: 4px solid var(--success-color);
         }
 
         .error {
-            background-color: #f8d7da;
-            color: #721c24;
+            background-color: rgba(230, 57, 70, 0.2);
+            color: var(--error-color);
+            border-left: 4px solid var(--error-color);
+        }
+
+        .toggle-form {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #666;
+        }
+
+        .toggle-form a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toggle-form a:hover {
+            text-decoration: underline;
+            color: #5a67d8;
         }
 
         footer {
             text-align: center;
-            background-image: url("https://img.pikbest.com/backgrounds/20190309/dark-purple-simple-gradient-banner-background_1872428.jpg!bwr800");
-            color: rgb(255, 255, 255);
-            position: fixed;
-            bottom: 0;
-            height: 90px;
-            ;
-            width: 70%;
-            text-align: center;
-            font-size: smaller;
+            background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--text-light);
+            width: 100%;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        footer h5 {
+            color: #f9c74f;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Password toggle */
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #a0aec0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                max-width: 90%;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .moon {
+                width: 60px;
+                height: 60px;
+                top: 10%;
+                right: 10%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 1.2rem;
+            }
+
+            h1 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+
+            .input-group {
+                margin-bottom: 1rem;
+            }
+
+            button {
+                padding: 12px;
+            }
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 
 <body>
-    <div class="login-box">
-        <img src="https://github.com/vicky-tec/TRAVALLY_/blob/main/TRAVALLY.png?raw=true" alt="Logo" class="logo">
-        <h1>Admin Portal</h1>
+    <div class="stars" id="stars"></div>
+    <div class="moon"></div>
 
-        <div class="input-group">
-            <label for="email">Email</label>
-            <input type="email" id="email">
+    <div class="main-container">
+        <div class="login-container">
+            <div class="form-container">
+                <div id="login-form" class="active-form">
+                    <img src="https://github.com/vicky-tec/TRAVALLY_/blob/main/TRAVALLY.png?raw=true" alt="Travally Logo" class="logo">
+                    <h1>Admin Portal</h1>
+
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" value="admin@travally.com" placeholder="Enter your email">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" value="admin123" placeholder="Enter your password">
+                            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                        </div>
+                    </div>
+
+                    <button onclick="login()" id="login-btn">
+                        <span id="login-text">Sign In</span>
+                        <span id="login-spinner" class="spinner" style="display: none;"></span>
+                    </button>
+
+                    <div class="default-creds">
+                        Default credentials pre-filled for testing<br>
+                        Email: admin@travally.com<br>
+                        Password: admin123
+                    </div>
+
+                    <div class="toggle-form">
+                        Don't have an account? <a onclick="showSignup()">Sign up</a>
+                    </div>
+
+                    <div id="message"></div>
+                </div>
+
+                <div id="signup-form">
+                    <img src="https://github.com/vicky-tec/TRAVALLY_/blob/main/TRAVALLY.png?raw=true" alt="Travally Logo" class="logo">
+                    <h1>Create Account</h1>
+
+                    <div class="input-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" placeholder="Enter your full name">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" placeholder="Enter your email">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="signup-password">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="signup-password" placeholder="Create a password (min 6 chars)">
+                            <i class="fas fa-eye password-toggle" id="toggleSignupPassword"></i>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="signup-confirm-password">Confirm Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="signup-confirm-password" placeholder="Confirm your password">
+                            <i class="fas fa-eye password-toggle" id="toggleConfirmPassword"></i>
+                        </div>
+                    </div>
+
+                    <button onclick="signup()" id="signup-btn">
+                        <span id="signup-text">Create Account</span>
+                        <span id="signup-spinner" class="spinner" style="display: none;"></span>
+                    </button>
+
+                    <div class="toggle-form">
+                        Already have an account? <a onclick="showLogin()">Sign in</a>
+                    </div>
+
+                    <div id="signup-message"></div>
+                </div>
+            </div>
         </div>
-
-        <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" id="password">
-        </div>
-
-        <button onclick="login()">Sign In</button>
-
-        <div class="default-creds">
-            Default credentials pre-filled for testing<br>
-            Email: admin@travally.com<br>
-            Password: admin123
-        </div>
-
-        <div id="message"></div>
     </div>
+
     <footer>
-        <h5 style="color: rgb(255, 251, 0);">TEST THIS AT YOUR OWN RISK</h5>
+        <h5>TEST THIS AT YOUR OWN RISK</h5>
         &copy; 2025 TRAVALLY | Designed with devotion ✨
     </footer>
 
     <script>
+        // Create stars for background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 200;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                
+                // Random size (1-3px)
+                const size = Math.random() * 2 + 1;
+                
+                // Random animation duration (2-5s)
+                const duration = Math.random() * 3 + 2;
+                
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.setProperty('--duration', `${duration}s`);
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Initialize stars
+        createStars();
+
+        // Password toggle functionality
+        function setupPasswordToggle() {
+            const togglePassword = document.getElementById('togglePassword');
+            const password = document.getElementById('password');
+            
+            const toggleSignupPassword = document.getElementById('toggleSignupPassword');
+            const signupPassword = document.getElementById('signup-password');
+            
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const confirmPassword = document.getElementById('signup-confirm-password');
+            
+            function togglePasswordVisibility(toggle, field) {
+                toggle.addEventListener('click', function() {
+                    const type = field.getAttribute('type') === 'password' ? 'text' : 'password';
+                    field.setAttribute('type', type);
+                    toggle.classList.toggle('fa-eye');
+                    toggle.classList.toggle('fa-eye-slash');
+                });
+            }
+            
+            togglePasswordVisibility(togglePassword, password);
+            togglePasswordVisibility(toggleSignupPassword, signupPassword);
+            togglePasswordVisibility(toggleConfirmPassword, confirmPassword);
+        }
+
+        // Form toggling
+        function showSignup() {
+            document.getElementById('login-form').classList.remove('active-form');
+            document.getElementById('signup-form').classList.add('active-form');
+            // Reset form
+            document.getElementById('signup-name').value = '';
+            document.getElementById('signup-email').value = '';
+            document.getElementById('signup-password').value = '';
+            document.getElementById('signup-confirm-password').value = '';
+            document.getElementById('signup-message').style.display = 'none';
+        }
+
+        function showLogin() {
+            document.getElementById('signup-form').classList.remove('active-form');
+            document.getElementById('login-form').classList.add('active-form');
+            // Reset form
+            document.getElementById('email').value = 'admin@travally.com';
+            document.getElementById('password').value = 'admin123';
+            document.getElementById('message').style.display = 'none';
+        }
+
+        // Show loading state
+        function showLoading(buttonId, show) {
+            const btn = document.getElementById(buttonId);
+            const text = document.getElementById(`${buttonId.replace('-btn', '-text')}`);
+            const spinner = document.getElementById(`${buttonId.replace('-btn', '-spinner')}`);
+            
+            if (show) {
+                btn.disabled = true;
+                text.style.display = 'none';
+                spinner.style.display = 'inline-block';
+            } else {
+                btn.disabled = false;
+                text.style.display = 'inline';
+                spinner.style.display = 'none';
+            }
+        }
+
+        // Login function
         async function login() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
@@ -183,26 +528,134 @@
 
             // Basic validation
             if (!email || !password) {
-                showMessage('✗ Please fill all fields', 'error');
+                showMessage('Please fill all fields', 'error');
                 return;
             }
 
+            // Email validation
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showMessage('Please enter a valid email address', 'error');
+                return;
+            }
+
+            showLoading('login-btn', true);
+
             try {
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
                 // In a real application, you would make an API call here
                 // For demo purposes, we'll simulate a login
                 if (email === 'admin@travally.com' && password === 'admin123') {
-                    showMessage('✓ Login successful! Redirecting...', 'success');
+                    showMessage('Login successful! Redirecting...', 'success');
                     // Simulate redirect after 1.5 seconds
                     setTimeout(() => {
                         window.location.href = 'main.html'; // Replace with your main page
                     }, 1500);
                 } else {
-                    showMessage('✗ Certified Boka', 'error');
+                    showMessage('Invalid credentials', 'error');
                 }
             } catch (error) {
-                showMessage('✗ An error occurred. Please try again.', 'GANDU');
+                showMessage('An error occurred. Please try again.', 'error');
                 console.error('Login error:', error);
+            } finally {
+                showLoading('login-btn', false);
             }
+        }
+
+        // Signup function
+        async function signup() {
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            const messageEl = document.getElementById('signup-message');
+
+            // Clear previous messages
+            messageEl.style.display = 'none';
+            messageEl.className = '';
+
+            // Validation
+            if (!name || !email || !password || !confirmPassword) {
+                showSignupMessage('Please fill all fields', 'error');
+                return;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showSignupMessage('Please enter a valid email address', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showSignupMessage('Passwords do not match', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showSignupMessage('Password must be at least 6 characters', 'error');
+                return;
+            }
+
+            showLoading('signup-btn', true);
+
+            try {
+                // Simulate API call to backend
+                const response = await simulateSignupAPI({
+                    name,
+                    email,
+                    password
+                });
+
+                if (response.success) {
+                    showSignupMessage('Account created successfully! Redirecting...', 'success');
+                    // Store user data in localStorage (simulating backend)
+                    localStorage.setItem('user', JSON.stringify({
+                        name,
+                        email,
+                        password // Note: In a real app, never store plain passwords
+                    }));
+
+                    // Simulate redirect after 1.5 seconds
+                    setTimeout(() => {
+                        window.location.href = 'main.html';
+                    }, 1500);
+                } else {
+                    showSignupMessage(response.message, 'error');
+                }
+            } catch (error) {
+                showSignupMessage('An error occurred. Please try again.', 'error');
+                console.error('Signup error:', error);
+            } finally {
+                showLoading('signup-btn', false);
+            }
+        }
+
+        // Simulate backend API call for signup
+        function simulateSignupAPI(userData) {
+            return new Promise((resolve) => {
+                // Simulate network delay
+                setTimeout(() => {
+                    // Check if email is already registered (simulating database check)
+                    const users = JSON.parse(localStorage.getItem('users') || '[]');
+                    const existingUser = users.find(u => u.email === userData.email);
+                    
+                    if (existingUser) {
+                        resolve({
+                            success: false,
+                            message: 'Email already registered'
+                        });
+                    } else {
+                        // Add new user to "database"
+                        users.push(userData);
+                        localStorage.setItem('users', JSON.stringify(users));
+                        
+                        resolve({
+                            success: true,
+                            message: 'User created successfully'
+                        });
+                    }
+                }, 1500); // Simulate network delay
+            });
         }
 
         function showMessage(message, type) {
@@ -212,11 +665,27 @@
             messageEl.style.display = 'block';
         }
 
-        // Allow login on Enter key press
+        function showSignupMessage(message, type) {
+            const messageEl = document.getElementById('signup-message');
+            messageEl.textContent = message;
+            messageEl.className = type;
+            messageEl.style.display = 'block';
+        }
+
+        // Allow login/signup on Enter key press
         document.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
-                login();
+                if (document.getElementById('login-form').classList.contains('active-form')) {
+                    login();
+                } else {
+                    signup();
+                }
             }
+        });
+
+        // Initialize password toggle after DOM loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setupPasswordToggle();
         });
     </script>
 </body>
