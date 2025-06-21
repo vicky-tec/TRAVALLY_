@@ -1083,6 +1083,141 @@
                 transform: translateY(-12px);
             }
         }
+
+        /* Add this to your existing CSS */
+        .scroll-hover-effect {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        .scroll-hover-effect.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Add a slight scale effect for cards when they come into view */
+        .destination-card,
+        .buddy-card {
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .destination-card.active,
+        .buddy-card.active {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        /* Add these transitions to existing elements */
+        .destination-card {
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .buddy-card {
+            transition: all 0.4s ease, transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .content-section {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Add this to your existing CSS */
+        .scroll-hover-effect {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        .scroll-hover-effect.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Add a slight scale effect for cards when they come into view */
+        .destination-card,
+        .buddy-card {
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .destination-card.active,
+        .buddy-card.active {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        /* Add this to your existing CSS */
+        .scroll-hover-effect {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        .scroll-hover-effect.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Add a slight scale effect for cards when they come into view */
+        .destination-card,
+        .buddy-card {
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .destination-card.active,
+        .buddy-card.active {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        /* Add these transitions to existing elements */
+        .destination-card {
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .buddy-card {
+            transition: all 0.4s ease, transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .content-section {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Add this to your existing CSS */
+        .scroll-hover-effect {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        .scroll-hover-effect.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Add a slight scale effect for cards when they come into view */
+        .destination-card,
+        .buddy-card {
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .destination-card.active,
+        .buddy-card.active {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        /* Add these transitions to existing elements */
+        .destination-card {
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .buddy-card {
+            transition: all 0.4s ease, transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .content-section {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
     </style>
 </head>
 
@@ -1483,8 +1618,207 @@
             window.location.href = 'finder.html';
             // Or with parameters:
             // window.location.href = `buddy-results.html?destination=${destination}&date=${date}&interests=${interests}`;
+            // Scroll-triggered hover effects
         }
     </script>
+    <script>
+    // Scroll-triggered animations
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add scroll-hover-effect class to elements you want to animate
+        const animatedElements = document.querySelectorAll(
+            '.content-section, .destination-card, .buddy-card, .hero-content, .buddy-finder, .footer-section'
+        );
+        
+        animatedElements.forEach(element => {
+            element.classList.add('scroll-hover-effect');
+        });
+
+        // Function to check if element is in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.75 &&
+                rect.bottom >= 0
+            );
+        }
+
+        // Function to handle scroll events with throttling
+        let isScrolling;
+        function handleScroll() {
+            // Clear our timeout throughout the scroll
+            window.clearTimeout(isScrolling);
+            
+            // Set a timeout to run after scrolling ends
+            isScrolling = setTimeout(function() {
+                animatedElements.forEach(element => {
+                    if (isInViewport(element)) {
+                        element.classList.add('active');
+                    }
+                });
+            }, 100);
+        }
+
+        // Initial check on load
+        handleScroll();
+
+        // Check on scroll with debounce
+        window.addEventListener('scroll', handleScroll);
+    });
+
+    // Enhanced hover effects for cards
+    document.querySelectorAll('.destination-card, .buddy-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-15px)';
+            this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'var(--card-box-shadow)';
+        });
+    });
+
+    // Add ripple effect to buttons
+    document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            const x = e.clientX - e.target.getBoundingClientRect().left;
+            const y = e.clientY - e.target.getBoundingClientRect().top;
+            
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 1000);
+        });
+    });
+</script>
+
+<style>
+    /* Add these styles to your existing CSS */
+    .ripple {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        pointer-events: none;
+    }
+
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+
+    /* Enhanced scroll animations */
+    .scroll-hover-effect {
+        transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    .scroll-hover-effect.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    /* Staggered animations for grid items */
+    .destination-grid .destination-card {
+        transition-delay: calc(var(--index) * 0.1s);
+    }
+
+    .buddy-list .buddy-card {
+        transition-delay: calc(var(--index) * 0.1s);
+    }
+
+    /* Add index custom property to cards */
+    .destination-card {
+        --index: 0;
+    }
+
+    .buddy-card {
+        --index: 0;
+    }
+
+    /* Set the index for each card */
+    .destination-card:nth-child(1) { --index: 1; }
+    .destination-card:nth-child(2) { --index: 2; }
+    .destination-card:nth-child(3) { --index: 3; }
+    .destination-card:nth-child(4) { --index: 4; }
+    .destination-card:nth-child(5) { --index: 5; }
+    .destination-card:nth-child(6) { --index: 6; }
+
+    .buddy-card:nth-child(1) { --index: 1; }
+    .buddy-card:nth-child(2) { --index: 2; }
+    .buddy-card:nth-child(3) { --index: 3; }
+
+    /* Section-specific animations */
+    .hero-content {
+        transition-delay: 0.2s;
+    }
+
+    .featured-destinations h2 {
+        transition-delay: 0.1s;
+    }
+
+    .buddy-finder h2 {
+        transition-delay: 0.1s;
+    }
+
+    .buddy-finder p.text-center {
+        transition-delay: 0.2s;
+    }
+
+    .buddy-finder .buddy-search-form {
+        transition-delay: 0.3s;
+    }
+
+    .buddy-finder h3 {
+        transition-delay: 0.4s;
+    }
+
+    /* Footer animations */
+    .footer-section {
+        --index: 0;
+        transition-delay: calc(var(--index) * 0.1s + 0.1s);
+    }
+
+    .footer-section:nth-child(1) { --index: 1; }
+    .footer-section:nth-child(2) { --index: 2; }
+    .footer-section:nth-child(3) { --index: 3; }
+
+    /* More dramatic hover effects */
+    .destination-card:hover {
+        transform: translateY(-15px) rotateY(15deg) !important;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    .buddy-card:hover {
+        transform: translateY(-15px) !important;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25) !important;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+        .scroll-hover-effect {
+            transform: translateY(20px);
+        }
+        
+        .destination-card:hover {
+            transform: translateY(-10px) !important;
+        }
+        
+        .buddy-card:hover {
+            transform: translateY(-10px) !important;
+        }
+    }
+</style>
     <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/03/28/05/20250328055708-52MFWWBB.js"></script>
 </body>
