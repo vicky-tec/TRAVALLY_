@@ -1704,6 +1704,43 @@
                 }
             }
         }
+
+        /* Add this to your existing CSS */
+        .scroll-hover-effect {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        .scroll-hover-effect.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Add a slight scale effect for cards when they come into view */
+        .destination-card,
+        .buddy-card {
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .destination-card.active,
+        .buddy-card.active {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        /* Add these transitions to existing elements */
+        .destination-card {
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .buddy-card {
+            transition: all 0.4s ease, transform 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        .content-section {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
     </style>
 
 <body>
@@ -1752,8 +1789,8 @@
     <header id="home" class="hero">
         <div class="video-slideshow" id="videoSlideshow">
             <!-- Fallback image for mobile -->
-            <img src="https://img.freepik.com/premium-photo/indian-temple_397139-19908.jpg" alt="Bihar Landscape" class="video-fallback"
-                id="videoFallback">
+            <img src="https://img.freepik.com/premium-photo/indian-temple_397139-19908.jpg" alt="Bihar Landscape"
+                class="video-fallback" id="videoFallback">
 
             <!-- Video with muted attribute but no autoplay -->
             <video loop playsinline muted id="heroVideo">
@@ -1769,7 +1806,7 @@
             </div>
         </div>
         <div class="hero-content">
-            <h1 style="color: yellow;">Discover Bihar’s heritage with TRAVALLY!</h1>
+            <h1 style="color: rgb(248, 248, 52);">Discover Bihar’s heritage with TRAVALLY!</h1>
             <p style="color: rgb(19, 255, 176)">Let TRAVALLY guide you through Bihar’s historical treasures!</p>
             <a href="#destinations" class="btn">Explore Destinations <i class="fas fa-arrow-down"></i></a>
         </div>
@@ -2244,6 +2281,38 @@
         }
 
         // Rest of your existing JavaScript remains the same
+        // Scroll-triggered hover effects
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add scroll-hover-effect class to elements you want to animate
+            const sections = document.querySelectorAll('.content-section, .destination-card, .buddy-card');
+            sections.forEach(section => {
+                section.classList.add('scroll-hover-effect');
+            });
+
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.75 &&
+                    rect.bottom >= 0
+                );
+            }
+
+            // Function to handle scroll events
+            function handleScroll() {
+                sections.forEach(section => {
+                    if (isInViewport(section)) {
+                        section.classList.add('active');
+                    }
+                });
+            }
+
+            // Initial check on load
+            handleScroll();
+
+            // Check on scroll
+            window.addEventListener('scroll', handleScroll);
+        });
     </script>
 
     <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
