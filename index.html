@@ -1254,6 +1254,7 @@
         }
 
         /* --- Preloader --- */
+        /* Updated Loader Styles */
         #preloader {
             position: fixed;
             left: 0;
@@ -1278,59 +1279,66 @@
             pointer-events: none;
         }
 
+        /* HTML: <div class="loader"></div> */
+        /* HTML: <div class="loader"></div> */
         .loader {
-            border: 5px solid var(--input-border-color);
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            animation: spin 1.2s linear infinite;
+            width: 65px;
+            aspect-ratio: 1;
             position: relative;
         }
 
-        .loader::after {
-            content: '';
+        .loader:before,
+        .loader:after {
+            content: "";
             position: absolute;
-            top: -8px;
-            left: -8px;
-            right: -8px;
-            bottom: -8px;
-            border: 5px solid transparent;
-            border-top: 5px solid var(--secondary-color);
-            border-radius: 50%;
-            animation: spin 1.5s linear infinite;
+            border-radius: 50px;
+            box-shadow: 0 0 0 3px inset #fff;
+            animation: l4 2.5s infinite;
         }
 
-        @keyframes spin {
+        .loader:after {
+            animation-delay: -1.25s;
+        }
+
+        @keyframes l4 {
             0% {
-                transform: rotate(0deg);
+                inset: 0 35px 35px 0;
+            }
+
+            12.5% {
+                inset: 0 35px 0 0;
+            }
+
+            25% {
+                inset: 35px 35px 0 0;
+            }
+
+            37.5% {
+                inset: 35px 0 0 0;
+            }
+
+            50% {
+                inset: 35px 0 0 35px;
+            }
+
+            62.5% {
+                inset: 0 0 0 35px;
+            }
+
+            75% {
+                inset: 0 0 35px 35px;
+            }
+
+            87.5% {
+                inset: 0 0 35px 0;
             }
 
             100% {
-                transform: rotate(360deg);
+                inset: 0 35px 35px 0;
             }
         }
 
-        .warrior-quote {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.3rem;
-            color: var(--heading-color);
-            margin-top: 30px;
-            text-align: center;
-            max-width: 80%;
-            opacity: 0.8;
-            animation: fadeIn 1.5s ease-out;
-        }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 0.8;
-            }
-        }
 
         /* --- Responsive Styles --- */
         @media (max-width: 1200px) {
@@ -2625,26 +2633,26 @@
         });
 
         // Pause scrolling message on hover
-const scrollingMessage = document.querySelector('.scrolling-message');
-if (scrollingMessage) {
-    scrollingMessage.addEventListener('mouseenter', () => {
-        scrollingMessage.querySelector('.scrolling-message-content').style.animationPlayState = 'paused';
-    });
-    
-    scrollingMessage.addEventListener('mouseleave', () => {
-        scrollingMessage.querySelector('.scrolling-message-content').style.animationPlayState = 'running';
-    });
-    
-    // Click to pause/unpause
-    scrollingMessage.addEventListener('click', () => {
-        const content = scrollingMessage.querySelector('.scrolling-message-content');
-        if (content.style.animationPlayState === 'paused') {
-            content.style.animationPlayState = 'running';
-        } else {
-            content.style.animationPlayState = 'paused';
+        const scrollingMessage = document.querySelector('.scrolling-message');
+        if (scrollingMessage) {
+            scrollingMessage.addEventListener('mouseenter', () => {
+                scrollingMessage.querySelector('.scrolling-message-content').style.animationPlayState = 'paused';
+            });
+
+            scrollingMessage.addEventListener('mouseleave', () => {
+                scrollingMessage.querySelector('.scrolling-message-content').style.animationPlayState = 'running';
+            });
+
+            // Click to pause/unpause
+            scrollingMessage.addEventListener('click', () => {
+                const content = scrollingMessage.querySelector('.scrolling-message-content');
+                if (content.style.animationPlayState === 'paused') {
+                    content.style.animationPlayState = 'running';
+                } else {
+                    content.style.animationPlayState = 'paused';
+                }
+            });
         }
-    });
-}
     </script>
 
     <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
