@@ -275,6 +275,164 @@
             font-size: 1.2rem;
         }
 
+        /* --- Advertisement Slideshow --- */
+        .ad-section {
+            padding: 3rem 0;
+            background: var(--gradient-glass);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ad-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .ad-slideshow {
+            position: relative;
+            height: 300px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-box-shadow);
+        }
+
+        .ad-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-background);
+        }
+
+        .ad-slide.active {
+            opacity: 1;
+        }
+
+        .ad-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ad-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            text-align: center;
+        }
+
+        .ad-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .ad-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .ad-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            z-index: 2;
+        }
+
+        .ad-nav button {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .ad-nav button:hover {
+            background: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .ad-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 2;
+        }
+
+        .ad-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ad-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .ad-section {
+                padding: 2rem 0;
+            }
+
+            .ad-slideshow {
+                height: 250px;
+            }
+
+            .ad-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .ad-content p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .ad-slideshow {
+                height: 200px;
+            }
+
+            .ad-content {
+                padding: 1.5rem;
+            }
+
+            .ad-nav button {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+        }
+
         /* Dropdown Menu Styles */
         .dropdown {
             position: relative;
@@ -1741,12 +1899,63 @@
         .content-section {
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
+        /* Horizontal Scrolling Text */
+        .scrolling-message {
+            background: var(--gradient-primary);
+            color: white;
+            /* padding: 1rem 0; */
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .scrolling-message-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll 20s linear infinite;
+            font-weight: 300;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .scrolling-message-content i {
+            margin: 0 1rem;
+            color: var(--accent-color);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .scrolling-message-content {
+                font-size: 0.9rem;
+                animation: scroll 15s linear infinite;
+            }
+        }
     </style>
 
 <body>
     <div id="preloader">
         <div class="loader"></div>
         <div class="warrior-quote">"Your Yatra begins with struggle"</div>
+    </div>
+    <div class="scrolling-message">
+        <div class="scrolling-message-content">
+            <i class="fas fa-users"></i> Users Scroll down to view the full experience!----
+            <i class="fas fa-info-circle"></i> Explore Bihar's rich heritage with TRAVALLY!----
+            <i class="fas fa-map-marked-alt"></i>Get 20% off on your first booking!---
+            <i class="fas fa-users"></i> Find travel buddies for your next adventure!---
+            <i class="fas fa-robot"></i> Chat with YuktiBot for personalized recommendations!---
+        </div>
     </div>
 
     <nav class="navbar">
@@ -1771,13 +1980,12 @@
                 <li><a href="loginpage.html">Register</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Support <i class="fas fa-caret-down"></i></a>
-                    <ul class="dropdown-menu"> 
-                        <li><a href="https://wa.me/+918235699597" target="_blank"><i class="fab fa-whatsapp"></i>
-                                WhatsApp Support</a></li> 
-                        <li><a href="tel:+918235699597"><i class="fas fa-phone-alt"></i> Phone Support</a></li>
+                    <ul class="dropdown-menu">
                         <li><a href="#" onclick="openLiveChat()"><i class="fas fa-comment-dots"></i> Live Chat</a></li>
+                        <li><a href="https://wa.me/918579924554" target="_blank"><i class="fab fa-whatsapp"></i>
+                                WhatsApp Support</a></li>
                         <li><a href="mailto:support@travally.com"><i class="fas fa-envelope"></i> Email Us</a></li>
-                       
+                        <li><a href="tel:+918579924554"><i class="fas fa-phone-alt"></i> Phone Support</a></li>
                         <li class="divider"></li>
                         <li><a href="/help"><i class="fas fa-question-circle"></i> Help Center</a></li>
                         <li><a href="/feedback"><i class="fas fa-comment-alt"></i> Feedback</a></li>
@@ -1807,8 +2015,8 @@
             </div>
         </div>
         <div class="hero-content">
-            <h1 style="color: rgb(248, 248, 52);">Discover Bihar’s heritage with TRAVALLY!</h1>
-            <p style="color: rgb(19, 255, 176)">Let TRAVALLY guide you through Bihar’s historical treasures!</p>
+            <h1 style="color: rgb(248, 248, 52);">Explore Bihar's rich heritage with TRAVALLY!</h1>
+            <!-- <p style="color: rgb(19, 255, 176)">Let TRAVALLY guide you through Bihar’s historical treasures!</p> -->
             <a href="#destinations" class="btn">Explore Destinations <i class="fas fa-arrow-down"></i></a>
         </div>
     </header>
@@ -1890,6 +2098,53 @@
                             <a href="mapo.html?location=Vaishali" class="btn btn-outline">View on Map <i
                                     class="fas fa-map-marker-alt"></i></a>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ad-section">
+            <div class="container">
+                <div class="ad-slideshow">
+                    <div class="ad-nav">
+                        <button class="ad-prev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="ad-next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+
+                    <div class="ad-slide active">
+                        <img src="1.png" alt="Travel Deal 1">
+                        <div class="ad-content">
+                            <!-- <h3>Special Bihar Tour Package</h3> -->
+                            <p style="color: rgb(234, 255, 0); font-weight: 200; ">Get 20% off on our exclusive 7-day
+                                Bihar heritage tour</p>
+                            <a href="https://apkaads.in/" class="btn">Book Now</a>
+                        </div>
+                    </div>
+
+                    <div class="ad-slide">
+                        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="Travel Deal 2">
+                        <div class="ad-content">
+                            <h3>Buddhist Circuit Special</h3>
+                            <p>Explore the sacred Buddhist sites with our guided tours</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+
+                    <div class="ad-slide">
+                        <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="Travel Deal 3">
+                        <div class="ad-content">
+                            <h3>Local Experiences</h3>
+                            <p>Authentic Bihari cuisine and cultural experiences</p>
+                            <a href="#" class="btn">Discover</a>
+                        </div>
+                    </div>
+
+                    <div class="ad-dots">
+                        <span class="ad-dot active"></span>
+                        <span class="ad-dot"></span>
+                        <span class="ad-dot"></span>
                     </div>
                 </div>
             </div>
@@ -2314,6 +2569,82 @@
             // Check on scroll
             window.addEventListener('scroll', handleScroll);
         });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        // Advertisement Slideshow
+        const adSlides = document.querySelectorAll('.ad-slide');
+        const adDots = document.querySelectorAll('.ad-dot');
+        const prevBtn = document.querySelector('.ad-prev');
+        const nextBtn = document.querySelector('.ad-next');
+        let currentAdIndex = 0;
+
+        function showAdSlide(index) {
+            adSlides.forEach(slide => slide.classList.remove('active'));
+            adDots.forEach(dot => dot.classList.remove('active'));
+
+            adSlides[index].classList.add('active');
+            adDots[index].classList.add('active');
+            currentAdIndex = index;
+        }
+
+        function nextAdSlide() {
+            currentAdIndex = (currentAdIndex + 1) % adSlides.length;
+            showAdSlide(currentAdIndex);
+        }
+
+        function prevAdSlide() {
+            currentAdIndex = (currentAdIndex - 1 + adSlides.length) % adSlides.length;
+            showAdSlide(currentAdIndex);
+        }
+
+        // Button events
+        nextBtn.addEventListener('click', nextAdSlide);
+        prevBtn.addEventListener('click', prevAdSlide);
+
+        // Dot navigation
+        adDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showAdSlide(index);
+            });
+        });
+
+        // Auto-advance slides
+        let adInterval = setInterval(nextAdSlide, 5000);
+
+        // Pause on hover
+        const adSlideshow = document.querySelector('.ad-slideshow');
+        adSlideshow.addEventListener('mouseenter', () => {
+            clearInterval(adInterval);
+        });
+
+        adSlideshow.addEventListener('mouseleave', () => {
+            adInterval = setInterval(nextAdSlide, 5000);
+        });
+
+        // Pause scrolling message on hover
+const scrollingMessage = document.querySelector('.scrolling-message');
+if (scrollingMessage) {
+    scrollingMessage.addEventListener('mouseenter', () => {
+        scrollingMessage.querySelector('.scrolling-message-content').style.animationPlayState = 'paused';
+    });
+    
+    scrollingMessage.addEventListener('mouseleave', () => {
+        scrollingMessage.querySelector('.scrolling-message-content').style.animationPlayState = 'running';
+    });
+    
+    // Click to pause/unpause
+    scrollingMessage.addEventListener('click', () => {
+        const content = scrollingMessage.querySelector('.scrolling-message-content');
+        if (content.style.animationPlayState === 'paused') {
+            content.style.animationPlayState = 'running';
+        } else {
+            content.style.animationPlayState = 'paused';
+        }
+    });
+}
     </script>
 
     <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
