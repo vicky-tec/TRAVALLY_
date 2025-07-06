@@ -1,81 +1,250 @@
-            font-size: 1rem;
-            transition: all 0.3s;
-            font-weight: 500;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YuktiBot - Bihar AI Guide</title>
+    <link rel="icon" href="https://vicky-tec.github.io/TRAVALLY/TRAVALLY.png" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Quicksand:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #06B6D4;
+            --secondary: #9333EA;
+            --accent: #EC4899;
+            --dark: #1E293B;
+            --light: #F8FAFC;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, rgb(0, 255, 255), rgb(128, 0, 255), rgb(0, 91, 144));
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 60px;
+        }
+
+        .navbar {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            min-width: 80px;
+            background: rgba(15, 32, 39, 0.9);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+            color: rgb(255, 191, 0);
+            font-size: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-section {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .chat-section h2 {
+            text-align: center;
+            font-size: 1.6rem;
+            color: #009688;
+            margin-top: 0;
+        }
+
+        .chat-window {
+            height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            padding: 10px 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            max-width: 75%;
+            word-wrap: break-word;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.bot {
+            background: #d1e7dd;
+            color: #333;
+            text-align: left;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user {
+            background: #009688;
+            color: #fff;
+            text-align: right;
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.system {
+            background: #f0f0f0;
+            color: #666;
+            text-align: center;
+            margin: 10px auto;
+            font-size: 0.9em;
+            max-width: 90%;
+            border-radius: 6px;
+            padding: 8px 12px;
+        }
+
+        .chat-input {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .chat-input input:focus {
+            border-color: #009688;
+            box-shadow: 0 0 0 2px rgba(0, 150, 136, 0.2);
+        }
+
+        .chat-input button {
+            background-color: #009688;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin-left: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
         }
 
         .chat-input button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .chat-input button:active {
-            transform: translateY(0);
+            background-color: #00796b;
         }
 
         .suggestions {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            padding: 0 15px 15px;
-            background: white;
+            gap: 8px;
+            margin-top: 10px;
         }
 
         .suggestion-btn {
-            background-color: white;
-            color: var(--primary-dark);
-            border: 1px solid var(--primary);
-            padding: 8px 16px;
-            border-radius: var(--radius-full);
+            background-color: #e0f2f1;
+            color: #00796b;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 16px;
             cursor: pointer;
             font-size: 0.85rem;
             transition: all 0.3s;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
         }
 
         .suggestion-btn:hover {
-            background-color: var(--primary);
-            color: white;
+            background-color: #b2dfdb;
             transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
         }
 
         footer {
             text-align: center;
             padding: 20px;
-            background-color: var(--dark);
+            background-color: rgba(15, 32, 39, 0.9);
             color: white;
             margin-top: 30px;
             position: fixed;
             bottom: 0;
             width: 100%;
-            z-index: 10;
-        }
-
-        footer p {
-            font-size: 0.9rem;
-            opacity: 0.8;
         }
 
         .typing-indicator {
-            display: inline-flex;
-            padding: 10px 15px;
-            background: white;
-            border-radius: var(--radius-lg);
-            margin-bottom: 15px;
-            border: 1px solid var(--gray-light);
-            box-shadow: var(--shadow-sm);
-            align-items: center;
-            gap: 5px;
-        }
-
-        .typing-text {
-            font-size: 0.9rem;
-            color: var(--gray);
+            display: inline-block;
+            padding: 8px 12px;
+            background: #e0e0e0;
+            border-radius: 12px;
+            margin-bottom: 10px;
         }
 
         .typing-dot {
@@ -83,7 +252,8 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: var(--gray);
+            background: #666;
+            margin: 0 2px;
             animation: typingAnimation 1.4s infinite ease-in-out;
         }
 
@@ -100,24 +270,27 @@
         }
 
         @keyframes typingAnimation {
-            0%, 60%, 100% {
+
+            0%,
+            60%,
+            100% {
                 transform: translateY(0);
-                opacity: 0.6;
             }
+
             30% {
-                transform: translateY(-3px);
-                opacity: 1;
+                transform: translateY(-5px);
             }
         }
 
         /* Voice input button styles */
         .voice-btn {
-            background-color: white;
-            color: var(--primary);
-            border: 1px solid var(--gray-light);
-            border-radius: var(--radius);
-            width: 46px;
-            height: 46px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -126,120 +299,67 @@
         }
 
         .voice-btn:hover {
-            background-color: var(--gray-light);
-            transform: scale(1.05);
+            background-color: #e64a19;
+            transform: scale(1.1);
         }
 
         .voice-btn.listening {
             animation: pulse 1.5s infinite;
-            background-color: var(--error);
-            color: white;
-            border-color: var(--error);
+            background-color: #f44336;
         }
 
         @keyframes pulse {
             0% {
-                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+                box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
             }
-            70% {
-                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
-            }
-        }
 
-        /* Loading animation */
-        @keyframes shimmer {
-            0% {
-                background-position: -468px 0;
+            70% {
+                box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
             }
+
             100% {
-                background-position: 468px 0;
+                box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
             }
         }
 
         /* Responsive design */
         @media (max-width: 768px) {
             .navbar {
-                padding: 0.8rem;
+                flex-direction: column;
+                padding: 1rem;
             }
 
             .nav-links {
+                margin-top: 1rem;
                 gap: 1rem;
-            }
-
-            .page-header h1 {
-                font-size: 2rem;
-            }
-
-            .page-header p {
-                font-size: 1rem;
-                padding: 0 15px;
             }
 
             .chat-section {
                 margin: 20px 10px;
+                padding: 15px;
             }
 
             .chat-window {
                 height: 300px;
-                padding: 15px;
             }
 
             .message {
-                max-width: 90%;
-                padding: 10px 12px;
-                font-size: 0.95rem;
+                max-width: 85%;
             }
 
-            .chat-input-container {
-                flex-direction: column;
-                gap: 10px;
+            .chat-input {
+                flex-wrap: wrap;
             }
 
-            .suggestions {
-                padding: 10px;
-            }
-
-            .suggestion-btn {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-links {
-                gap: 0.8rem;
-            }
-
-            .nav-links a {
-                font-size: 0.85rem;
-            }
-
-            .logo img {
-                height: 32px;
-            }
-
-            .page-header h1 {
-                font-size: 1.8rem;
-            }
-
-            .chat-header h2 {
-                font-size: 1.2rem;
-            }
-
-            .chat-input button {
-                padding: 0 15px;
-                min-width: 70px;
+            .voice-btn {
+                margin-top: 10px;
+                margin-left: 0;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="header-gradient"></div>
-    
     <nav class="navbar">
         <div class="logo">
             <a href="index.html">
@@ -253,44 +373,39 @@
         </ul>
     </nav>
 
-    <header class="page-header">
-        <h1>YuktiBot - Your Bihar AI Guide</h1>
-        <p>Discover the rich heritage, culture, and modern developments of Bihar through intelligent conversation</p>
-    </header>
+    <h2>YuktiBot - Your Bihar AI Guide</h2>
 
     <section id="guide" class="chat-section">
-        <div class="chat-header">
-            <h2>Ask me about Bihar!</h2>
-        </div>
+        <h2>Ask me about Bihar!</h2>
         <div class="chat-window" id="chatWindow">
-            <div class="message bot">Namaskar! 🙏 I'm YuktiBot, your AI guide to Bihar.</div>
-            <div class="message system">Try asking about: history, IIT Patna, current affairs, culture, food, tourism, or famous people from Bihar</div>
+            <div class="message bot">Namaskar! 🙏 I'm YuktiBot, your AI guide to Bihar.
+            </div>
+            <div class="message system">Try asking about: history, IIT Patna, current affairs, culture, food, tourism,
+                or famous people from Bihar
+            </div>
         </div>
         <div class="suggestions" id="suggestions">
             <button class="suggestion-btn" onclick="sendSuggestion('Tell me about Bihar\'s history')">History</button>
-            <button class="suggestion-btn" onclick="sendSuggestion('What are famous tourist places in Bihar?')">Tourist Places</button>
+            <button class="suggestion-btn" onclick="sendSuggestion('What are famous tourist places in Bihar?')">Tourist
+                Places</button>
             <button class="suggestion-btn" onclick="sendSuggestion('Tell me about IIT Patna')">IIT Patna</button>
             <button class="suggestion-btn" onclick="sendSuggestion('Current affairs in Bihar')">Current Affairs</button>
         </div>
-        <div class="chat-input-container">
-            <div class="chat-input">
-                <input type="text" id="userInput" placeholder="Type your question about Bihar..." 
-                    onkeypress="handleKeyPress(event)" aria-label="Type your message" />
-                <button onclick="sendMessage()" aria-label="Send message">
-                    <span>Send</span>
-                </button>
-                <button class="voice-btn" id="voiceBtn" title="Voice Input" aria-label="Voice input">
-                    <i class="fas fa-microphone"></i>
-                </button>
-            </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type your question about Bihar..."
+                onkeypress="handleKeyPress(event)" />
+            <button onclick="sendMessage()">Send</button>
+            <button class="voice-btn" id="voiceBtn" title="Voice Input">
+                <i class="fas fa-microphone"></i>
+            </button>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 TRAVALLY | Designed with devotion ✨</p>
+        &copy; 2025 TRAVALLY | Designed with devotion ✨
     </footer>
 
-    <!-- Font Awesome for icons -->
+    <!-- Font Awesome for microphone icon -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     <script>
@@ -317,7 +432,6 @@
             // Add Bihar time context
             return `बिहार का समय: ${dateTimeStr}`;
         }
-        
         // Enhanced knowledge base about Bihar with IIT Patna and current affairs
         const biharKnowledge = {
             greetings: {
@@ -583,100 +697,194 @@
                 patterns: ["transportation", "how to travel", "getting around", "public transport", "travel options"],
                 responses: [
                     "Navigating Bihar:\n\n" +
-                    "• Airports: Patna (Jay Prakash Narayan International), Gaya (international for Buddhist circuit), Darbhanga\n" +
-                    "• Railways: Extensive network with major junctions at Patna, Gaya, Muzaffarpur, Bhagalpur, and Barauni\n" +
-                    "• Roadways: Well-connected highway system including NH19 (GT Road), NH27, NH28, and NH31\n" +
-                    "• Public Transport: \n" +
-                    "   - City buses in Patna and other major towns\n" +
-                    "   - Auto-rickshaws and e-rickshaws widely available\n" +
-                    "   - Private taxi services and app-based cabs (Ola/Uber in Patna)\n" +
-                    "• Waterways: Ferry services on Ganga River (Patna to Hajipur route operational)\n" +
-                    "• Special Options: \n" +
-                    "   - Tourist taxis for sightseeing\n" +
-                    "   - Cycle rickshaws in older city areas\n" +
-                    "   - Shared jeeps/tempos for rural connectivity\n\n" +
-                    "Would you like specific information about transport between particular cities or for tourist destinations?",
+                    "• Airports: Patna, Gaya (international), Darbhanga\n" +
+                    "• Railways: Extensive network with major junctions at Patna, Gaya, Muzaffarpur\n" +
+                    "• Roadways: National highways connect all major cities\n" +
+                    "• Local Transport: Auto-rickshaws, e-rickshaws, buses\n" +
+                    "• Upcoming: Patna Metro (first phase expected 2025)",
 
-                    "Transportation Details:\n\n" +
-                    "🚆 Major Railway Routes:\n" +
-                    "- Patna-New Delhi Rajdhani Express\n" +
-                    "- Patna-Howrah Express\n" +
-                    "- Gaya-Varanasi Intercity\n" +
-                    "- Darbhanga-Bangalore Express\n\n" +
-                    "🚌 Interstate Bus Services:\n" +
-                    "- Bihar State Road Transport Corporation (BSRTC)\n" +
-                    "- Private operators on major routes\n" +
-                    "- Luxury buses to Delhi/Kolkata available\n\n" +
-                    "✈️ Flight Connectivity:\n" +
-                    "- Patna: Daily flights to Delhi, Mumbai, Bangalore, Kolkata\n" +
-                    "- Gaya: International flights to Bangkok, Colombo (seasonal)\n" +
-                    "- Darbhanga: Connecting flights to major Indian cities"
+                    "Travel tips for Bihar:\n\n" +
+                    "• Best for tourists: Private taxis for inter-city travel\n" +
+                    "• Buddhist Circuit: Special tourist buses available\n" +
+                    "• River Transport: Ganga ferries between Patna and nearby towns\n" +
+                    "• Ride-hailing: Ola/Uber available in Patna"
                 ]
             },
 
-            default: {
+            agriculture: {
+                patterns: ["farming", "crops", "agricultural produce", "rural economy", "farming techniques"],
                 responses: [
-                    "I'm not sure I understand. Could you rephrase your question about Bihar?",
-                    "I'm still learning about Bihar. Could you ask something more specific?",
-                    "That's an interesting question! I'm afraid I don't have enough information about that aspect of Bihar yet."
+                    "Bihar's agricultural landscape:\n\n" +
+                    "• Major Crops: Rice, wheat, maize, pulses, sugarcane\n" +
+                    "• Cash Crops: Litchi (Muzaffarpur), mango (Bhagalpur), tobacco\n" +
+                    "• Innovations: SRI (System of Rice Intensification) techniques\n" +
+                    "• Challenges: Floods in north Bihar, drought in south\n" +
+                    "• Schemes: Bihar Rajya Fasal Sahayata Yojana for farmers",
+
+                    "Specialty produce:\n\n" +
+                    "• Shahi Litchi: GI tagged from Muzaffarpur\n" +
+                    "• Katarni Rice: Aromatic variety from Bhagalpur\n" +
+                    "• Makhana (Fox nuts): Grown in Darbhanga/Saharsa\n" +
+                    "• Jardalu Mango: Special variety from Bhagalpur"
+                ]
+            },
+
+            sports: {
+                patterns: ["sports", "athletes", "games", "sports persons", "sports achievements"],
+                responses: [
+                    "Bihar's sports culture:\n\n" +
+                    "• Traditional: Kabaddi, Gilli-Danda, Kho-Kho\n" +
+                    "• Modern: Cricket, football, athletics\n" +
+                    "• Facilities: Moin-ul-Haq Stadium (Patna), various academies\n" +
+                    "• Achievers: Neeraj Chopra (Olympics), Kameshwar Pandey (football)",
+
+                    "Recent developments:\n\n" +
+                    "• Bihar Kabaddi League launched in 2023\n" +
+                    "• New sports complex in Rajgir\n" +
+                    "• State government's 'Mission Olympic' program\n" +
+                    "• Growth of cricket academies across districts"
+                ]
+            },
+
+            districts: {
+                patterns: ["districts", "important cities", "major towns", "administrative divisions"],
+                responses: [
+                    "Bihar's administrative divisions:\n\n" +
+                    "• Total 38 districts grouped into 9 divisions\n" +
+                    "• Important Cities:\n" +
+                    "  - Patna (capital), Gaya (spiritual center)\n" +
+                    "  - Muzaffarpur (commercial hub)\n" +
+                    "  - Bhagalpur (silk city), Darbhanga (cultural center)\n" +
+                    "  - Nalanda (ancient learning center)",
+
+                    "District specialties:\n\n" +
+                    "• Rohtas: Historical forts and industries\n" +
+                    "• West Champaran: Valmiki Tiger Reserve\n" +
+                    "• Sitamarhi: Birthplace of Sita (Ramayana)\n" +
+                    "• Madhubani: Famous for Mithila paintings\n" +
+                    "• Saran: Chirand archaeological site"
+                ]
+            },
+
+            handicrafts: {
+                patterns: ["handicrafts", "traditional arts", "handmade products", "artisanal crafts"],
+                responses: [
+                    "Bihar's exquisite handicrafts:\n\n" +
+                    "• Madhubani/Mithila Paintings: Intricate folk art\n" +
+                    "• Sujni Embroidery: Traditional quilt-making\n" +
+                    "• Bamboo Crafts: Furniture and household items\n" +
+                    "• Stone Pottery: Especially from Patna\n" +
+                    "• Bhagalpuri Silk: Renowned worldwide",
+
+                    "Where to find handicrafts:\n\n" +
+                    "• Madhubani: Direct from artists' villages\n" +
+                    "• Patna: Khadi Gramodyog Bhawan\n" +
+                    "• Government emporiums in major cities\n" +
+                    "• Annual craft fairs in Patna and Bodh Gaya"
+                ]
+            },
+
+            wildlife: {
+                patterns: ["wildlife", "animals", "sanctuaries", "national parks", "biodiversity"],
+                responses: [
+                    "Bihar's wildlife treasures:\n\n" +
+                    "• Valmiki National Park: Only tiger reserve (West Champaran)\n" +
+                    "• Bhimbandh Wildlife Sanctuary: Hot springs and animals\n" +
+                    "• Kaimur Wildlife Sanctuary: Diverse flora and fauna\n" +
+                    "• Gautam Buddha Wildlife Sanctuary: Rare species\n" +
+                    "• Kanwar Lake Bird Sanctuary: Asia's largest freshwater oxbow lake",
+
+                    "Notable wildlife:\n\n" +
+                    "• Royal Bengal Tigers in Valmiki\n" +
+                    "• Migratory birds at Kanwar Lake\n" +
+                    "• Sloth bears in Kaimur\n" +
+                    "• Endangered Gangetic dolphins in Ganga"
+                ]
+            },
+
+            university: {
+                patterns: ["universities", "higher education", "colleges", "educational institutes"],
+                responses: [
+                    "Bihar's premier universities:\n\n" +
+                    "• Patna University (1917): One of India's oldest\n" +
+                    "• Nalanda University (revived): International institution\n" +
+                    "• Chanakya National Law University\n" +
+                    "• Aryabhatta Knowledge University (technical education)\n" +
+                    "• Magadh University (one of India's largest)",
+
+                    "Specialized institutions:\n\n" +
+                    "• AIIMS Patna: Premier medical institute\n" +
+                    "• Indian Institute of Management Bodh Gaya\n" +
+                    "• National Institute of Technology Patna\n" +
+                    "• Central University of South Bihar"
+                ]
+            },
+
+            unknown: {
+                responses: [
+                    "I specialize in Bihar-related knowledge. Perhaps ask about heritage sites, cultural practices, or notable personalities?",
+                    "My expertise covers Bihar's aspects. Could you rephrase your query about the state?",
+                    "I'm designed to share Bihar's wonders. Maybe inquire about tourism, history, or cuisine?",
+                    "Let's focus on Bihar's treasures. What would you like to know about the state?"
                 ]
             }
         };
 
-        // Helper functions for date/time responses
-        function isChhathSeason() {
-            const now = new Date();
-            const month = now.getMonth();
-            return (month === 10 || month === 3); // November or March/April
-        }
+        // DOM elements
+        const chatWindow = document.getElementById('chatWindow');
+        const userInput = document.getElementById('userInput');
+        const suggestions = document.getElementById('suggestions');
+        const voiceBtn = document.getElementById('voiceBtn');
 
-        function getCurrentFestival() {
-            const now = new Date();
-            const month = now.getMonth();
-            
-            if(month === 0) return "Makar Sankranti (January)";
-            if(month === 3 || month === 4) return "Buddha Purnima (April/May)";
-            if(month === 9) return "Durga Puja/Navratri (October)";
-            if(month === 10) return "Chhath Puja (November)";
-            return "No major festival this month";
-        }
+        // Speech recognition setup
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition;
 
-        function getCurrentSeason() {
-            const now = new Date();
-            const month = now.getMonth();
-            
-            if(month >= 2 && month <= 5) return "Summer (Hot and dry)";
-            if(month >= 6 && month <= 9) return "Monsoon (Rainy season)";
-            return "Winter (Cool and pleasant)";
-        }
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-IN';
 
-        // Chat functionality
-        function sendMessage() {
-            const userInput = document.getElementById('userInput');
-            const message = userInput.value.trim();
-            
-            if(message) {
-                addMessage(message, 'user');
-                userInput.value = '';
-                setTimeout(() => {
-                    respondToMessage(message);
-                }, 500);
-            }
-        }
+            recognition.onstart = function () {
+                voiceBtn.classList.add('listening');
+                addMessage("Listening... Speak now", 'system');
+            };
 
-        function sendSuggestion(suggestion) {
-            document.getElementById('userInput').value = suggestion;
-            sendMessage();
-        }
-
-        function handleKeyPress(e) {
-            if(e.key === 'Enter') {
+            recognition.onresult = function (event) {
+                const transcript = event.results[0][0].transcript;
+                userInput.value = transcript;
                 sendMessage();
-            }
+            };
+
+            recognition.onerror = function (event) {
+                voiceBtn.classList.remove('listening');
+                addMessage("Could not understand audio. Please try again.", 'system');
+            };
+
+            recognition.onend = function () {
+                voiceBtn.classList.remove('listening');
+            };
+        } else {
+            voiceBtn.style.display = 'none';
+            addMessage("Voice input not supported in your browser", 'system');
         }
 
+        // Voice button click handler
+        voiceBtn.addEventListener('click', function () {
+            if (voiceBtn.classList.contains('listening')) {
+                recognition.stop();
+            } else {
+                try {
+                    recognition.start();
+                } catch (e) {
+                    addMessage("Error accessing microphone. Please check permissions.", 'system');
+                }
+            }
+        });
+
+        // Function to add message to chat
         function addMessage(text, sender) {
-            const chatWindow = document.getElementById('chatWindow');
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('message', sender);
             messageDiv.textContent = text;
@@ -684,100 +892,173 @@
             chatWindow.scrollTop = chatWindow.scrollHeight;
         }
 
-        function showTypingIndicator() {
-            const chatWindow = document.getElementById('chatWindow');
+        // Function to show typing indicator
+        function showTyping() {
             const typingDiv = document.createElement('div');
             typingDiv.classList.add('typing-indicator');
-            typingDiv.innerHTML = `
-                <span class="typing-text">YuktiBot is typing</span>
-                <span class="typing-dot"></span>
-                <span class="typing-dot"></span>
-                <span class="typing-dot"></span>
-            `;
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
             chatWindow.appendChild(typingDiv);
             chatWindow.scrollTop = chatWindow.scrollHeight;
-            return typingDiv;
         }
 
-        function hideTypingIndicator(indicator) {
-            indicator.remove();
-        }
-
-        function respondToMessage(message) {
-            const chatWindow = document.getElementById('chatWindow');
-            const typingIndicator = showTypingIndicator();
-            
-            setTimeout(() => {
-                hideTypingIndicator(typingIndicator);
-                const response = generateResponse(message.toLowerCase());
-                addMessage(response, 'bot');
-            }, 1500);
-        }
-
-        function generateResponse(message) {
-            // Check for empty message
-            if(!message.trim()) {
-                return "Please ask me something about Bihar!";
+        // Function to hide typing indicator
+        function hideTyping() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
             }
+        }
+
+        // Function to get bot response
+        function getBotResponse(userMessage) {
+            userMessage = userMessage.toLowerCase().trim();
 
             // Check for greetings
-            for(const category in biharKnowledge) {
-                if(biharKnowledge[category].patterns) {
-                    for(const pattern of biharKnowledge[category].patterns) {
-                        if(message.includes(pattern)) {
-                            const responses = biharKnowledge[category].responses;
-                            return responses[Math.floor(Math.random() * responses.length)];
-                        }
+            if (biharKnowledge.greetings.patterns.some(pattern => userMessage.includes(pattern))) {
+                return getRandomResponse(biharKnowledge.greetings.responses);
+            }
+
+            // Check other categories
+            for (const category in biharKnowledge) {
+                if (category !== 'greetings' && category !== 'unknown') {
+                    if (biharKnowledge[category].patterns.some(pattern => userMessage.includes(pattern))) {
+                        return getRandomResponse(biharKnowledge[category].responses);
                     }
                 }
             }
 
-            // Default response if no match found
-            const defaultResponses = biharKnowledge.default.responses;
-            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+            // Default response
+            return getRandomResponse(biharKnowledge.unknown.responses);
         }
 
-        // Voice recognition functionality
-        const voiceBtn = document.getElementById('voiceBtn');
-        let recognition;
+        // Helper function to get random response from array
+        function getRandomResponse(responses) {
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
 
-        if('webkitSpeechRecognition' in window) {
-            recognition = new webkitSpeechRecognition();
-            recognition.continuous = false;
-            recognition.interimResults = false;
-            recognition.lang = 'en-IN';
+        // Function to send message
+        function sendMessage() {
+            const message = userInput.value.trim();
+            if (message === '') return;
 
-            recognition.onstart = function() {
-                voiceBtn.classList.add('listening');
-            };
+            addMessage(message, 'user');
+            userInput.value = '';
 
-            recognition.onresult = function(event) {
-                const transcript = event.results[0][0].transcript;
-                document.getElementById('userInput').value = transcript;
-                voiceBtn.classList.remove('listening');
-                sendMessage();
-            };
+            showTyping();
 
-            recognition.onerror = function(event) {
-                voiceBtn.classList.remove('listening');
-                console.error('Voice recognition error', event.error);
-            };
+            // Simulate thinking delay
+            setTimeout(() => {
+                hideTyping();
+                const response = getBotResponse(message);
+                addMessage(response, 'bot');
 
-            recognition.onend = function() {
-                if(voiceBtn.classList.contains('listening')) {
-                    voiceBtn.classList.remove('listening');
+                // Add some quick suggestions based on response
+                if (response.includes('history')) {
+                    addQuickSuggestions(['More about Maurya Empire', 'Ancient universities', 'Buddha in Bihar']);
+                } else if (response.includes('tourist')) {
+                    addQuickSuggestions(['Bodh Gaya details', 'Nalanda University', 'Patna attractions']);
+                } else if (response.includes('culture')) {
+                    addQuickSuggestions(['Chhath Puja', 'Madhubani art', 'Bihari cuisine']);
+                } else if (response.includes('famous people')) {
+                    addQuickSuggestions(['Emperor Ashoka', 'Dr. Rajendra Prasad', 'Anand Kumar']);
+                } else if (response.includes('IIT Patna')) {
+                    addQuickSuggestions(['Admissions at IIT Patna', 'Courses offered', 'Placement statistics']);
+                } else if (response.includes('current affairs')) {
+                    addQuickSuggestions(['Bihar politics', 'Economic growth', 'Infrastructure projects']);
                 }
-            };
+            }, 1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+        }
 
-            voiceBtn.addEventListener('click', function() {
-                if(voiceBtn.classList.contains('listening')) {
-                    recognition.stop();
-                } else {
-                    recognition.start();
-                }
+        // Function to handle suggestion buttons
+        function sendSuggestion(suggestion) {
+            userInput.value = suggestion;
+            sendMessage();
+        }
+
+        // Function to add quick suggestions
+        function addQuickSuggestions(suggestions) {
+            const existingButtons = document.querySelectorAll('.quick-suggestion');
+            existingButtons.forEach(btn => btn.remove());
+
+            suggestions.forEach(suggestion => {
+                const btn = document.createElement('button');
+                btn.classList.add('suggestion-btn', 'quick-suggestion');
+                btn.textContent = suggestion;
+                btn.onclick = () => {
+                    userInput.value = suggestion;
+                    sendMessage();
+                };
+                suggestions.appendChild(btn);
             });
-        } else {
-            voiceBtn.style.display = 'none';
+        }
+
+        // Handle Enter key press
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Initial greeting
+        window.onload = function () {
+            setTimeout(() => {
+                addMessage("You can ask me about:\n- Bihar's history and ancient universities\n- IIT Patna and other educational institutions\n- Current affairs and developments\n- Famous tourist places\n- Cultural aspects and traditions\n- Notable personalities from Bihar\n- Bihari cuisine and local specialties", 'bot');
+            }, 1500);
+        };
+        window.onload = function () {
+            // Add initial greeting
+            setTimeout(() => {
+                addMessage("You can ask me about:\n- Bihar's history and ancient universities\n- IIT Patna and other educational institutions\n- Current affairs and developments\n- Famous tourist places\n- Cultural aspects and traditions\n- Notable personalities from Bihar\n- Bihari cuisine and local specialties", 'bot');
+
+                // Add current time
+                setTimeout(() => {
+                    addMessage(getBiharDateTime(), 'system');
+                }, 500);
+            }, 1500);
+        };
+        // Function to get current date/time formatted for Bihar
+        function getBiharDateTime(lang = 'en') {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true,
+                timeZone: 'Asia/Kolkata'
+            };
+            return now.toLocaleString(lang === 'hi' ? 'hi-IN' : 'en-IN', options);
+        }
+
+        // Helper function to get current season in Bihar
+        function getCurrentSeason() {
+            const month = new Date().getMonth();
+            if (month >= 10 || month < 2) return "Winter (Cool and pleasant)";
+            if (month >= 2 && month < 5) return "Summer (Hot, peak heat in May)";
+            if (month >= 5 && month < 7) return "Pre-monsoon (Humid)";
+            return "Monsoon (Rainy season)";
+        }
+
+        // Helper function for festival check
+        function isChhathSeason() {
+            const now = new Date();
+            return (now.getMonth() === 10); // November
+        }
+
+        // Helper function to get current festival
+        function getCurrentFestival() {
+            const month = new Date().getMonth();
+            switch (month) {
+                case 0: return "Makar Sankranti (Kite festival)";
+                case 3: return "Buddha Purnima celebrations";
+                case 9: return "Navratri and Durga Puja";
+                case 10: return "Chhath Puja preparations";
+                default: return "Regular season in Bihar";
+            }
         }
     </script>
 </body>
