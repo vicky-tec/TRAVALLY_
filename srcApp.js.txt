@@ -1,0 +1,82 @@
+// src/App.js
+import React, { useEffect, useRef } from "react";
+import "./App.css";
+import { gsap } from "gsap";
+
+const helpItems = [
+  {
+    title: "🗺️ Map Issues",
+    content: "Trouble loading maps? Try refreshing or checking your internet connection."
+  },
+  {
+    title: "🔐 Login Issues",
+    content: "Make sure your credentials are correct or use 'Forgot Password' option."
+  },
+  {
+    title: "💬 Interaction",
+    content: "If elements are unresponsive, try a different browser or clear cache."
+  },
+  {
+    title: "🖥️ Server Issues",
+    content: "Server might be under maintenance. Try again later or check our status page."
+  }
+];
+
+function HelpCard({ title, content, index }) {
+  const cardRef = useRef(null);
+  const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    gsap.from(cardRef.current, {
+      opacity: 0,
+      y: 50,
+      delay: index * 0.2,
+      duration: 1,
+      ease: "power3.out"
+    });
+  }, [index]);
+
+  return (
+    <div
+      ref={cardRef}
+      className={`help-card ${open ? "active" : ""}`}
+      onClick={() => setOpen(!open)}
+    >
+      <h2>{title}</h2>
+      <p className="content" style={{ maxHeight: open ? "200px" : "0px" }}>
+        {content}
+      </p>
+    </div>
+  );
+}
+
+function App() {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    gsap.from(containerRef.current, {
+      scale: 0.8,
+      opacity: 0,
+      duration: 1,
+      ease: "back.out(1.7)"
+    });
+  }, []);
+
+  return (
+    <div className="app">
+      <div className="container" ref={containerRef}>
+        <h1>🎯 Help Center</h1>
+        {helpItems.map((item, index) => (
+          <HelpCard
+            key={index}
+            title={item.title}
+            content={item.content}
+            index={index}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;

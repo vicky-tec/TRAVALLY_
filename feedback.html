@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travally - Feedback</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            font-family: 'Roboto', sans-serif;
+            cursor: pointer;
+        }
+
+        html {
+            font-size: 62.5%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-color: #0a0a0a;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.6rem;
+            line-height: 1.5;
+            transition: all 0.3s ease;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgb(37, 156, 183);
+            mix-blend-mode: difference;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+        }
+
+        /* Header Styles */
+        header {
+            margin-top: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 9%;
+            background: transparent;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            margin-top: 0;
+            padding: 0.5rem 9%;
+            background-color: rgba(22, 22, 22, 0.95);
+        }
+
+        .logo {
+            font-size: 3rem;
+            color: #1bc4f8;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.5s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 15px #1bc4f8;
+        }
+
+        nav a {
+            font-size: 1.8rem;
+            color: white;
+            margin-left: 4rem;
+            font-weight: 500;
+            transition: 0.3s ease;
+            border-bottom: 3px solid transparent;
+            position: relative;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: rgb(0, 255, 255);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: #1bc4f8;
+            bottom: -3px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Feedback Section */
+        .feedback {
+            min-height: 100vh;
+            padding: 10rem 9% 5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .feedback h2 {
+            font-size: 5rem;
+            margin-bottom: 5rem;
+            text-align: center;
+            color: #1bc4f8;
+            position: relative;
+        }
+
+        .feedback h2::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            bottom: -10px;
+            left: 0;
+            background-color: #1bc4f8;
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .feedback-container {
+            width: 100%;
+            max-width: 700px;
+            background: rgba(27, 196, 248, 0.1);
+            border-radius: 1rem;
+            padding: 3rem;
+            border: 2px solid #1bc4f8;
+            box-shadow: 0 0 25px rgba(27, 196, 248, 0.2);
+        }
+
+        .feedback-form .input-box {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .feedback-form label {
+            display: block;
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .feedback-form input,
+        .feedback-form select,
+        .feedback-form textarea {
+            width: 100%;
+            padding: 1.5rem;
+            font-size: 1.6rem;
+            color: white;
+            background: rgba(27, 196, 248, 0.1);
+            border: 2px solid #1bc4f8;
+            border-radius: 1rem;
+            resize: none;
+            transition: all 0.3s ease;
+        }
+
+        .feedback-form input:focus,
+        .feedback-form select:focus,
+        .feedback-form textarea:focus {
+            outline: none;
+            box-shadow: 0 0 15px #1bc4f8;
+        }
+
+        .feedback-form textarea {
+            min-height: 150px;
+        }
+
+        .issue-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .issue-option {
+            flex: 1 1 calc(50% - 1rem);
+        }
+
+        .issue-option input {
+            display: none;
+        }
+
+        .issue-option label {
+            display: block;
+            padding: 1rem;
+            background: rgba(27, 196, 248, 0.1);
+            border-radius: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .issue-option input:checked+label {
+            background: #1bc4f8;
+            color: #111;
+            font-weight: 600;
+            border-color: #1bc4f8;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.5rem;
+            background: #1bc4f8;
+            color: #111;
+            font-size: 1.8rem;
+            font-weight: 600;
+            border-radius: 1rem;
+            border: 2px solid #1bc4f8;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: 2rem;
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: #1bc4f8;
+            box-shadow: 0 0 15px #1bc4f8;
+        }
+
+        /* Footer Styles */
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.4rem;
+            color: #ccc;
+        }
+
+        .contact-bottom {
+            text-align: center;
+            margin-top: 6rem;
+            font-size: 1.6rem;
+            color: white;
+        }
+
+        .contact-bottom h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1bc4f8;
+        }
+
+        .contact-bottom p {
+            margin: 0.5rem 0;
+            color: #ccc;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .feedback h2 {
+                font-size: 3.5rem;
+            }
+
+            .feedback-container {
+                padding: 2rem;
+            }
+
+            .issue-option {
+                flex: 1 1 100%;
+            }
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 10, 0.7);
+        }
+
+        /* Mobile Menu Toggle */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 101;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Form Status Messages */
+        #form-status {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.6rem;
+            text-align: center;
+        }
+
+        .success {
+            background-color: rgba(40, 167, 69, 0.2);
+            border: 1px solid #28a745;
+            color: #28a745;
+        }
+
+        .error {
+            background-color: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #dc3545;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor"></div>
+    <button id="menu-toggle" class="hamburger"><i class="fas fa-bars"></i></button>
+
+    <div class="video-background">
+        <video autoplay muted loop id="myVideo">
+            <source src="matrix-digital-moewalls-com.mp4" type="video/mp4">
+            <img src="elliott-engelmann-DjlKxYFJlTc-unsplash.jpg" alt="Fallback background">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <section class="feedback" id="feedback">
+        <h2 class="section-title">Share Your Feedback</h2>
+
+        <div class="feedback-container">
+            <form id="feedback-form" class="feedback-form">
+                <div class="input-box">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="contact_number" name="phone" placeholder="Enter your phone number">
+                </div>
+
+                <div class="input-box">
+                    <label for="gender">Gender:</label>
+                    <select name="gender" id="gender" required>
+                        <option value="" disabled selected hidden>Choose...</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+
+                <div class="input-box">
+                    <label>Feedback Type</label>
+                    <div class="issue-options">
+                        <div class="issue-option">
+                            <input type="radio" id="booking" name="issue" value="Booking Issue" checked>
+                            <label for="booking">Booking Issue</label>
+                        </div>
+                        <div class="issue-option">
+                            <input type="radio" id="website" name="issue" value="Website Experience">
+                            <label for="website">Website Experience</label>
+                        </div>
+                        <div class="issue-option">
+                            <input type="radio" id="customer-service" name="issue" value="Customer Service">
+                            <label for="customer-service">Customer Service</label>
+                        </div>
+                        <div class="issue-option">
+                            <input type="radio" id="suggestion" name="issue" value="Suggestion">
+                            <label for="suggestion">Suggestion</label>
+                        </div>
+                        <div class="issue-option">
+                            <input type="radio" id="complaint" name="issue" value="Complaint">
+                            <label for="complaint">Complaint</label>
+                        </div>
+                        <div class="issue-option">
+                            <input type="radio" id="other" name="issue" value="Other">
+                            <label for="other">Other</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <label for="message">Your Feedback</label>
+                    <textarea id="message" name="message" placeholder="Please share your detailed feedback here..."
+                        required></textarea>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="age" />
+                    <label for="age">Check if you are over 18 years old</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="ex" required />
+                    <label for="ex">By checking this box I certify that I agree with the data terms and
+                        policies.</label>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Feedback</button>
+
+                <div id="form-status"></div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="contact-bottom">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-envelope"></i> support@travally.com</p>
+            <p><i class="fas fa-phone"></i> +91 9876543210</p>
+            <p><i class="fas fa-map-marker-alt"></i> Patna, Bihar</p>
+        </div>
+        <div class="copyright">&copy; 2025 Travally. All Rights Reserved.</div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const nav = document.querySelector('nav');
+
+            menuToggle.addEventListener('click', function () {
+                nav.classList.toggle('active');
+                menuToggle.innerHTML = nav.classList.contains('active') ?
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function () {
+                    nav.classList.remove('active');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+
+
+            // Header scroll effect
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
+            });
+
+            // Video background fallback for mobile
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
+                const videoBg = document.querySelector('.video-background');
+                videoBg.innerHTML = '<img src="elliott-engelmann-DjlKxYFJlTc-unsplash.jpg" alt="Background" style="width:100%;height:100%;object-fit:cover;">';
+            }
+
+            // Form submission handling (using same JS as contact form)
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxaWe0ln2EGBizW9DjzoLaGrju1mANL4rLkN9Ctgzzxe2hVvZ1wCPC5gHbjrKMPvaqK/exec';
+            const form = document.forms['feedback-form'];
+            const formStatus = document.getElementById('form-status');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const submitBtn = form.querySelector('button[type="submit"]');
+
+                // Show loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+                // Prepare form data (including checkboxes)
+                var formData = new FormData(form);
+                var age = document.getElementById("age").checked;
+                var ex = document.getElementById("ex").checked;
+
+                if (age) {
+                    formData.append("age", "Yes");
+                } else {
+                    formData.append("age", "No");
+                }
+                if (ex) {
+                    formData.append("ex", "Yes");
+                } else {
+                    formData.append("ex", "No");
+                }
+
+                // Submit to Google Sheets
+                fetch(scriptURL, { method: 'POST', body: formData })
+                    .then((response) => {
+                        formStatus.className = 'success';
+                        formStatus.innerHTML = '<i class="fas fa-check-circle"></i> Thank you for your feedback!';
+                        formStatus.style.display = 'block';
+
+                        // Reset form
+                        form.reset();
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = 'Submit Feedback';
+
+                        // Hide message after 5 seconds
+                        setTimeout(() => {
+                            formStatus.style.display = 'none';
+                        }, 5000);
+                    })
+                    .catch((error) => {
+                        formStatus.className = 'error';
+                        formStatus.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error submitting feedback. Please try again.';
+                        formStatus.style.display = 'block';
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = 'Submit Feedback';
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
+<!-- This is the end of the feedback.html file. -->

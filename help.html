@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Help Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 20px;
+      width: 80%;
+      max-width: 700px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      animation: fadeIn 2s ease;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      animation: slideDown 1s ease;
+    }
+
+    .option {
+      background: rgba(0, 0, 0, 0.2);
+      margin-bottom: 15px;
+      padding: 20px;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      animation: slideIn 0.5s ease forwards;
+    }
+
+    .option:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .option:nth-child(2) { animation-delay: 0.3s; }
+    .option:nth-child(3) { animation-delay: 0.6s; }
+    .option:nth-child(4) { animation-delay: 0.9s; }
+    .option:nth-child(5) { animation-delay: 1.2s; }
+
+    .description {
+      margin-top: 10px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+    }
+
+    .active .description {
+      max-height: 200px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Help & Support</h1>
+
+    <div class="option" onclick="toggle(this)">
+      <strong>🗺️ Map Issues</strong>
+      <div class="description">
+        Trouble loading maps? Try refreshing your browser or checking your internet connection.
+      </div>
+    </div>
+
+    <div class="option" onclick="toggle(this)">
+      <strong>🔐 Login Issues</strong>
+      <div class="description">
+        Ensure your username and password are correct. Use the "Forgot Password" option if needed.
+      </div>
+    </div>
+
+    <div class="option" onclick="toggle(this)">
+      <strong>💬 Interaction</strong>
+      <div class="description">
+        If buttons or forms aren't responding, try clearing your cache or using a different browser.
+      </div>
+    </div>
+
+    <div class="option" onclick="toggle(this)">
+      <strong>🖥️ Server Issues</strong>
+      <div class="description">
+        Our servers might be under maintenance. Check our status page or try again later.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggle(element) {
+      element.classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
